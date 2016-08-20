@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Welcome to BluSea!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Welcome to Toko BluSea</h1>
+	<ul>
+		<li th:each="user: ${users}">
+			<p th:text="${user}" />
+		</li>
+	</ul>
+</body>
+</html>
