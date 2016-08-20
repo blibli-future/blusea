@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Welcome to BluSea!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>BluSea User List</h1>
+    <table>
+    	<tr>
+    		<th>id</th>
+    		<th>Nama Lengkap</th>
+    		<th>Nama Panggilan</th>
+    		<th>Email</th>
+    	</tr>
+    	
+    	<tr th:each="user : ${users}">
+    		<td th:text="${user.id}" />
+    		<td th:text="${user.fullName}" />
+    		<td th:text="${user.nickName}" />
+    		<td th:text="${user.email}" />
+    	</tr>
+    </table>
+</body>
+</html>

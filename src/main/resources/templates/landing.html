@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Welcome to BluSea!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome to BluSea!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Welcome to Toko BluSea</h1>
-	<ul>
-		<li th:each="user: ${users}">
-			<p th:text="${user}" />
-		</li>
-	</ul>
+	<form method="POST" th:attr="action=@{/register}">
+		<fieldset>
+			<input type="text" name="fullName" /> <br />
+			<input type="text" name="nickName" /> <br />
+			<input type="text" name="email" />  <br />
+			<input type="submit"
+				value="Register" />
+		</fieldset>
+	</form>
 </body>
 </html>

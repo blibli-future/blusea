@@ -26,8 +26,8 @@ public class HomeController {
 			String name, 
 			Model model)
 	{
-		repo.save(new User("Adhika Setya Pramudita", "Dhika"));
-		repo.save(new User("Elisabeth Diana Kartika", "Diana"));
+		repo.save(new User("Adhika Setya Pramudita", "Dhika", "hello@adhikasetyap.me"));
+		repo.save(new User("Elisabeth Diana Kartika", "Diana", "elisabeth.dianaks@gmail.com"));
 		List<String> users = new ArrayList<>();
 		for (User u: repo.findAll()) {
 			users.add(u.toString());
@@ -35,6 +35,7 @@ public class HomeController {
 		
 		model.addAttribute("name", name);
 		model.addAttribute("users", users);
+		model.addAttribute("newUser", new User());
 		return "landing";
 	}
 }

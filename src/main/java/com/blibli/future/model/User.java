@@ -13,13 +13,43 @@ public class User {
 	private long id;
 	private String fullName;
 	private String nickName;
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	private String email;
 	
-	protected User() {}
+	public User () {}
 	
-	public User(String fullName, String nickName) 
+	public User(String fullName, String nickName, String email) 
 	{
 		this.fullName = fullName;
 		this.nickName = nickName;
+		this.email    = email;
 	}
 	
 	@Override
