@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <title>Welcome to BluSea!</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Welcome to Toko BluSea</h1>
-	<form method="POST" th:attr="action=@{/register}">
+	<form method="POST" action="/register">
 		<fieldset>
 			<input type="text" name="fullName" /> <br />
 			<input type="text" name="nickName" /> <br />

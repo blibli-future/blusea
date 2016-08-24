@@ -13,13 +13,15 @@
     		<th>Nama Panggilan</th>
     		<th>Email</th>
     	</tr>
-    	
-    	<tr th:each="user : ${users}">
-    		<td th:text="${user.id}" />
-    		<td th:text="${user.fullName}" />
-    		<td th:text="${user.nickName}" />
-    		<td th:text="${user.email}" />
-    	</tr>
+
+		{{#users}}
+			<tr>
+				<td>{{id}}</td>
+				<td>{{fullName}}</td>
+				<td>{{nickName}}</td>
+				<td>{{email}}</td>
+			</tr>
+		{{/users}}
     </table>
 </body>
 </html>
