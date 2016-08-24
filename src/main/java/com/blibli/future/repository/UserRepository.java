@@ -1,10 +1,9 @@
 package com.blibli.future.repository;
 
-import java.util.List;
-
+import com.blibli.future.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-import com.blibli.future.model.User;
+import java.util.List;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
