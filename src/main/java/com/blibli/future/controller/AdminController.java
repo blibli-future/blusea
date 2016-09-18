@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,10 +18,7 @@ public class AdminController {
 	public String showAdminDashboard(
 			Model model)
 	{
-		List<User> users = new ArrayList<>();
-		for (User u: repo.findAll()) {
-			users.add(u);
-		}
+		List<User> users = (List<User>) repo.findAll();
 
 		model.addAttribute("users", users);
 		return "admin/dashboard";

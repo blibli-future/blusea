@@ -1,11 +1,9 @@
 package com.blibli.future.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="blusea_user")
 public class User {
 
     @Id
@@ -14,6 +12,7 @@ public class User {
     private String fullName;
     private String nickName;
     private String email;
+    private String password;
 
     public User() {
     }
