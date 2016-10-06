@@ -24,6 +24,6 @@ public class HomeController {
 	{
 		// create User stub for registration purpose
 		model.addAttribute("newUser", new User());
-		return "index";
+		return "landing";
 	}
 }
