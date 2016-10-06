@@ -18,13 +18,12 @@ public class UserController {
     private UserRepository repo;
 
     @RequestMapping("/user/{userId}")
-    public @ResponseBody String show(
-            @PathVariable(value="userId") String userId,
+    public String show(
+            @PathVariable Long userId,
             Model model)
     {
-        long id = Integer.getInteger(userId);
-        model.addAttribute("user", (User) repo.findOne(id));
-        return "user/dashboard";
+        model.addAttribute("user", (User) repo.findOne(userId));
+        return "/user/dashboard";
     }
 
 }
