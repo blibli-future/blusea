@@ -31,7 +31,7 @@ public class UserController {
     {
         repo.save(newUser);
         model.addAttribute("user", newUser);
-        return "user/dashboard";
+        return "redirect:/user/" + newUser.getId();
     }
 
 }
