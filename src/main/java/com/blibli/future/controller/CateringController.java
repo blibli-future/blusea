@@ -23,7 +23,7 @@ public class CateringController {
     ProductRepository productRepository;
 
     @RequestMapping("/catering/{username}")
-    public String catering(
+    public String cateringProfile(
             @PathVariable String username,
             Model model){
         model.addAttribute("catering", cateringRepository.findByUsername(username));
@@ -32,13 +32,13 @@ public class CateringController {
     }
 
     @RequestMapping(value="/catering",method=RequestMethod.GET)
-    public String cateringList(Model model){
+    public String showAllCateringList(Model model){
         model.addAttribute("catering", cateringRepository.findAll());
         return "catering/list";
     }
 
     @RequestMapping(value="/catering/register",method=RequestMethod.GET)
-    public String cateringRegister(Model model){
+    public String cateringRegisterForm(Model model){
         model.addAttribute("catering", cateringRepository.findAll());
         return "catering/register";
     }
@@ -56,7 +56,7 @@ public class CateringController {
     }
 
     @RequestMapping(value="/catering/{cateringId}/products", method=RequestMethod.POST)
-    public String cateringAddProduct(
+    public String cateringProductAdd(
             @PathVariable Long cateringId,
             @ModelAttribute Product newProduct,
             Model model){

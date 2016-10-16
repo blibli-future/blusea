@@ -19,7 +19,7 @@ public class UserController {
     private UserRepository repo;
 
     @RequestMapping("/user/profile")
-    public String profile(Model model)
+    public String showMyProfile(Model model)
     {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @RequestMapping("/user/{userId}")
-    public String show(
+    public String showPublicUserProfile(
             @PathVariable Long userId,
             Model model)
     {
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(value="register", method= RequestMethod.POST)
-    public String register(
+    public String addUser(
             @ModelAttribute User newUser,
             Model model)
     {
@@ -46,7 +46,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/user/login", method= RequestMethod.GET)
-    public String login(
+    public String authenticateUser(
             @ModelAttribute User newUser,
             HttpServletRequest request,
             Model model)

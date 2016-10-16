@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HomeController {
+public class PublicController {
 	@Autowired
 	private UserRepository repo;
 
