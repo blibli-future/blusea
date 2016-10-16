@@ -1,10 +1,17 @@
 package com.blibli.future.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="blusea_user")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,13 +21,46 @@ public class User {
     private String email;
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserRole roles;
+
+    private boolean enabled = true;
+
+    @javax.persistence.Transient
+    private final Set<GrantedAuthority> authorities = new HashSet<>();
+
     public User() {
+        authorities.add(new SimpleGrantedAuthority("USER"));
     }
 
-    public User(String fullName, String nickName, String email) {
-        this.fullName = fullName;
-        this.nickName = nickName;
-        this.email = email;
+    public Collection<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public String getUsername() {
+        return nickName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
     public String getFullName() {
@@ -57,6 +97,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+    public UserRole getUserRoles() {
+        return roles;
+    }
+
+    public void setRoles(UserRole roles) {
+        this.roles = roles;
     }
 
     @Override
