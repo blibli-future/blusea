@@ -21,13 +21,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/resources/**", "/daftar", "/about").permitAll()
+                .antMatchers("/catering/register")
+                .permitAll()
+                // URL that need special access role need to
+                // declared explicitly
                 .antMatchers("/admin/**")
                     .access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/", "/home")
+                .antMatchers("/catering/**")
+                    .access("hasRole('ROLE_CATERING')")
+                .antMatchers("/user/profile")
+                    .access("hasRole('ROLE_USER')")
+                // Any other url is accessible by everyone
+                .anyRequest()
                     .permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+
+                .and()
                 .formLogin()
                     .loginPage("/user/login")
                     .permitAll()
