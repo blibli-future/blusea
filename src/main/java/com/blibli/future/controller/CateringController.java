@@ -31,6 +31,9 @@ public class CateringController {
         Catering catering = cateringRepository.findByUsername(username);
         model.addAttribute("catering", catering);
         model.addAttribute("products", catering.getProducts());
+
+        System.out.println("Product : " + catering.toString());
+        System.out.println("ISI :" + catering.getProducts().size());
         return "catering/detail";
     }
 

@@ -56,7 +56,6 @@ public class Product {
     }
 
     @ManyToOne
-    @JoinColumn( name = "catering" , referencedColumnName = "id")
     private Catering catering;
 
     public Catering getCatering() {

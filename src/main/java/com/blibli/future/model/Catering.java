@@ -5,11 +5,7 @@ package com.blibli.future.model;
  */
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 
 @Entity
@@ -24,9 +20,26 @@ public class Catering {
     private String address;
     private String description;
     private String phoneNumber;
+
+    @Override
+    public String toString() {
+        return "Catering{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", cateringName='" + cateringName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", description='" + description + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dp='" + dp + '\'' +
+                ", products=" + products +
+                '}';
+    }
+
     private String dp;
 
-    @OneToMany
+    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products;
 
     public Catering(){
