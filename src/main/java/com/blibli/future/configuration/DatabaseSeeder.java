@@ -1,7 +1,9 @@
 package com.blibli.future.configuration;
 
+import com.blibli.future.model.Catering;
 import com.blibli.future.model.User;
 import com.blibli.future.model.UserRole;
+import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.UserRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class DatabaseSeeder {
     UserRepository userRepo;
     @Autowired
     UserRoleRepository userRoleRepo;
+    @Autowired
+    CateringRepository cateringRepository;
 
     @PostConstruct
     private void initTestData() {
@@ -35,5 +39,27 @@ public class DatabaseSeeder {
         r.setEmail("hello@adhikasetyap.me");
         r.setRole("ROLE_ADMIN");
         userRoleRepo.save(r);
+
+        u = new User();
+        r = new UserRole();
+        u.setFullName("Ahmad Widardi");
+        u.setNickName("Ardi");
+        u.setEmail("awidardi@gmail.com");
+        u.setPassword("12345");
+        userRepo.save(u);
+        r.setEmail("awidardi@gmail.com");
+        r.setRole("ROLE_ADMIN");
+        userRoleRepo.save(r);
+
+        Catering c = new Catering();
+        c.setUsername("x");
+        c.setCateringName("x");
+        c.setEmail("x");
+        c.setPassword("x");
+        c.setAddress("x");
+        c.setDescription("x");
+        c.setPhoneNumber("x");
+        c.setDp("50");
+        cateringRepository.save(c);
     }
 }

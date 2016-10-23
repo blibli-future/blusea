@@ -3,10 +3,7 @@ package com.blibli.future.model;
 /**
  * Created by ARDI on 10/6/2016.
  */
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -56,5 +53,17 @@ public class Product {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    @ManyToOne
+    @JoinColumn( name = "catering" , referencedColumnName = "id")
+    private Catering catering;
+
+    public Catering getCatering() {
+        return catering;
+    }
+
+    public void setCatering(Catering catering) {
+        this.catering = catering;
     }
 }

@@ -3,7 +3,9 @@ package com.blibli.future.controller;
 /**
  * Created by ARDI on 10/6/2016.
  */
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +28,9 @@ public class CateringController {
     public String cateringProfile(
             @PathVariable String username,
             Model model){
-        model.addAttribute("catering", cateringRepository.findByUsername(username));
-        model.addAttribute("products", productRepository.findAll());
+        Catering catering = cateringRepository.findByUsername(username);
+        model.addAttribute("catering", catering);
+        model.addAttribute("products", catering.getProducts());
         return "catering/detail";
     }
 
@@ -38,7 +41,13 @@ public class CateringController {
     }
 
     @RequestMapping(value="/catering/register",method=RequestMethod.GET)
-    public String cateringRegisterForm(Model model){
+    public String cateringRegisterForm(
+            Model model,
+            HttpServletRequest request)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
         model.addAttribute("catering", cateringRepository.findAll());
         return "catering/register";
     }
@@ -51,28 +60,38 @@ public class CateringController {
         cateringRepository.save(newCatering);
 
         model.addAttribute("catering", newCatering);
-        model.addAttribute("products", productRepository.findAll());
         return "redirect:/catering/" + newCatering.getUsername();
     }
 
-    @RequestMapping(value="/catering/{cateringId}/products", method=RequestMethod.POST)
-    public String cateringProductAdd(
-            @PathVariable Long cateringId,
+    @RequestMapping(value="/catering/{username}/addproducts",method=RequestMethod.GET)
+    public String cateringGetAddProduct(
+            @PathVariable String username,
+            Model model,
+            HttpServletRequest request)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        model.addAttribute("catering", cateringRepository.findByUsername(username));
+
+        return "catering/addproducts";
+    }
+
+    @RequestMapping(value="/catering/{username}/addproducts", method=RequestMethod.POST)
+    public String cateringPostAddProduct(
+            @PathVariable String username,
             @ModelAttribute Product newProduct,
             Model model){
-        productRepository.save(newProduct);
-        Catering catering = cateringRepository.findOne(cateringId);
+        Catering catering = cateringRepository.findByUsername(username);
 
         if(catering != null){
             if(!catering.hasProduct(newProduct)){
-                catering.getProducts().add(newProduct);
+                newProduct.setCatering(catering);
             }
+            productRepository.save(newProduct);
             cateringRepository.save(catering);
-            model.addAttribute("catering", cateringRepository.findOne(cateringId));
-            model.addAttribute("products", productRepository.findAll());
-            return "redirect:/catering/" + catering.getId();
+            return "redirect:/catering/" + catering.getUsername();
         }
-        model.addAttribute("catering", cateringRepository.findAll());
-        return "redirect:/catering";
+        return "redirect:/catering/" + catering.getUsername();
     }
 }

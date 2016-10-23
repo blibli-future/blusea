@@ -5,8 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Hello BluSea</h1>
-<p>Id : {{catering.id}}</p>
-<p>Nama Lengkap : {{catering.cateringName}}</p>
+
+    <h1>Welcome back, {{catering.username}}</h1>
+    <p>User </p>
+    <p>Nama Lengkap : {{catering.cateringName}}</p>
+    <p>Product sementara</p>
+    <ul>
+        <li>id</li>
+        <li>Nama Product</li>
+        <li>Description</li>
+        <li>Photo</li>
+
+        {{#products}}
+        <li>{{id}}</li>
+        <li>{{name}}</li>
+        <li>{{description}}</li>
+        <li>{{photo}}</li>
+        {{/products}}
+    </ul>
 </body>
 </html>

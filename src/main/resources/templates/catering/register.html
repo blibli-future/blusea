@@ -7,11 +7,12 @@
 <body>
 <h1>Welcome to Toko BluSea</h1>
 <form method="POST" action="/catering/register">
+    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
     <fieldset>
         Insert Username <input type="text" name="username" /> <br />
         Insert Name <input type="text" name="cateringName" /> <br />
         Insert Email <input type="text" name="email" /> <br />
-        Insert Password <input type="password" name="password" />  <br />
+        Insert Password <input type="password" name="password" /> <br />
         Insert Address <input type="text" name="address" /> <br />
         Insert Description <input type="text" name="description" /> <br />
         Insert Phone Number <input type="text" name="phoneNumber" /> <br />

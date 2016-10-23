@@ -24,7 +24,7 @@ public class Catering {
     private String address;
     private String description;
     private String phoneNumber;
-    private float dp;
+    private String dp;
 
     @OneToMany
     private List<Product> products;
@@ -97,11 +97,11 @@ public class Catering {
         this.phoneNumber = phoneNumber;
     }
 
-    public float getDp() {
+    public String getDp() {
         return dp;
     }
 
-    public void setDp(float dp) {
+    public void setDp(String dp) {
         this.dp = dp;
     }
 
