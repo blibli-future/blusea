@@ -49,6 +49,7 @@ public class DatabaseSeeder {
         userRepo.save(u);
         r.setEmail("awidardi@gmail.com");
         r.setRole("ROLE_ADMIN");
+        r.setRole("ROLE_CATERING");
         userRoleRepo.save(r);
 
         Catering c = new Catering();

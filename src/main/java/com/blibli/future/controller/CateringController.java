@@ -7,6 +7,8 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +25,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.UUID;
 
 @Controller
 public class CateringController {
+
+    @Autowired
+    public Environment env;
 
     @Autowired
     CateringRepository cateringRepository;
@@ -112,17 +118,19 @@ public class CateringController {
                 try {
                     byte[] bytes = file.getBytes();
 
+                    String fileName = UUID.randomUUID().toString().replaceAll("-","");
+
                     // Creating the directory to store file
                     //String rootPath = System.getProperty("catalina.home");
-                    File dir = new File("D:\\Software\\xampp\\htdocs\\gambar\\" + formatted);
+                    File dir = new File(env.getProperty("blusea.productPhotoDir.path") + formatted);
                     if (!dir.exists())
                         dir.mkdirs();
 
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
-                            + File.separator + newProduct.getId() + ".jpg");
+                            + File.separator + fileName + ".jpg");
                     newProduct.setPhoto("gambar"
-                            + File.separator + formatted + File.separator + newProduct.getId() + ".jpg");
+                            + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
                     stream.write(bytes);
