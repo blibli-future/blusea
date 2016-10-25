@@ -41,7 +41,6 @@ public class Catering extends User {
         super();
     }
 
-    @Override
     public String getUsername() {
         return username;
     }

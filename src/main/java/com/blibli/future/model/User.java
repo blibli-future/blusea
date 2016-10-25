@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name="blusea_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,38 +26,10 @@ public class User implements UserDetails {
 
     private boolean enabled = true;
 
-    @javax.persistence.Transient
-    private final Set<GrantedAuthority> authorities = new HashSet<>();
+    public User() {}
 
-    public User() {
-        authorities.add(new SimpleGrantedAuthority("USER"));
-    }
-
-    public Collection<GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
     public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
-    public String getUsername() {return "";}
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+        return enabled;
     }
 
     public String getEmail() {
