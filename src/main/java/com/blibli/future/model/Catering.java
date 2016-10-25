@@ -12,8 +12,6 @@ import javax.persistence.*;
 public class Catering extends User {
     private String username;
     private String cateringName;
-//    private String email;
-//    private String password;
     private String address;
     private String description;
     private String phoneNumber;
@@ -21,7 +19,6 @@ public class Catering extends User {
     @Override
     public String toString() {
         return "Catering{" +
-//                "id=" + id +
                 ", username='" + username + '\'' +
                 ", cateringName='" + cateringName + '\'' +
                 ", address='" + address + '\'' +

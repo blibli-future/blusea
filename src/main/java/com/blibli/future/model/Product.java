@@ -18,11 +18,6 @@ public class Product {
         super();
     }
 
-    public Product(String name, String description){
-        this.setName(name);
-        this.setDescription(description);
-    }
-
     public String getName() {
         return name;
     }

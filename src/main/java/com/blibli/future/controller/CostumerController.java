@@ -1,8 +1,8 @@
 package com.blibli.future.controller;
 
-import com.blibli.future.model.Consumer;
+import com.blibli.future.model.Costumer;
 import com.blibli.future.model.User;
-import com.blibli.future.repository.ConsumerRepository;
+import com.blibli.future.repository.CostumerRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
  * Created by dhika on 29/08/2016.
  */
 @Controller
-public class UserController {
+public class CostumerController {
     @Autowired
-    private ConsumerRepository repo;
+    private CostumerRepository repo;
 
     @RequestMapping("/user/profile")
     public String showMyProfile(Model model)
@@ -38,12 +38,12 @@ public class UserController {
 
     @RequestMapping(value="register", method= RequestMethod.POST)
     public String addUser(
-            @ModelAttribute Consumer newConsumer,
+            @ModelAttribute Costumer newCostumer,
             Model model)
     {
-        repo.save(newConsumer);
-        model.addAttribute("user", newConsumer);
-        return "redirect:/user/" + newConsumer.getId();
+        repo.save(newCostumer);
+        model.addAttribute("user", newCostumer);
+        return "redirect:/user/" + newCostumer.getId();
     }
 
     @RequestMapping(value="/user/login", method= RequestMethod.GET)

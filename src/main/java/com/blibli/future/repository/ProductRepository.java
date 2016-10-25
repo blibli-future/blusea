@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.blibli.future.model.Product;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ProductRepository extends CrudRepository<Product, Long>{
-    public List<Product> findByName(String name);
+    List<Product> findByName(String name);
 }

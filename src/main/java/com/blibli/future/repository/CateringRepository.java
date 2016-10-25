@@ -6,7 +6,9 @@ package com.blibli.future.repository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.blibli.future.model.Catering;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CateringRepository extends CrudRepository<Catering, Long> {
-    public Catering findByUsername(String username);
+    Catering findByUsername(String username);
 }

@@ -1,10 +1,10 @@
 package com.blibli.future.configuration;
 
 import com.blibli.future.model.Catering;
-import com.blibli.future.model.Consumer;
+import com.blibli.future.model.Costumer;
 import com.blibli.future.model.UserRole;
 import com.blibli.future.repository.CateringRepository;
-import com.blibli.future.repository.ConsumerRepository;
+import com.blibli.future.repository.CostumerRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class DatabaseSeeder {
     @Autowired
-    ConsumerRepository consumerRepository;
+    CostumerRepository costumerRepository;
     @Autowired
     UserRoleRepository userRoleRepo;
     @Autowired
@@ -25,12 +25,12 @@ public class DatabaseSeeder {
 
     @PostConstruct
     private void initTestData() {
-        Consumer u = new Consumer();
+        Costumer u = new Costumer();
         u.setFullName("Adhika Setya Pramudita");
         u.setNickName("Dhika");
         u.setEmail("hello@adhikasetyap.me");
         u.setPassword("1234");
-        consumerRepository.save(u);
+        costumerRepository.save(u);
         UserRole r = new UserRole();
         r.setEmail("hello@adhikasetyap.me");
         r.setRole("ROLE_USER");
@@ -40,13 +40,13 @@ public class DatabaseSeeder {
         r.setRole("ROLE_ADMIN");
         userRoleRepo.save(r);
 
-        u = new Consumer();
+        u = new Costumer();
         r = new UserRole();
         u.setFullName("Ahmad Widardi");
         u.setNickName("Ardi");
         u.setEmail("awidardi@gmail.com");
         u.setPassword("12345");
-        consumerRepository.save(u);
+        costumerRepository.save(u);
         r.setEmail("awidardi@gmail.com");
         r.setRole("ROLE_ADMIN");
         r.setRole("ROLE_CATERING");

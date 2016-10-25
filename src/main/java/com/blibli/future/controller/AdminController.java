@@ -1,8 +1,7 @@
 package com.blibli.future.controller;
 
-import com.blibli.future.model.Consumer;
-import com.blibli.future.model.User;
-import com.blibli.future.repository.ConsumerRepository;
+import com.blibli.future.model.Costumer;
+import com.blibli.future.repository.CostumerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +12,15 @@ import java.util.List;
 @Controller
 public class AdminController {
 	@Autowired
-	private ConsumerRepository repo;
+	private CostumerRepository repo;
 
 	@RequestMapping("/admin")
 	public String showAdminDashboard(
 			Model model)
 	{
-		List<Consumer> consumers = (List<Consumer>) repo.findAll();
+		List<Costumer> costumers = (List<Costumer>) repo.findAll();
 
-		model.addAttribute("users", consumers);
+		model.addAttribute("users", costumers);
 		return "admin/dashboard";
 	}
 }

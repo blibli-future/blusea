@@ -6,11 +6,11 @@ import javax.persistence.Entity;
  * Created by dhika on 25/10/2016.
  */
 @Entity
-public class Consumer extends User {
+public class Costumer extends User {
     private String fullName;
     private String nickName;
 
-    public Consumer() {
+    public Costumer() {
         super();
     }
 
