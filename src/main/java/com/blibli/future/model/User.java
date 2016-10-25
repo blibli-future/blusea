@@ -11,13 +11,12 @@ import java.util.Set;
 
 @Entity
 @Table(name="blusea_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String fullName;
-    private String nickName;
     private String email;
     private String password;
 
@@ -44,9 +43,7 @@ public class User implements UserDetails {
     }
 
     @Override
-    public String getUsername() {
-        return nickName;
-    }
+    public String getUsername() {return "";}
 
     @Override
     public boolean isAccountNonExpired() {
@@ -61,22 +58,6 @@ public class User implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getEmail() {
@@ -114,10 +95,4 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Customer[id=%d, fullName='%s', nickName='%s']",
-                id, fullName, nickName);
-    }
 }
