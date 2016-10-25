@@ -1,7 +1,7 @@
 package com.blibli.future.controller;
 
 import com.blibli.future.model.User;
-import com.blibli.future.repository.UserRepository;
+import com.blibli.future.repository.ConsumerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PublicController {
 	@Autowired
-	private UserRepository repo;
+	private ConsumerRepository repo;
 
 	@RequestMapping("/")
 	public String landing(

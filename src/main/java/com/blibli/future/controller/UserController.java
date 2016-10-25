@@ -1,7 +1,8 @@
 package com.blibli.future.controller;
 
+import com.blibli.future.model.Consumer;
 import com.blibli.future.model.User;
-import com.blibli.future.repository.UserRepository;
+import com.blibli.future.repository.ConsumerRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
     @Autowired
-    private UserRepository repo;
+    private ConsumerRepository repo;
 
     @RequestMapping("/user/profile")
     public String showMyProfile(Model model)
@@ -31,18 +32,18 @@ public class UserController {
             @PathVariable Long userId,
             Model model)
     {
-        model.addAttribute("user", (User) repo.findOne(userId));
+        model.addAttribute("user", repo.findOne(userId));
         return "/user/dashboard";
     }
 
     @RequestMapping(value="register", method= RequestMethod.POST)
     public String addUser(
-            @ModelAttribute User newUser,
+            @ModelAttribute Consumer newConsumer,
             Model model)
     {
-        repo.save(newUser);
-        model.addAttribute("user", newUser);
-        return "redirect:/user/" + newUser.getId();
+        repo.save(newConsumer);
+        model.addAttribute("user", newConsumer);
+        return "redirect:/user/" + newConsumer.getId();
     }
 
     @RequestMapping(value="/user/login", method= RequestMethod.GET)
