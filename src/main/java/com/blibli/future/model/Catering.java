@@ -13,8 +13,19 @@ public class Catering extends User {
     private String username;
     private String cateringName;
     private String address;
+
+    @Column(columnDefinition="text")
     private String description;
     private String phoneNumber;
+
+    private String dp;
+
+    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Product> products;
+
+    public Catering(){
+        super();
+    }
 
     @Override
     public String toString() {
@@ -27,15 +38,6 @@ public class Catering extends User {
                 ", dp='" + dp + '\'' +
                 ", products=" + products +
                 '}';
-    }
-
-    private String dp;
-
-    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> products;
-
-    public Catering(){
-        super();
     }
 
     public String getUsername() {

@@ -6,10 +6,16 @@ import com.blibli.future.model.UserRole;
 import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.CostumerRepository;
 import com.blibli.future.repository.UserRoleRepository;
+import io.codearte.jfairy.Fairy;
+import io.codearte.jfairy.producer.company.Company;
+import io.codearte.jfairy.producer.person.Person;
+import io.codearte.jfairy.producer.text.TextProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+
+import static io.codearte.jfairy.producer.person.PersonProperties.withCompany;
 
 /**
  * Created by dhika on 08/10/2016.
@@ -62,5 +68,25 @@ public class DatabaseSeeder {
         c.setPhoneNumber("x");
         c.setDp("50");
         cateringRepository.save(c);
+
+        // automatic data seeder
+        Fairy fairy = Fairy.create();
+        TextProducer texter = fairy.textProducer();
+        for (int i=0; i<30; i++) {
+            Company company = fairy.company();
+            Person person = fairy.person(withCompany(company));
+
+            c = new Catering();
+            c.setUsername(person.username());
+            c.setCateringName(company.name());
+            c.setEmail(person.companyEmail());
+            c.setPassword("secret");
+            c.setAddress(person.getAddress().toString());
+            c.setDescription(texter.paragraph(5));
+            c.setPhoneNumber(person.telephoneNumber());
+            c.setDp("50");
+            cateringRepository.save(c);
+        }
+
     }
 }
