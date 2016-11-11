@@ -76,6 +76,12 @@
 			<version>2.4</version>
 		</dependency>
 
+		<!-- Frontend library -->
+		<dependency>
+			<groupId>org.webjars.bower</groupId>
+			<artifactId>foundation-sites</artifactId>
+			<version>6.2.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

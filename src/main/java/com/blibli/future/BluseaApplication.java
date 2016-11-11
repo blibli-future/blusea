@@ -16,5 +16,8 @@ public class BluseaApplication extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/assets/**")
 				.addResourceLocations("classpath:/static/");
+
+		registry.addResourceHandler("/library/**")
+				.addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 }
