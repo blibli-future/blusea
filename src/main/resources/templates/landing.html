@@ -1,21 +1,28 @@
 {{>_layout/header}}
 
-<h1>Welcome to Toko BluSea</h1>
-<a href="/user/login">Login user lama</a>
-<form method="POST" action="/register">
-    <fieldset>
-        Masukkan Nama Lengkap <input type="text" name="fullName" /> <br />
-        Masukkan Nama Panggilan <input type="text" name="nickName" /> <br />
-        Masukkan Email <input type="text" name="email" />  <br />
-        Masukkan Password <input type="password" name="password" />  <br />
-        <input type="submit"
-               value="Register" />
-    </fieldset>
-</form>
 
 <div class="row">
-    <div class="small-3 columns">6 columns</div>
-    <div class="small-3 columns">6 columns</div>
+    <h1>Welcome to Toko BluSea</h1>
+    <a href="/user/login">Login user lama</a>
+    <form method="POST" action="/register">
+        <fieldset>
+            Masukkan Nama Lengkap <input type="text" name="fullName" /> <br />
+            Masukkan Nama Panggilan <input type="text" name="nickName" /> <br />
+            Masukkan Email <input type="text" name="email" />  <br />
+            Masukkan Password <input type="password" name="password" />  <br />
+            <input type="submit"
+                   value="Register" />
+        </fieldset>
+    </form>
+</div>
+
+<div class="row catering-list">
+    {{#caterings}}
+    <div class="small-3 columns item">
+        {{id}}
+        <div>{{cateringName}}</div>
+    </div>
+    {{/caterings}}
 </div>
 
 {{>_layout/footer}}
