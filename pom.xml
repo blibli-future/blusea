@@ -18,12 +18,6 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,11 +71,11 @@
 		</dependency>
 
 		<!-- Frontend library -->
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>foundation-sites</artifactId>
-			<version>6.2.4</version>
-		</dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0-alpha.5</version>
+        </dependency>
 
 		<!-- Data mocker -->
 		<dependency>

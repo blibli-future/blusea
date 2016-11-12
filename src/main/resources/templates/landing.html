@@ -1,9 +1,13 @@
-{{>_layout/header}}
+{{>_partial/header}}
 
+{{>_partial/public-navbar}}
 
-<div class="row">
-    <h1>Welcome to Toko BluSea</h1>
-    <a href="/user/login">Login user lama</a>
+<div class="container">
+
+    <div class="jumbotron">
+        <h1>Welcome to Toko BluSea</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+    </div>
     <form method="POST" action="/register">
         <fieldset>
             Masukkan Nama Lengkap <input type="text" name="fullName" /> <br />
@@ -13,16 +17,24 @@
             <input type="submit"
                    value="Register" />
         </fieldset>
+        <a href="/user/login">Login user lama</a>
     </form>
-</div>
 
-<div class="row catering-list">
-    {{#caterings}}
-    <div class="small-3 columns item">
-        {{id}}
-        <div>{{cateringName}}</div>
+    <div class="row">
+        {{#caterings}}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="img-fluid card-img-top" src="https://dummyimage.com/600x400/000/fff" alt="Card image cap">
+                <div class="card-block">
+                    <h4 class="card-title">{{cateringName}}</h4>
+                    <p class="card-text">{{description}}</p>
+                    <a href="#" class="btn btn-primary">Lihat makanan</a>
+                </div>
+            </div>
+        </div>
+        {{/caterings}}
     </div>
-    {{/caterings}}
+
 </div>
 
-{{>_layout/footer}}
+{{>_partial/footer}}
