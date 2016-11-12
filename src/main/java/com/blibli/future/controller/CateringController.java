@@ -138,7 +138,6 @@ public class CateringController {
                     logger.info("Server File Location="
                             + serverFile.getAbsolutePath());
 
-//                    return "You successfully uploaded file=" + newProduct.getName();
                 } catch (Exception e) {
                     return "You failed to upload " + newProduct.getName() + " => " + e.getMessage();
                 }

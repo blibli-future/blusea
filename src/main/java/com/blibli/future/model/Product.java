@@ -14,6 +14,11 @@ public class Product {
     private String description;
     private String photo;
 
+    //relationship begins
+    @ManyToOne
+    private Catering catering;
+    //relationship ends
+
     public Product(){
         super();
     }
@@ -49,9 +54,6 @@ public class Product {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-
-    @ManyToOne
-    private Catering catering;
 
     public Catering getCatering() {
         return catering;

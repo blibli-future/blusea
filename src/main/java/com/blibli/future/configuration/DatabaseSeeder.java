@@ -1,10 +1,10 @@
 package com.blibli.future.configuration;
 
 import com.blibli.future.model.Catering;
-import com.blibli.future.model.Costumer;
+import com.blibli.future.model.Customer;
 import com.blibli.future.model.UserRole;
 import com.blibli.future.repository.CateringRepository;
-import com.blibli.future.repository.CostumerRepository;
+import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.company.Company;
@@ -23,7 +23,7 @@ import static io.codearte.jfairy.producer.person.PersonProperties.withCompany;
 @Component
 public class DatabaseSeeder {
     @Autowired
-    CostumerRepository costumerRepository;
+    CustomerRepository customerRepository;
     @Autowired
     UserRoleRepository userRoleRepo;
     @Autowired
@@ -31,31 +31,42 @@ public class DatabaseSeeder {
 
     @PostConstruct
     private void initTestData() {
-        Costumer u = new Costumer();
+        Customer u = new Customer();
         u.setFullName("Adhika Setya Pramudita");
-        u.setNickName("Dhika");
+        u.setUsername("Dhika");
         u.setEmail("hello@adhikasetyap.me");
         u.setPassword("1234");
-        costumerRepository.save(u);
+        customerRepository.save(u);
         UserRole r = new UserRole();
-        r.setEmail("hello@adhikasetyap.me");
+        r.setUsername("Dhika");
         r.setRole("ROLE_USER");
         userRoleRepo.save(r);
         r = new UserRole();
-        r.setEmail("hello@adhikasetyap.me");
+        r.setUsername("Dhika");
         r.setRole("ROLE_ADMIN");
         userRoleRepo.save(r);
 
-        u = new Costumer();
+        u = new Customer();
         r = new UserRole();
         u.setFullName("Ahmad Widardi");
-        u.setNickName("Ardi");
+        u.setUsername("Ardi");
         u.setEmail("awidardi@gmail.com");
         u.setPassword("12345");
-        costumerRepository.save(u);
-        r.setEmail("awidardi@gmail.com");
+        customerRepository.save(u);
+        r.setUsername("Ardi");
         r.setRole("ROLE_ADMIN");
         r.setRole("ROLE_CATERING");
+        userRoleRepo.save(r);
+
+        u = new Customer();
+        r = new UserRole();
+        u.setFullName("user");
+        u.setUsername("user");
+        u.setPassword("12345");
+        customerRepository.save(u);
+        r.setUsername("user");
+        r.setRole("ROLE_ADMIN");
+        r.setRole("ROLE_USER");
         userRoleRepo.save(r);
 
         Catering c = new Catering();

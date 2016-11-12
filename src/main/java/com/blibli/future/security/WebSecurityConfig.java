@@ -27,10 +27,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // declared explicitly
                 .antMatchers("/admin/**")
                     .access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/catering/**")
-                    .access("hasRole('ROLE_CATERING')")
+                .antMatchers("/catering")
+                    .permitAll()
                 .antMatchers("/user/profile")
                     .access("hasRole('ROLE_USER')")
+                .antMatchers("/catering/{username}")
+                    .access("hasRole('ROLE_CATERING')")
+                .antMatchers("/catering/{username}/addproducts")
+                    .access("hasRole('ROLE_CATERING')")
+                .antMatchers("/catering/register")
+                    .permitAll()
                 // Any other url is accessible by everyone
                 .anyRequest()
                     .permitAll()
@@ -47,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select email, password, enabled from blusea_user where email=?")
-                .authoritiesByUsernameQuery("select email, role from user_role where email=?  ");
+                .usersByUsernameQuery("select username, password, enabled from blusea_user where username=?")
+                .authoritiesByUsernameQuery("select username, role from user_role where username=?  ");
     }
 }

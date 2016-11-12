@@ -1,15 +1,24 @@
 package com.blibli.future.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="blusea_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    private String username;
     private String email;
     private String password;
 
@@ -19,8 +28,14 @@ public class User {
 
     private boolean enabled = true;
 
-    public User() {}
+    @javax.persistence.Transient
+    private final Set<GrantedAuthority> authorities = new HashSet<>();
 
+    public User() {
+        authorities.add(new SimpleGrantedAuthority("USER"));
+    }
+
+    @Override
     public boolean isEnabled() {
         return enabled;
     }
@@ -37,8 +52,37 @@ public class User {
         return id;
     }
 
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
     public void setPassword(String password) {

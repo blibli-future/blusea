@@ -13,7 +13,7 @@ public class UserRole {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
-    private String email;
+    private String username;
     private String role;
 
     public UserRole() {
@@ -23,12 +23,12 @@ public class UserRole {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username= username;
     }
 
     public String getRole() {

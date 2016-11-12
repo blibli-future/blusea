@@ -10,44 +10,26 @@ import javax.persistence.*;
 
 @Entity
 public class Catering extends User {
-    private String username;
+//    private String username;
     private String cateringName;
     private String address;
 
     @Column(columnDefinition="text")
     private String description;
     private String phoneNumber;
-
     private String dp;
 
+    //relationship begins
     @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products;
+    @ManyToOne
+    private Order order;
+    //relationship ends
 
     public Catering(){
         super();
     }
-
-    @Override
-    public String toString() {
-        return "Catering{" +
-                ", username='" + username + '\'' +
-                ", cateringName='" + cateringName + '\'' +
-                ", address='" + address + '\'' +
-                ", description='" + description + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", dp='" + dp + '\'' +
-                ", products=" + products +
-                '}';
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    
     public String getCateringName() {
         return cateringName;
     }
@@ -103,5 +85,13 @@ public class Catering extends User {
             }
         }
         return false;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
