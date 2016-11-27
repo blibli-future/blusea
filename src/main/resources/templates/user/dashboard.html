@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to BluSea!</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-	<h1>Hello BluSea</h1>
+{{>_partial/header}}
+{{>_partial/user-navbar}}
+
+<div class="container">
+    <h1>Hello BluSea</h1>
     <p>Id : {{user.id}}</p>
     <p>Nama lengkap : {{user.fullName}}</p>
     <p>Nama panggilan : {{user.nickName}}</p>
     <p>Email : {{user.email}}</p>
-</body>
-</html>
+</div>
+
+{{>_partial/footer}}

@@ -19,8 +19,8 @@ public class PublicController {
 	public String landing(
 			Model model)
 	{
-		List<Catering> allCatering = ((List<Catering>) cateringRepository.findAll());
-		model.addAttribute("caterings", allCatering);
+		List<Catering> firstSixCatering = cateringRepository.findAll().subList(0, 6);
+		model.addAttribute("caterings", firstSixCatering);
 		return "landing";
 	}
 }

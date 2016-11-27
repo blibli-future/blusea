@@ -42,6 +42,16 @@ public class CustomerController {
         return "/customer/dashboard";
     }
 
+    @RequestMapping(value="register", method= RequestMethod.GET)
+    public String addUserForm(
+            HttpServletRequest request,
+            Model model)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+        return "costumer/register";
+    }
+
     @RequestMapping(value="register", method= RequestMethod.POST)
     public String addUser(
             @ModelAttribute Customer newCustomer,
@@ -60,7 +70,6 @@ public class CustomerController {
     {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
-        return "login";
+        return "user/login";
     }
-
 }

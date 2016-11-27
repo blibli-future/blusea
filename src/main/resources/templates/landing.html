@@ -1,24 +1,11 @@
 {{>_partial/header}}
-
 {{>_partial/public-navbar}}
 
 <div class="container">
-
     <div class="jumbotron">
         <h1>Welcome to Toko BluSea</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <p class="lead">Temukan kebutuhan catering perusahaanmu disini!</p>
     </div>
-    <form method="POST" action="/register">
-        <fieldset>
-            Masukkan Nama Lengkap <input type="text" name="fullName" /> <br />
-            Masukkan Nama Panggilan <input type="text" name="nickName" /> <br />
-            Masukkan Email <input type="text" name="email" />  <br />
-            Masukkan Password <input type="password" name="password" />  <br />
-            <input type="submit"
-                   value="Register" />
-        </fieldset>
-        <a href="/user/login">Login user lama</a>
-    </form>
 
     <div class="row">
         {{#caterings}}
@@ -28,13 +15,12 @@
                 <div class="card-block">
                     <h4 class="card-title">{{cateringName}}</h4>
                     <p class="card-text">{{description}}</p>
-                    <a href="#" class="btn btn-primary">Lihat makanan</a>
+                    <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
                 </div>
             </div>
         </div>
         {{/caterings}}
     </div>
-
 </div>
 
 {{>_partial/footer}}
