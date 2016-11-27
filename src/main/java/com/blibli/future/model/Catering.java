@@ -20,16 +20,16 @@ public class Catering extends User {
     private String dp;
 
     //relationship begins
-    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Product> products;
-    @ManyToOne
-    private Order order;
+    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<OrderDetail> orderDetails;
     //relationship ends
 
     public Catering(){
         super();
     }
-    
+
     public String getCateringName() {
         return cateringName;
     }
@@ -87,11 +87,11 @@ public class Catering extends User {
         return false;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

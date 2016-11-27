@@ -1,6 +1,7 @@
 package com.blibli.future.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customer extends User {
@@ -9,9 +10,8 @@ public class Customer extends User {
     private String nickName;
 
     //relationship begins
-    @OneToOne
-    @JoinColumn(name="id")
-    private Order order;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Order> orders;
     //relationship ends
 
     public Customer() {
@@ -34,11 +34,11 @@ public class Customer extends User {
         this.nickName = nickName;
     }
 
-    public Order getOrder() {
-        return order;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

@@ -5,12 +5,13 @@ package com.blibli.future.repository;
  */
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.blibli.future.model.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends CrudRepository<Product, Long>{
+public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByName(String name);
 }

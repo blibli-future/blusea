@@ -1,80 +1,67 @@
 package com.blibli.future.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by ARDI on 11/2/2016.
  */
-
 @Entity
+@Table(name="blusea_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idOrder;
-    private Date orderDate;
-    //deliv date
-    private Date theDate;
+    private long id;
+    private Date createDate;
+    private Date deliveryDate;
     private long quantities;
-    private long prices;
+    private long totalPrices;
+
+    /**
+     * Order Status Explanation
+     * 0 = customer still shopping
+     * 1 = customer checkout and pay dp, waiting for confirmation from catering
+     * 2 = catering say OK and starting to prepare order
+     * 3 = order shipped and completed
+     */
+    private int status;
+    public static int ORDER_STATUS_CART = 0;
+    public static int ORDER_STATUS_CONFIRMATION = 1;
+    public static int ORDER_STATUS_WAITING = 2;
+    public static int ORDER_STATUS_COMPLETE = 3;
 
     //relationship begins
-    @OneToOne(mappedBy = "order")
+    @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Catering> caterings;
-    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Product> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
     //relationship ends
 
 
-    public long getIdOrder() {
-        return idOrder;
+    public Order() {
+        this.status = ORDER_STATUS_CART;
     }
 
-    public void setIdOrder(long idOrder) {
-        this.idOrder = idOrder;
+    public long getId() {
+        return id;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getTheDate() {
-        return theDate;
+    public Date getDeliveryDate() {
+        return deliveryDate;
     }
 
-    public void setTheDate(Date theDate) {
-        this.theDate = theDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public List<Catering> getCaterings() {
-        return caterings;
-    }
-
-    public void setCaterings(List<Catering> caterings) {
-        this.caterings = caterings;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setDeliveryDate(Date deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public long getQuantities() {
@@ -85,13 +72,57 @@ public class Order {
         this.quantities = quantities;
     }
 
-    public long getPrices() {
-        return prices;
+    public long getTotalPrices() {
+        return totalPrices;
     }
 
-    public void setPrices(long prices) {
-        this.prices = prices;
+    public void setTotalPrices(long totalPrices) {
+        this.totalPrices = totalPrices;
     }
 
+    public int getStatus() {
+        return status;
+    }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
+    public void addOrderDetail(OrderDetail orderDetail) {
+        this.orderDetails.add(orderDetail);
+    }
+
+    public void addOrderDetail(List<OrderDetail> orderDetail) {
+        this.orderDetails.addAll(orderDetail);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", createDate=" + createDate +
+                ", deliveryDate=" + deliveryDate +
+                ", quantities=" + quantities +
+                ", totalPrices=" + totalPrices +
+                ", status=" + status +
+                ", customer=" + customer +
+                ", orderDetails=" + orderDetails +
+                '}';
+    }
 }
