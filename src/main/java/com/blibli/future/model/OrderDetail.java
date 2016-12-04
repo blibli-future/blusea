@@ -15,8 +15,6 @@ public class OrderDetail {
     private Order order;
     @ManyToOne
     private Product product;
-    @ManyToOne
-    private Catering catering;
 
     private int quantity;
     private int price;
@@ -27,7 +25,6 @@ public class OrderDetail {
 
     public OrderDetail(Order o, Product p, int price, int quantity) {
         this.product = p;
-        this.catering = p.getCatering();
         setOrder(o);
         this.price = price;
         this.quantity = quantity;
@@ -52,14 +49,6 @@ public class OrderDetail {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    public Catering getCatering() {
-        return catering;
-    }
-
-    public void setCatering(Catering catering) {
-        this.catering = catering;
     }
 
     public int getQuantity() {
@@ -92,7 +81,6 @@ public class OrderDetail {
                 "id=" + id +
                 ", order=" + order.getId() +
                 ", product=" + product +
-                ", catering=" + catering +
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", note=" + note +

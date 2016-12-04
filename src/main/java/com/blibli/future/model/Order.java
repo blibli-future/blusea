@@ -35,6 +35,8 @@ public class Order {
     //relationship begins
     @ManyToOne
     private Customer customer;
+    @ManyToOne
+    private Catering catering;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<OrderDetail> orderDetails = new ArrayList<>();
     //relationship ends
@@ -96,6 +98,14 @@ public class Order {
         this.customer = customer;
     }
 
+    public Catering getCatering() {
+        return catering;
+    }
+
+    public void setCatering(Catering catering) {
+        this.catering = catering;
+    }
+
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
@@ -112,17 +122,4 @@ public class Order {
         this.orderDetails.addAll(orderDetail);
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", createDate=" + createDate +
-                ", deliveryDate=" + deliveryDate +
-                ", quantities=" + quantities +
-                ", totalPrices=" + totalPrices +
-                ", status=" + status +
-                ", customer=" + customer +
-                ", orderDetails=" + orderDetails +
-                '}';
-    }
 }

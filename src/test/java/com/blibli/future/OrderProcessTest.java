@@ -73,6 +73,7 @@ public class OrderProcessTest extends AbstractTests {
 
         order = new Order();
         order.setCustomer(customer);
+        order.setCatering(catering);
         orderRepository.save(order);
 
         OrderDetail orderDetail = new OrderDetail(order, product1, 10000, 40);
@@ -101,7 +102,10 @@ public class OrderProcessTest extends AbstractTests {
 
     @Test
     public void canFindByEmailAndStatus() {
-        order = orderRepository.findByCustomerEmailAndStatus("john.doe@gmail.com", Order.ORDER_STATUS_CART);
+        order = orderRepository.findByCustomerEmailAndStatus("john.doe@gmail.com", Order.ORDER_STATUS_CART).get(0);
+        Assert.assertNotNull(order);
+
+        order = orderRepository.findByCateringEmailAndStatus("order@foodbank.com", Order.ORDER_STATUS_CART).get(0);
         Assert.assertNotNull(order);
     }
 }
