@@ -16,18 +16,12 @@ public class OrderDetail {
     @ManyToOne
     private Product product;
 
-    private int quantity;
-    private int price;
-    private int note;
-
     public OrderDetail() {
     }
 
-    public OrderDetail(Order o, Product p, int price, int quantity) {
+    public OrderDetail(Order o, Product p) {
         this.product = p;
         setOrder(o);
-        this.price = price;
-        this.quantity = quantity;
     }
 
     public long getId() {
@@ -51,39 +45,12 @@ public class OrderDetail {
         this.product = product;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getNote() {
-        return note;
-    }
-
-    public void setNote(int note) {
-        this.note = note;
-    }
-
     @Override
     public String toString() {
         return "OrderDetail{" +
                 "id=" + id +
                 ", order=" + order.getId() +
                 ", product=" + product +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", note=" + note +
                 '}';
     }
 }

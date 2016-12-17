@@ -13,6 +13,7 @@ public class Product {
     private String name;
     private String description;
     private String photo;
+    private int price;
 
     //relationship begins
     @ManyToOne
@@ -61,5 +62,13 @@ public class Product {
 
     public void setCatering(Catering catering) {
         this.catering = catering;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

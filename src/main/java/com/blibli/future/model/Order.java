@@ -18,6 +18,7 @@ public class Order {
     private Date deliveryDate;
     private long quantities;
     private long totalPrices;
+    private String note;
 
     /**
      * Order Status Explanation
@@ -122,4 +123,11 @@ public class Order {
         this.orderDetails.addAll(orderDetail);
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 }
