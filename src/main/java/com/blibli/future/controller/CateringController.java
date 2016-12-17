@@ -41,19 +41,6 @@ public class CateringController {
     private static final Logger logger = LoggerFactory
             .getLogger(CateringController.class);
 
-    @RequestMapping("/catering/{username}")
-    public String cateringProfile(
-            @PathVariable String username,
-            Model model){
-        Catering catering = cateringRepository.findByUsername(username);
-        model.addAttribute("catering", catering);
-        model.addAttribute("products", catering.getProducts());
-
-        System.out.println("Product : " + catering.toString());
-        System.out.println("ISI :" + catering.getProducts().size());
-        return "catering/detail";
-    }
-
     @RequestMapping(value="/catering",method=RequestMethod.GET)
     public String showAllCateringList(Model model){
         model.addAttribute("catering", cateringRepository.findAll());
