@@ -2,9 +2,11 @@ package com.blibli.future.configuration;
 
 import com.blibli.future.model.Catering;
 import com.blibli.future.model.Customer;
+import com.blibli.future.model.Product;
 import com.blibli.future.model.UserRole;
 import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.CustomerRepository;
+import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import io.codearte.jfairy.Fairy;
 import io.codearte.jfairy.producer.company.Company;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 import static io.codearte.jfairy.producer.person.PersonProperties.withCompany;
 
@@ -28,6 +32,8 @@ public class DatabaseSeeder {
     UserRoleRepository userRoleRepo;
     @Autowired
     CateringRepository cateringRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @PostConstruct
     private void initTestData() {
@@ -97,6 +103,17 @@ public class DatabaseSeeder {
             c.setPhoneNumber(person.telephoneNumber());
             c.setDp("50");
             cateringRepository.save(c);
+
+            for (int j=0; j<10; j++) {
+                Product p = new Product();
+                p.setName("Produk " + j);
+                p.setDescription("Deskripsi dari produk " + j);
+                p.setPhoto("https://dummyimage.com/200x200/000/fff");
+                p.setCatering(c);
+                int randomPrice = ThreadLocalRandom.current().nextInt(10, 101) * 100;
+                p.setPrice(randomPrice);
+                productRepository.save(p);
+            }
         }
 
     }
