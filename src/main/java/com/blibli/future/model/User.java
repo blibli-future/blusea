@@ -103,5 +103,4 @@ public class User implements UserDetails{
     public void setRoles(UserRole roles) {
         this.roles = roles;
     }
-
 }

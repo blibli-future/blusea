@@ -21,6 +21,7 @@ public class Catering extends User {
     private String description;
     private String phoneNumber;
     private String dp;
+    private String photo;
 
     //relationship begins
     @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -101,8 +102,18 @@ public class Catering extends User {
     public Set<String> getAvailableCategory(){
         Set<String> categories = null;
         for(Product product : products){
-            
+
         }
         return categories;
+    }
+
+    // HACKKK MOVE THIS TO USER MODEL
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

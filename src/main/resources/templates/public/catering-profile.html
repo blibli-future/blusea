@@ -2,12 +2,8 @@
 {{>_partial/public-navbar}}
 
 <div class="container">
-    <h1>{{catering.username}}</h1>
+    <h1>{{catering.cateringName}}</h1>
     <table class="table">
-        <tr>
-            <td>Nama perusahaan</td>
-            <td>{{catering.cateringName}}</td>
-        </tr>
         <tr>
             <td>Alamat</td>
             <td>{{catering.address}}</td>
@@ -17,7 +13,7 @@
             <td>{{catering.phoneNumber}}</td>
         </tr>
     </table>
-    <p>Daftar menu</p>
+    <h2>Daftar menu</h2>
     <form action="/my-user/order/new" method="POST">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
         <input type="hidden" name="catering-id" value="{{catering.id}}"/>
@@ -54,7 +50,7 @@
                     <label for="note">Keterangan tambahan</label>
                     <textarea type="text" class="form-control" id="note" name="note" placeholder="Keterangan tambahan untuk pesanan Anda"></textarea>
                 </div>
-                <button type="submit" class="btn btn-default">Pesan</button>
+                <button type="submit" class="btn btn-primary btn-lg">Pesan</button>
             </div>
         </div>
     </form>

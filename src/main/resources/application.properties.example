@@ -1,0 +1,6 @@
+spring.datasource.url= jdbc:postgresql://localhost:5432/blusea
+spring.datasource.username=postgres
+spring.datasource.password=
+
+spring.jpa.hibernate.ddl-auto=create-drop
+blusea.productPhotoDir.path=C:\\xampp\\htdocs\\gambar\\

@@ -62,6 +62,7 @@ public class DatabaseSeeder {
         c.setDescription("Hehe");
         c.setAddress("Jalan Kaliurang");
         c.setDp("70%");
+        c.setPhoto("https://dummyimage.com/200x200/000/fff");
         c.setPhoneNumber("085642196188");
         cateringRepository.save(c);
         r.setUsername("ArdiCatering");
@@ -102,10 +103,11 @@ public class DatabaseSeeder {
         c.setAddress("Jl. Adi Sucipto");
         c.setDescription("Prima Catering, melalui pengalaman selama 15 tahun telah menjadi “partner of choice” bagi berbagai perusahaan terkemuka di Jakarta. \n" +
                 "\n" +
-                "Melalui cita rasa istimewa, higienitas yang terjaga dan terstandarisasi, serta pelayanan kami yang sepenuh hati, kami membangun kepercayaan klien.  Kepuasan anda adalah hal yang utama bagi kami.\n" +
+                "<br>Melalui cita rasa istimewa, higienitas yang terjaga dan terstandarisasi, serta pelayanan kami yang sepenuh hati, kami membangun kepercayaan klien.  Kepuasan anda adalah hal yang utama bagi kami.\n" +
                 "\n" +
-                "T: +622145841573 / HP: +628111333800 (Marketing) / E: debby@prima-catering.com");
+                "<br>T: +622145841573 / HP: +628111333800 (Marketing) / E: debby@prima-catering.com");
         c.setPhoneNumber("+622145841573");
+        c.setPhoto("http://static1.squarespace.com/static/52414d6fe4b00ee0badffc5d/t/52fa2817e4b0a0539a45c733/1477546613639/?format=1500w");
         c.setDp("50");
         cateringRepository.save(c);
 
@@ -151,6 +153,7 @@ public class DatabaseSeeder {
             c.setDescription(texter.paragraph(5));
             c.setPhoneNumber(person.telephoneNumber());
             c.setDp("50");
+            c.setPhoto("https://dummyimage.com/600x400/000/fff");
             cateringRepository.save(c);
 
             for (int j=0; j<10; j++) {
