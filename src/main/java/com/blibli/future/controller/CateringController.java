@@ -43,7 +43,7 @@ public class CateringController {
 
     @RequestMapping(value="/catering",method=RequestMethod.GET)
     public String showAllCateringList(Model model){
-        model.addAttribute("catering", cateringRepository.findAll());
+        model.addAttribute("caterings", cateringRepository.findAll());
         return "catering/list";
     }
 

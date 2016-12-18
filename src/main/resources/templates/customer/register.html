@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to BluSea!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Welcome to Toko BluSea</h1>
+<form method="POST" action="/register">
+    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+    <fieldset>
+        Insert Username <input type="text" name="username" /> <br />
+        Insert Email <input type="text" name="email" /> <br />
+        Insert Password <input type="password" name="password" /> <br />
+        Insert Full Name <input type="text" name="fullName" /> <br />
+        Insert Nick Name <input type="text" name="nickName" /> <br />
+        <input type="submit"
+               value="Register" />
+    </fieldset>
+</form>
+</body>
+</html>

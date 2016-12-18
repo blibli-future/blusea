@@ -38,31 +38,31 @@ public class CustomerController {
             @PathVariable String username,
             Model model)
     {
-        model.addAttribute("user", userRepository.findByUsername(username));
+        model.addAttribute("customer", repo.findByUsername(username));
         return "/customer/dashboard";
     }
 
-    @RequestMapping(value="register", method= RequestMethod.GET)
+    @RequestMapping(value="/register", method= RequestMethod.GET)
     public String addUserForm(
             HttpServletRequest request,
             Model model)
     {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
-        return "costumer/register";
+        return "customer/register";
     }
 
-    @RequestMapping(value="register", method= RequestMethod.POST)
+    @RequestMapping(value="/register", method= RequestMethod.POST)
     public String addUser(
             @ModelAttribute Customer newCustomer,
             Model model)
     {
         repo.save(newCustomer);
         model.addAttribute("user", newCustomer);
-        return "redirect:/user/" + newCustomer.getId();
+        return "redirect:/customer/" + newCustomer.getUsername();
     }
 
-    @RequestMapping(value="/user/login", method= RequestMethod.GET)
+    @RequestMapping(value="/login", method= RequestMethod.GET)
     public String authenticateUser(
             @ModelAttribute User newUser,
             HttpServletRequest request,
