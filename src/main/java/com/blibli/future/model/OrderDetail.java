@@ -13,7 +13,7 @@ public class OrderDetail {
 
     @ManyToOne
     private Order order;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
 
     public OrderDetail() {
@@ -43,6 +43,10 @@ public class OrderDetail {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public int getPrice() {
+        return product.getPrice() * order.getQuantities();
     }
 
     @Override

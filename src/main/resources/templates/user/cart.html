@@ -1,0 +1,27 @@
+{{>_partial/header}}
+{{>_partial/user-navbar}}
+
+<div class="container">
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Nama produk</th>
+            <th>Harga satuan</th>
+            <th>Subtotal</th>
+        </tr>
+        {{#order.orderDetails}}
+        <tr>
+            <td>{{@index}}</td>
+            <td>{{product.name}}</td>
+            <td>{{order.quantities}}</td>
+            <td>{{price}}</td>
+        </tr>
+        {{/order.orderDetails}}
+        <tr>
+            <td colspan="3">Total harga</td>
+            <td>{{order.totalPrices}}</td>
+        </tr>
+    </table>
+</div>
+
+{{>_partial/footer}}

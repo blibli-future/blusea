@@ -16,8 +16,8 @@ public class Order {
     private long id;
     private Date createDate;
     private Date deliveryDate;
-    private long quantities;
-    private long totalPrices;
+    private int quantities;
+    private int totalPrices;
     private String note;
 
     /**
@@ -67,19 +67,27 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public long getQuantities() {
+    public int getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(long quantities) {
+    public void setQuantities(int quantities) {
         this.quantities = quantities;
     }
 
-    public long getTotalPrices() {
+    public int getTotalPrices() {
         return totalPrices;
     }
 
-    public void setTotalPrices(long totalPrices) {
+    public void updateTotalPrices() {
+        int tmp = 0;
+        for (OrderDetail od: this.orderDetails) {
+            tmp += od.getProduct().getPrice() * this.quantities;
+        }
+        totalPrices = tmp;
+    }
+
+    public void setTotalPrices(int totalPrices) {
         this.totalPrices = totalPrices;
     }
 

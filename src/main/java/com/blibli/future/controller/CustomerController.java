@@ -4,6 +4,7 @@ import com.blibli.future.model.Customer;
 import com.blibli.future.model.User;
 import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.repository.UserRepository;
+import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,13 +23,13 @@ public class CustomerController {
     private CustomerRepository repo;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private Helper helper;
 
     @RequestMapping(value="/user/profile" , method = RequestMethod.GET)
     public String showMyProfile(ModelMap model)
     {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(username);
-        User user = userRepository.findByUsername(username);
+        User user = helper.getCurrentUser();
         model.addAttribute("user", user);
         return "/user/dashboard";
     }

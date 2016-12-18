@@ -59,13 +59,7 @@ public class OrderController{
         order.setTotalPrices(totalPrice);
         orderRepository.save(order);
 
-        return "redirect:/my-user/order/checkout";
-    }
-
-    @RequestMapping(value = "/my-user/order/checkout", method = RequestMethod.GET)
-    public String checkoutOrder(HttpServletRequest request)
-    {
-        return "/user/order/checkout";
+        return "redirect:/my-user/order/cart";
     }
 
     @RequestMapping(value = "/my-user/order/cart", method = RequestMethod.GET)
@@ -73,13 +67,19 @@ public class OrderController{
             Model model,
             HttpServletRequest request)
     {
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = helper.getCurrentCustomer().getEmail();
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        model.addAttribute("order", orderRepository.findByCustomerEmail(email));
+        model.addAttribute("order", orderRepository.findByCustomerEmailAndStatus(email, Order.ORDER_STATUS_CART).get(0));
 
-        return "order/cart";
+        return "/user/cart";
+    }
+
+    @RequestMapping(value = "/my-user/order/checkout", method = RequestMethod.GET)
+    public String checkoutOrder(HttpServletRequest request)
+    {
+        return "/user/checkout";
     }
 
     @RequestMapping(value="/order/add",method=RequestMethod.GET)
