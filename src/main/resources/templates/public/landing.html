@@ -3,19 +3,25 @@
 
 <div class="container" id="homepage">
     <div class="jumbotron">
-        <h1>Welcome to Toko BluSea</h1>
+        <h1>Selamat datang di Kuliner Nusantara</h1>
         <p class="lead">Temukan kebutuhan catering perusahaanmu disini!</p>
+        <form>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="email" class="form-control form-control-xl" id="lgFormGroupInput" placeholder="Kombinasi makanan, contoh &#34;ayam, nasi goreng, bakso&#34;">
+                </div>
+                <button type="submit" class="col-sm-2 col-form-label col-form-label-xl btn btn-primary">Cari</button>
+            </div>
+        </form>
     </div>
 
     <div class="row">
         {{#caterings}}
-
         <div class="col-md-4">
             <div class="card">
                 <img class="img-fluid card-img-top" src="https://dummyimage.com/600x400/000/fff" alt="Card image cap">
                 <h4 class="card-title">{{cateringName}}</h4>
                 <div class="card-block">
-
                     <p class="card-text">{{description}}</p>
                     <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
                 </div>
