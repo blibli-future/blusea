@@ -121,7 +121,7 @@ public class CateringController {
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    newProduct.setPhoto("gambar"
+                    newProduct.setPhoto("http://localhost/gambar"
                             + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
