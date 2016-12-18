@@ -39,6 +39,7 @@ public class DatabaseSeeder {
     private void initTestData() {
         Customer u = new Customer();
         u.setFullName("Adhika Setya Pramudita");
+        u.setNickName("Dhika");
         u.setUsername("Dhika");
         u.setEmail("hello@adhikasetyap.me");
         u.setPassword("1234");
@@ -49,7 +50,7 @@ public class DatabaseSeeder {
         userRoleRepo.save(r);
         r = new UserRole();
         r.setUsername("Dhika");
-        r.setRole("ROLE_ADMIN");
+        r.setRole("ROLE_CUSTOMER");
         userRoleRepo.save(r);
 
         Catering c = new Catering();
