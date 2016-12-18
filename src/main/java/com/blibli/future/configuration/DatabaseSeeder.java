@@ -92,16 +92,47 @@ public class DatabaseSeeder {
         r.setRole("ROLE_USER");
         userRoleRepo.save(r);
 
+
         c = new Catering();
-        c.setUsername("x");
-        c.setCateringName("x");
-        c.setEmail("x");
-        c.setPassword("x");
-        c.setAddress("x");
-        c.setDescription("x");
-        c.setPhoneNumber("x");
+        c.setUsername("prima.catering");
+        c.setCateringName("Prima Catering");
+        c.setEmail("debby@prima-catering.com");
+        c.setPassword("1234");
+        c.setAddress("Jl. Adi Sucipto");
+        c.setDescription("Prima Catering, melalui pengalaman selama 15 tahun telah menjadi “partner of choice” bagi berbagai perusahaan terkemuka di Jakarta. \n" +
+                "\n" +
+                "Melalui cita rasa istimewa, higienitas yang terjaga dan terstandarisasi, serta pelayanan kami yang sepenuh hati, kami membangun kepercayaan klien.  Kepuasan anda adalah hal yang utama bagi kami.\n" +
+                "\n" +
+                "T: +622145841573 / HP: +628111333800 (Marketing) / E: debby@prima-catering.com");
+        c.setPhoneNumber("+622145841573");
         c.setDp("50");
         cateringRepository.save(c);
+
+        // Prima Catering products
+        Product p = new Product();
+        p.setName("Roti tawar");
+        p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/b/b3/Various_grains.jpg");
+        p.setDescription("Roti dengan gandum utuh dan organik");
+        p.setCatering(c);
+        p.setPrice(2500);
+        productRepository.save(p);
+
+        p = new Product();
+        p.setName("Kacang gurih");
+        p.setPhoto("https://cdn.pixabay.com/photo/2015/02/05/05/58/peanut-624601_960_720.jpg");
+        p.setDescription("Kacang tanah yang digoreng dengan bumbu garam spesial.");
+        p.setCatering(c);
+        p.setPrice(2000);
+        productRepository.save(p);
+
+        p = new Product();
+        p.setName("Tempura telur");
+        p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/4/46/Preety_much_sums_up_Osaka_food_culture_(4127987298).jpg");
+        p.setDescription("Tempura yang digoreng deepfried dengan topping telur dadar dari ayam kampung.");
+        p.setCatering(c);
+        p.setPrice(5000);
+        productRepository.save(p);
+
 
         // automatic data seeder
         Fairy fairy = Fairy.create();
@@ -122,7 +153,7 @@ public class DatabaseSeeder {
             cateringRepository.save(c);
 
             for (int j=0; j<10; j++) {
-                Product p = new Product();
+                p = new Product();
                 p.setName("Produk " + j);
                 p.setDescription("Deskripsi dari produk " + j);
                 p.setPhoto("https://dummyimage.com/200x200/000/fff");
