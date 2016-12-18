@@ -1,7 +1,7 @@
 {{>_partial/header}}
 {{>_partial/public-navbar}}
 
-<div class="container" id="homepage">
+<main class="container" id="homepage">
     <div class="jumbotron">
         <h1>Selamat datang di Kuliner Nusantara</h1>
         <p class="lead">Temukan kebutuhan catering perusahaanmu disini!</p>
@@ -22,7 +22,7 @@
                 <img class="img-fluid card-img-top" src="{{photo}}" alt="Card image cap">
                 <h4 class="card-title">{{cateringName}}</h4>
                 <div class="card-block">
-                    <p class="card-text">{{description}}</p>
+                    <p class="card-text">{{{description}}}</p>
                     <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
                 </div>
             </div>
@@ -47,6 +47,6 @@
         -->
         {{/caterings}}
     </div>
-</div>
+</main>
 
 {{>_partial/footer}}

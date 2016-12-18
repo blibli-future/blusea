@@ -1,7 +1,7 @@
 {{>_partial/header}}
 {{>_partial/public-navbar}}
 
-<div class="container">
+<main class="container">
     <h1>Login to Kuliner Nusantara</h1>
     <p if="${loginError}" class="error">Wrong user or password</p>
     <form method="POST" action="/user/login">
@@ -13,6 +13,6 @@
                    value="Login!" />
         </fieldset>
     </form>
-</div>
+</main>
 
 {{>_partial/footer}}

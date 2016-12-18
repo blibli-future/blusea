@@ -103,8 +103,6 @@ public class DatabaseSeeder {
         c.setAddress("Jl. Adi Sucipto");
         c.setDescription("Prima Catering, melalui pengalaman selama 15 tahun telah menjadi “partner of choice” bagi berbagai perusahaan terkemuka di Jakarta. \n" +
                 "\n" +
-                "<br>Melalui cita rasa istimewa, higienitas yang terjaga dan terstandarisasi, serta pelayanan kami yang sepenuh hati, kami membangun kepercayaan klien.  Kepuasan anda adalah hal yang utama bagi kami.\n" +
-                "\n" +
                 "<br>T: +622145841573 / HP: +628111333800 (Marketing) / E: debby@prima-catering.com");
         c.setPhoneNumber("+622145841573");
         c.setPhoto("http://static1.squarespace.com/static/52414d6fe4b00ee0badffc5d/t/52fa2817e4b0a0539a45c733/1477546613639/?format=1500w");

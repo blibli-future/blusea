@@ -1,7 +1,7 @@
 {{>_partial/header}}
 {{>_partial/public-navbar}}
 
-<div class="container">
+<main class="container">
     <h1>Login to Kuliner Nusantara</h1>
     <form method="POST" action="/login">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
@@ -12,6 +12,6 @@
                    value="Login!" />
         </fieldset>
     </form>
-</div>
+</main>
 
 {{>_partial/footer}}
