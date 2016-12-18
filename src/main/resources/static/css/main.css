@@ -1,3 +1,22 @@
 .container {
     padding-top: 70px;
 }
+
+.card-title {
+    position: absolute;
+    top: 25%;
+    right : 33%;
+    left : 33%;
+
+    text-align: center;
+    background: rgba(29, 106, 154, 0.72);
+    color: #fff;
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+img:hover ~ .card-title{
+    visibility: visible;
+    opacity: 1;
+}

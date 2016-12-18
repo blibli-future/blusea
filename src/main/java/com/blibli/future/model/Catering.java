@@ -3,7 +3,10 @@ package com.blibli.future.model;
 /**
  * Created by ARDI on 10/6/2016.
  */
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -93,5 +96,13 @@ public class Catering extends User {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public Set<String> getAvailableCategory(){
+        Set<String> categories = null;
+        for(Product product : products){
+            
+        }
+        return categories;
     }
 }

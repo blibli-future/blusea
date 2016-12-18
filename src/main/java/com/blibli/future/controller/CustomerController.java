@@ -72,4 +72,13 @@ public class CustomerController {
         model.addAttribute("_csrf", _csrf);
         return "user/login";
     }
+
+    @RequestMapping(value="/user/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "user/login-error";
+    }
+
+
 }
+

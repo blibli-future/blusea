@@ -1,0 +1,46 @@
+{{>_partial/header}}
+{{>_partial/public-navbar}}
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to Toko BluSea</h1>
+        <p class="lead">Temukan kebutuhan catering perusahaanmu disini!</p>
+    </div>
+
+    <div class="row">
+        {{#caterings}}
+
+        <div class="col-md-4">
+            <div class="card">
+                <img class="img-fluid card-img-top" src="https://dummyimage.com/600x400/000/fff" alt="Card image cap">
+                <h4 class="card-title">{{cateringName}}</h4>
+                <div class="card-block">
+
+                    <p class="card-text">{{description}}</p>
+                    <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div class="col-md-4">
+            <div class="wrap-img">
+                <img src="https://www.blibli.com/page/wp-content/uploads/new-people1-karir.jpg" alt="new-people1-karir" width="380" height="380" class="alignnone size-full wp-image-3252 hvrbox-layer_bottom">
+                <div class="hvrbox-layer-title hvrbox-layer_slideTop">
+                    <h4>Inspiring Workplace</h4>
+                    <p><img src="https://www.blibli.com/page/wp-content/uploads/ic-binocular1.png" alt="scroll down" width="28" height="14"></p></div>
+                <div class="hvrbox-layer_top hvrbox-layer_slideup">
+                    <div class="hvrbox-text">
+                        <h4>Inspiring Workplace</h4>
+                        <p>
+                        </p><p>As the melting pot of bright talents from world class universities and experienced professionals ranging from multinational tech, agencies, manufactures, entrepreneurs, to consulting. Blibli.com provides opportunities for bright talents to explore diverse perspectives and ideas among themselves, thus inspiring one another in pursuing life purposes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+        {{/caterings}}
+    </div>
+</div>
+
+{{>_partial/footer}}

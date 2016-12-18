@@ -25,7 +25,7 @@ public class PublicController {
 	{
 		List<Catering> firstSixCatering = cateringRepository.findAll().subList(0, 6);
 		model.addAttribute("caterings", firstSixCatering);
-		return "landing";
+		return "public/landing";
 	}
 
 	@RequestMapping("/catering/{username}")

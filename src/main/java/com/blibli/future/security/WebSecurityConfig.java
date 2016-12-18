@@ -20,9 +20,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .authorizeRequests()
                 .antMatchers("/catering/register")
-                .permitAll()
+                    .permitAll()
                 // URL that need special access role need to
                 // declared explicitly
                 .antMatchers("/admin/**")
@@ -40,14 +41,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Any other url is accessible by everyone
                 .anyRequest()
                     .permitAll()
-
                 .and()
                 .formLogin()
                     .loginPage("/user/login")
+                    .failureUrl("/user/login-error.html")
                     .permitAll()
-                    .and()
+                .and()
                 .logout()
-                    .permitAll();
+                .logoutSuccessUrl("/public/landing");
     }
 
     @Autowired
