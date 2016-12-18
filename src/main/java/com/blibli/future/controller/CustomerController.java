@@ -2,6 +2,7 @@ package com.blibli.future.controller;
 
 import com.blibli.future.model.Customer;
 import com.blibli.future.model.User;
+import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.repository.UserRepository;
 import com.blibli.future.utility.Helper;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class CustomerController {
     @Autowired
-    private CustomerRepository repo;
+    private CustomerRepository customerRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -39,7 +40,7 @@ public class CustomerController {
             @PathVariable String username,
             Model model)
     {
-        model.addAttribute("customer", repo.findByUsername(username));
+        model.addAttribute("customer", customerRepository.findByUsername(username));
         return "/customer/dashboard";
     }
 
@@ -58,12 +59,24 @@ public class CustomerController {
             @ModelAttribute Customer newCustomer,
             Model model)
     {
-        repo.save(newCustomer);
+        customerRepository.save(newCustomer);
         model.addAttribute("user", newCustomer);
         return "redirect:/customer/" + newCustomer.getUsername();
     }
 
+    @RequestMapping(value="/customer/{username}/order",method = RequestMethod.GET)
+    public String showOrder(
+            @PathVariable String username,
+            Model model,
+            HttpServletRequest request)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
 
+        model.addAttribute("customer", customerRepository.findByUsername(username));
+
+        return "customer/order";
+    }
 
 
 }
