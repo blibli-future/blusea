@@ -52,16 +52,33 @@ public class DatabaseSeeder {
         r.setRole("ROLE_ADMIN");
         userRoleRepo.save(r);
 
+        Catering c = new Catering();
+        r = new UserRole();
+        c.setCateringName("Ahmad Widardi");
+        c.setUsername("ArdiCatering");
+        c.setEmail("cateringa@gmail.com");
+        c.setPassword("12345");
+        c.setDescription("Hehe");
+        c.setAddress("Jalan Kaliurang");
+        c.setDp("70%");
+        c.setPhoneNumber("085642196188");
+        cateringRepository.save(c);
+        r.setUsername("ArdiCatering");
+        r.setRole("ROLE_ADMIN");
+        r.setRole("ROLE_CATERING");
+        userRoleRepo.save(r);
+
         u = new Customer();
         r = new UserRole();
         u.setFullName("Ahmad Widardi");
-        u.setUsername("Ardi");
-        u.setEmail("awidardi@gmail.com");
+        u.setNickName("Ardi");
+        u.setUsername("ArdiCustomer");
+        u.setEmail("customera@gmail.com");
         u.setPassword("12345");
         customerRepository.save(u);
-        r.setUsername("Ardi");
+        r.setUsername("ArdiCustomer");
         r.setRole("ROLE_ADMIN");
-        r.setRole("ROLE_CATERING");
+        r.setRole("ROLE_CUSTOMER");
         userRoleRepo.save(r);
 
         u = new Customer();
@@ -75,7 +92,7 @@ public class DatabaseSeeder {
         r.setRole("ROLE_USER");
         userRoleRepo.save(r);
 
-        Catering c = new Catering();
+        c = new Catering();
         c.setUsername("x");
         c.setCateringName("x");
         c.setEmail("x");

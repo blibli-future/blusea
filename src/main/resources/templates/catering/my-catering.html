@@ -18,13 +18,12 @@
         </tr>
     </table>
     <p>Daftar menu</p>
-    <form action="/my-user/order/new" method="POST">
-        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+    <a href="/catering/{{catering.username}}/addproducts" > Want to add products? </a>
         <input type="hidden" name="catering-id" value="{{catering.id}}"/>
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                    {{#products}}
+                    {{#catering.products}}
                     <div class="col-md-4">
                         <div class="card">
                             <img class="img-fluid card-img-top" src="http:\\localhost\{{photo}}" alt="Card image cap">
@@ -34,29 +33,12 @@
                                     Harga Rp. {{price}} / pax <br>
                                     {{description}}
                                 </p>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="choosen-product" value="{{id}}"> Tambahkan ke pesanan
-                                    </label>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    {{/products}}
+                    {{/catering.products}}
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="quantity">Jumlah pesanan</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label for="note">Keterangan tambahan</label>
-                    <textarea type="text" class="form-control" id="note" name="note" placeholder="Keterangan tambahan untuk pesanan Anda"></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Pesan</button>
-            </div>
         </div>
-    </form>
 
-{{>_partial/footer}}
+
+    {{>_partial/footer}}

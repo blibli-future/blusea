@@ -3,6 +3,8 @@ package com.blibli.future.controller;
 /**
  * Created by ARDI on 10/6/2016.
  */
+import com.blibli.future.model.User;
+import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import com.blibli.future.model.Product;
@@ -37,6 +40,9 @@ public class CateringController {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    Helper helper;
 
     private static final Logger logger = LoggerFactory
             .getLogger(CateringController.class);
@@ -115,7 +121,7 @@ public class CateringController {
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    newProduct.setPhoto("http://localhost/gambar"
+                    newProduct.setPhoto("gambar"
                             + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
@@ -134,8 +140,16 @@ public class CateringController {
             }
             productRepository.save(newProduct);
             cateringRepository.save(catering);
-            return "redirect:/catering/" + catering.getUsername();
+            return "redirect:/my-catering";
         }
-        return "redirect:/catering/" + catering.getUsername();
+        return "redirect:/my-catering";
+    }
+
+    @RequestMapping(value="/my-catering" , method = RequestMethod.GET)
+    public String showMyProfile(ModelMap model)
+    {
+        Catering catering = (Catering) helper.getCurrentUser();
+        model.addAttribute("catering", catering);
+        return "/catering/my-catering";
     }
 }

@@ -63,22 +63,7 @@ public class CustomerController {
         return "redirect:/customer/" + newCustomer.getUsername();
     }
 
-    @RequestMapping(value="/login", method= RequestMethod.GET)
-    public String authenticateUser(
-            @ModelAttribute User newUser,
-            HttpServletRequest request,
-            Model model)
-    {
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-        return "user/login";
-    }
 
-    @RequestMapping(value="/user/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "user/login-error";
-    }
 
 
 }

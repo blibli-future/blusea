@@ -1,21 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Welcome to BluSea, {{catering.username}}!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Welcome to Toko BluSea</h1>
-<form method="POST" action="/catering/{{catering.username}}/addproducts" enctype="multipart/form-data">
-    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-    <fieldset>
-        Insert Nama Product <input type="text" name="name" /> <br />
-        Insert Description <input type="text" name="description" /> <br />
-        Insert Price <input type="number" name="price"> <br>
-        File to upload: <input type="file" name="file" /> <br />
-        <input type="submit"
-               value="Register" />
-    </fieldset>
-</form>
-</body>
-</html>
+{{>_partial/header}}
+{{>_partial/public-navbar}}
+
+<div class="container">
+    <head>
+        <title>Welcome to BluSea, {{catering.username}}!</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+    <h1>Welcome to Toko BluSea</h1>
+    <form method="POST" action="/catering/{{catering.username}}/addproducts" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+        <fieldset>
+            Insert Nama Product <input type="text" name="name" /> <br />
+            Insert Description <input type="text" name="description" /> <br />
+            Insert Price <input type="number" name="price"> <br>
+            File to upload: <input type="file" name="file" /> <br />
+            <input type="submit"
+                   value="Add Product" />
+        </fieldset>
+    </form>
+    </body>
+</div>
+
+{{>_partial/footer}}
