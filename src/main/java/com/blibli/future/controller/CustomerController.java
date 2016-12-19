@@ -32,7 +32,7 @@ public class CustomerController {
     {
         Customer customer = (Customer) helper.getCurrentUser();
         model.addAttribute("customer", customer);
-        return "user/dashboard";
+        return "customer/profile";
     }
 
     @RequestMapping("/customer/{username}")

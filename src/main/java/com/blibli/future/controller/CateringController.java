@@ -150,6 +150,6 @@ public class CateringController {
     {
         Catering catering = (Catering) helper.getCurrentUser();
         model.addAttribute("catering", catering);
-        return "/catering/my-catering";
+        return "/catering/profile";
     }
 }
