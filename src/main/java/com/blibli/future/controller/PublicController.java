@@ -28,11 +28,20 @@ public class PublicController {
 	Helper helper;
 	@RequestMapping("/")
 	public String landing(
-			Model model)
-	{
+			Model model) {
 		List<Catering> firstSixCatering = cateringRepository.findAll().subList(0, 6);
 		model.addAttribute("caterings", firstSixCatering);
-		return "public/landing";
+        User user = helper.getCurrentUser();
+        if(user instanceof Customer){
+            Customer customer = (Customer) helper.getCurrentUser();
+            model.addAttribute("customer", customer);
+            return "/customer/home";
+        }else if(user instanceof Catering){
+            Catering catering = (Catering) helper.getCurrentUser();
+            model.addAttribute("catering", catering);
+            return "/catering/home";
+        }
+        return "public/landing";
 	}
 
 	@RequestMapping("/catering/{username}")

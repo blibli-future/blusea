@@ -30,9 +30,9 @@ public class CustomerController {
     @RequestMapping(value="/user/profile" , method = RequestMethod.GET)
     public String showMyProfile(ModelMap model)
     {
-        User user = helper.getCurrentUser();
-        model.addAttribute("user", user);
-        return "/user/dashboard";
+        Customer customer = (Customer) helper.getCurrentUser();
+        model.addAttribute("customer", customer);
+        return "user/dashboard";
     }
 
     @RequestMapping("/customer/{username}")
