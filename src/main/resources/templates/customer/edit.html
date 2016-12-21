@@ -1,0 +1,24 @@
+{{>_partial/header}}
+{{>_partial/customer-navbar}}
+
+<head>
+    <title>Welcome to BluSea!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Welcome to Toko BluSea</h1>
+<form method="POST" action="/my-customer/edit">
+    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+    <fieldset>
+        Edit Username <input type="text" name="username" value="{{customer.username}}"/> <br />
+        Edit Email <input type="text" name="email" value="{{customer.email}}"/> <br />
+        Edit Password <input type="password" name="password" value="{{customer.password}}"/> <br />
+        Edit Full Name <input type="text" name="fullName" value="{{customer.fullName}}"/> <br />
+        Edit Nick Name <input type="text" name="nickName" value="{{customer.nickName}}"/> <br />
+        <input type="submit"
+               value="Edit" />
+    </fieldset>
+</form>
+</body>
+
+{{>_partial/footer}}

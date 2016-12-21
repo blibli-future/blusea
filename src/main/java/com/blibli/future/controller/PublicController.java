@@ -4,6 +4,7 @@ import com.blibli.future.model.Catering;
 import com.blibli.future.model.Customer;
 import com.blibli.future.model.User;
 import com.blibli.future.repository.CateringRepository;
+import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,11 @@ public class PublicController {
 	CateringRepository cateringRepository;
 
 	@Autowired
+	CustomerRepository customerRepository;
+
+	@Autowired
 	Helper helper;
+
 	@RequestMapping("/")
 	public String landing(
 			Model model) {
@@ -80,10 +85,20 @@ public class PublicController {
 	public String decideUser(Model model) {
 		User user = helper.getCurrentUser();
 		if(user instanceof Customer){
-			return "redirect:/user/profile";
+			return "redirect:/my-customer/profile";
 		}else if(user instanceof Catering){
 			return "redirect:/my-catering";
 		}
 		return "redirect:/";
+	}
+
+	//Customer
+	@RequestMapping("/customer/{username}")
+	public String showPublicUserProfile(
+			@PathVariable String username,
+			Model model)
+	{
+		model.addAttribute("customer", customerRepository.findByUsername(username));
+		return "/customer/dashboard";
 	}
 }

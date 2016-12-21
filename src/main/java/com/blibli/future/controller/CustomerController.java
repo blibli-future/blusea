@@ -27,21 +27,12 @@ public class CustomerController {
     @Autowired
     private Helper helper;
 
-    @RequestMapping(value="/user/profile" , method = RequestMethod.GET)
+    @RequestMapping(value="/my-customer/profile" , method = RequestMethod.GET)
     public String showMyProfile(ModelMap model)
     {
         Customer customer = (Customer) helper.getCurrentUser();
         model.addAttribute("customer", customer);
         return "customer/profile";
-    }
-
-    @RequestMapping("/customer/{username}")
-    public String showPublicUserProfile(
-            @PathVariable String username,
-            Model model)
-    {
-        model.addAttribute("customer", customerRepository.findByUsername(username));
-        return "/customer/dashboard";
     }
 
     @RequestMapping(value="/register", method= RequestMethod.GET)
@@ -79,5 +70,31 @@ public class CustomerController {
     }
 
 
+    @RequestMapping(value="/my-customer/edit", method= RequestMethod.GET)
+    public String editCustomerForm(
+            HttpServletRequest request,
+            Model model)
+    {
+        Customer customer = (Customer) helper.getCurrentUser();
+        model.addAttribute("customer", customer);
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+        return "customer/edit";
+    }
+
+    @RequestMapping(value="/my-customer/edit", method= RequestMethod.POST)
+    public String editCustomer(
+            HttpServletRequest request,
+            Model model)
+    {
+        Customer customer = (Customer) helper.getCurrentUser();
+        customer.setUsername(request.getParameter("username"));
+        customer.setPassword(request.getParameter("password"));
+        customer.setEmail(request.getParameter("email"));
+        customer.setFullName(request.getParameter("fullName"));
+        customer.setNickName(request.getParameter("nickName"));
+        customerRepository.save(customer);
+        return "redirect:/my-customer/profile";
+    }
 }
 
