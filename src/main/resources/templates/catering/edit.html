@@ -1,5 +1,5 @@
 {{>_partial/header}}
-{{>_partial/customer-navbar}}
+{{>_partial/catering-navbar}}
 
 <head>
     <title>Welcome to BluSea!</title>
@@ -7,19 +7,20 @@
 </head>
 <body>
 <h1>Welcome to Toko BluSea</h1>
-<form method="POST" action="/catering/register">
+<form method="POST" action="/my-catering/edit">
     <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+    <img class="img-fluid card-img-top" src="{{catering.photo}}" alt="Card image cap">
     <fieldset>
-        Insert Username <input type="text" name="username" /> <br />
-        Insert Name <input type="text" name="cateringName" /> <br />
-        Insert Email <input type="text" name="email" /> <br />
-        Insert Password <input type="password" name="password" /> <br />
-        Insert Address <input type="text" name="address" /> <br />
-        Insert Description <input type="text" name="description" /> <br />
-        Insert Phone Number <input type="text" name="phoneNumber" /> <br />
-        Insert DP (Down Payment) <input type="text" name="dp" /> <br />
+        Edit Username <input type="text" name="username" value="{{catering.username}}"/> <br />
+        Edit Name <input type="text" name="cateringName" value="{{catering.cateringName}}"/> <br />
+        Edit Email <input type="text" name="email" value="{{catering.email}}"/> <br />
+        Edit Password <input type="password" name="password" value="{{catering.password}}"/> <br />
+        Edit Address <input type="text" name="address" value="{{catering.address}}"/> <br />
+        Edit Description <input type="text" name="description" value="{{catering.description}}"/> <br />
+        Edit Phone Number <input type="text" name="phoneNumber" value="{{catering.phoneNumber}}"/> <br />
+        Edit DP (Down Payment) <input type="text" name="dp" value="{{catering.dp}}"/> <br />
         <input type="submit"
-               value="Register" />
+               value="Edit" />
     </fieldset>
 </form>
 </body>

@@ -47,12 +47,6 @@ public class CateringController {
     private static final Logger logger = LoggerFactory
             .getLogger(CateringController.class);
 
-    @RequestMapping(value="/catering",method=RequestMethod.GET)
-    public String showAllCateringList(Model model){
-        model.addAttribute("caterings", cateringRepository.findAll());
-        return "catering/list";
-    }
-
     @RequestMapping(value="/catering/register",method=RequestMethod.GET)
     public String cateringRegisterForm(
             Model model,
@@ -140,16 +134,47 @@ public class CateringController {
             }
             productRepository.save(newProduct);
             cateringRepository.save(catering);
-            return "redirect:/my-catering";
+            return "redirect:/my-catering/profile";
         }
-        return "redirect:/my-catering";
+        return "redirect:/my-catering/profile";
     }
 
-    @RequestMapping(value="/my-catering" , method = RequestMethod.GET)
-    public String showMyProfile(ModelMap model)
+    @RequestMapping(value="/my-catering/profile" , method = RequestMethod.GET)
+    public String showMyCateringProfile(ModelMap model)
     {
         Catering catering = (Catering) helper.getCurrentUser();
         model.addAttribute("catering", catering);
-        return "/catering/profile";
+        return "catering/profile";
+    }
+
+    //editing
+    @RequestMapping(value="/my-catering/edit", method= RequestMethod.GET)
+    public String editCateringForm(
+            HttpServletRequest request,
+            Model model)
+    {
+        Catering catering = (Catering) helper.getCurrentUser();
+        model.addAttribute("catering", catering);
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+        return "catering/edit";
+    }
+
+    @RequestMapping(value="/my-catering/edit", method= RequestMethod.POST)
+    public String editCatering(
+            HttpServletRequest request)
+    {
+        Catering catering = (Catering) helper.getCurrentUser();
+        catering.setUsername(request.getParameter("username"));
+        catering.setPassword(request.getParameter("password"));
+        catering.setEmail(request.getParameter("email"));
+        catering.setCateringName(request.getParameter("cateringName"));
+        catering.setAddress(request.getParameter("address"));
+        catering.setDescription(request.getParameter("description"));
+        catering.setPhoneNumber(request.getParameter("phoneNumber"));
+        catering.setDp(request.getParameter("dp"));
+        catering.setPhoto(request.getParameter("photo"));
+        cateringRepository.save(catering);
+        return "redirect:/my-catering/profile";
     }
 }

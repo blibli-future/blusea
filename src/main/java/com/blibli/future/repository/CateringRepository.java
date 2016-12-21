@@ -12,5 +12,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CateringRepository extends JpaRepository<Catering, Long> {
     Catering findByUsername(String username);
-    Catering findByEmail(String email);
 }

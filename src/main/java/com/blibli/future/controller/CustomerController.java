@@ -28,7 +28,7 @@ public class CustomerController {
     private Helper helper;
 
     @RequestMapping(value="/my-customer/profile" , method = RequestMethod.GET)
-    public String showMyProfile(ModelMap model)
+    public String showMyCustomerProfile(ModelMap model)
     {
         Customer customer = (Customer) helper.getCurrentUser();
         model.addAttribute("customer", customer);
@@ -84,8 +84,7 @@ public class CustomerController {
 
     @RequestMapping(value="/my-customer/edit", method= RequestMethod.POST)
     public String editCustomer(
-            HttpServletRequest request,
-            Model model)
+            HttpServletRequest request)
     {
         Customer customer = (Customer) helper.getCurrentUser();
         customer.setUsername(request.getParameter("username"));

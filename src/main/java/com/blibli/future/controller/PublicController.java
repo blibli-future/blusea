@@ -49,21 +49,6 @@ public class PublicController {
         return "public/landing";
 	}
 
-	@RequestMapping("/catering/{username}")
-	public String cateringPublicProfile(
-			@PathVariable String username,
-			HttpServletRequest request,
-			Model model){
-		String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-		model.addAttribute("_csrf", _csrf);
-
-		Catering catering = cateringRepository.findByUsername(username);
-		model.addAttribute("catering", catering);
-		model.addAttribute("products", catering.getProducts());
-
-		return "public/catering-profile";
-	}
-
 	@RequestMapping(value="/login", method= RequestMethod.GET)
 	public String authenticateUser(
 			@ModelAttribute User newUser,
@@ -87,9 +72,32 @@ public class PublicController {
 		if(user instanceof Customer){
 			return "redirect:/my-customer/profile";
 		}else if(user instanceof Catering){
-			return "redirect:/my-catering";
+			return "redirect:/my-catering/profile";
 		}
 		return "redirect:/";
+	}
+
+	//catering
+
+	@RequestMapping(value="/catering",method=RequestMethod.GET)
+	public String showAllCateringList(Model model){
+		model.addAttribute("caterings", cateringRepository.findAll());
+		return "catering/list";
+	}
+
+	@RequestMapping("/catering/{username}")
+	public String cateringPublicProfile(
+			@PathVariable String username,
+			HttpServletRequest request,
+			Model model){
+		String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+		model.addAttribute("_csrf", _csrf);
+
+		Catering catering = cateringRepository.findByUsername(username);
+		model.addAttribute("catering", catering);
+		model.addAttribute("products", catering.getProducts());
+
+		return "public/catering-profile";
 	}
 
 	//Customer
