@@ -108,6 +108,10 @@ public class DatabaseSeeder {
         c.setPhoto("http://static1.squarespace.com/static/52414d6fe4b00ee0badffc5d/t/52fa2817e4b0a0539a45c733/1477546613639/?format=1500w");
         c.setDp("50");
         cateringRepository.save(c);
+        r = new UserRole();
+        r.setUsername("prima.catering");
+        r.setRole("ROLE_CATERING");
+        userRoleRepo.save(r);
 
         // Prima Catering products
         Product p = new Product();
