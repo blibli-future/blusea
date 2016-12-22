@@ -9,7 +9,7 @@ main.container {
     margin-top: 60px;
     padding: 20px;
     width: 100%;
-    background-color: #f5f5f5;
+    background-color: #e5e5e5;
 }
 
 #homepage .card-title {
@@ -33,4 +33,32 @@ main.container {
 
 .table .summary {
     text-align: right;
+}
+
+.order-list .order-item {
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-top: 2px solid #333;
+}
+
+.order-item .order-detail {
+    background-color: #eee;
+}
+
+.order-item table {
+    margin-bottom: 0;
+}
+
+.order-list .order-product-detail {
+    padding: 15px;
+    border-top: 1px solid #bbb;
+}
+
+.order-action {
+    text-align: right;
+    padding: 15px;
+}
+
+.order-action form {
+    display: inline-block;
 }

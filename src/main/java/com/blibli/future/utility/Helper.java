@@ -22,6 +22,10 @@ public class Helper {
         return auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken) ;
     }
 
+    public String getEmail() {
+        return getCurrentCustomer().getEmail();
+    }
+
 //    public boolean isLoggedInAsCustomer
 
     public User getCurrentUser() {

@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show Customer's order</title>
-</head>
-<body>
+{{>_partial/header}}
+{{>_partial/customer-navbar}}
 
-</body>
-</html>
+<main class="container">
+    <h2>Daftar Pesanan Anda</h2>
+    <div class="order-list">
+    {{#orderList}}
+        <div class="order-item">
+            <div class="order-detail">
+                <table class="table">
+                    <tr>
+                        <td>Tanggal Pemesanan</td>
+                        <td>Tanggal Pengiriman</td>
+                        <td>Jumlah pax</td>
+                        <td>Status</td>
+                        {{#notComplete}}
+                        <td>Kekurangan pembayaran</td>
+                        {{/notComplete}}
+                        <td>Nomor order</td>
+                    </tr>
+                    <tr>
+                        <td>{{createDate}}</td>
+                        <td>{{deliveryDate}}</td>
+                        <td>{{quantities}}</td>
+                        <td>{{plainTextStatus}}</td>
+                        {{#notComplete}}
+                        <td class="rupiah">{{remainingPayment}}</td>
+                        {{/notComplete}}
+                        <td>{{id}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="order-product-detail">
+                <p>Detail pesanan</p>
+                <table class="table">
+                    <tr>
+                        <th>Nama produk</th>
+                        <th>Harga satuan</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    {{#orderDetails}}
+                    <tr>
+                        <td>{{product.name}}</td>
+                        <td class="rupiah">{{product.price}}</td>
+                        <td class="rupiah">{{price}}</td>
+                    </tr>
+                    {{/orderDetails}}
+                </table>
+            </div>
+            <div class="order-action">
+                {{#isCart}}
+                    <form method="post" action="/my-customer/order/{{id}}/delete">
+                        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                        <button class="btn btn-danger" type="submit">Hapus belanjaan ini</button>
+                    </form>
+                    <a class="btn btn-secondary" href="/my-customer/order/{{id}/cart">Lihat invoice</a>
+                    <form action="/my-customer/order/{{id}}/confirm" method="POST">
+                        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                        <button class="btn btn-primary" value="submit">Konfirmasi Pembayaran</button>
+                    </form>
+                {{/isCart}}
+            </div>
+        </div>
+    {{/orderList}}
+    {{^orderList}}
+        <h2>Anda belum memiliki pesanan, silahkan melihat-lihat produk yang kami sediakan di <a href="/">sini</a>. </h2>
+    {{/orderList}}
+    </div>
+</main>
+
+{{>_partial/footer}}

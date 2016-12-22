@@ -22,7 +22,7 @@ public class User implements UserDetails{
     private String email;
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @PrimaryKeyJoinColumn
     private UserRole roles;
 

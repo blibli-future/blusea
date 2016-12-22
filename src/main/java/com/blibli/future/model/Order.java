@@ -1,6 +1,8 @@
 package com.blibli.future.model;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +44,7 @@ public class Order {
     private Customer customer;
     @ManyToOne
     private Catering catering;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<OrderDetail> orderDetails = new ArrayList<>();
     //relationship ends
 
@@ -157,5 +159,39 @@ public class Order {
 
     public int getDp() {
         return this.catering.getDp() * this.getTotalPrices() / 100;
+    }
+
+    public int getRemainingPayment() {
+        return getTotalPrices() - getDp();
+    }
+
+    public boolean isCart() {
+        return this.status == ORDER_STATUS_CART;
+    }
+
+    public boolean isPending() {
+        return this.status == ORDER_STATUS_PENDING;
+    }
+
+    public boolean isWaiting() {
+        return this.status == ORDER_STATUS_WAITING;
+    }
+
+    public boolean isComplete() {
+        return this.status == ORDER_STATUS_COMPLETE;
+    }
+
+    public boolean isNotComplete() {
+        return this.status != ORDER_STATUS_COMPLETE;
+    }
+
+    public String getPlainTextStatus() {
+        String plainText = "";
+        if(isCart()) {
+            plainText = "Menunggu pembayaran DP dari pembeli.";
+        } else if (isPending()) {
+            plainText = "Menunggu konfirmasi penerimaan pesanan dari pemilik catering.";
+        }
+        return plainText;
     }
 }

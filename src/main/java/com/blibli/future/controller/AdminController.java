@@ -18,7 +18,7 @@ public class AdminController {
 	public String showAdminDashboard(
 			Model model)
 	{
-		List<Customer> customers = (List<Customer>) repo.findAll();
+		List<Customer> customers = repo.findAll();
 
 		model.addAttribute("users", customers);
 		return "admin/dashboard";

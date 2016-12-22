@@ -10,7 +10,7 @@ public class Customer extends User {
     private String nickName;
 
     //relationship begins
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Order> orders;
     //relationship ends
 

@@ -26,40 +26,38 @@
     <h4>Detail Pesanan</h4>
     <table class="table">
         <tr>
-            <th>No</th>
             <th>Nama produk</th>
             <th>Harga satuan</th>
             <th>Subtotal</th>
         </tr>
         {{#order.orderDetails}}
         <tr>
-            <td>1</td>
             <td>{{product.name}}</td>
-            <td>{{product.price}}</td>
-            <td>{{price}}</td>
+            <td class="rupiah">{{product.price}}</td>
+            <td class="rupiah">{{price}}</td>
         </tr>
         {{/order.orderDetails}}
         <tr>
-            <td colspan="3" class="summary">Harga sebelum diskon</td>
-            <td>{{order.noDiscountPrice}}</td>
+            <td colspan="2" class="summary">Harga sebelum diskon</td>
+            <td class="rupiah">{{order.noDiscountPrice}}</td>
         </tr>
         <tr>
-            <td colspan="3" class="summary">Potongan diskon</td>
-            <td>{{order.discountAmount}}</td>
+            <td colspan="2" class="summary">Potongan diskon</td>
+            <td class="rupiah">{{order.discountAmount}}</td>
         </tr>
         <tr>
-            <td colspan="3" class="summary"><b>Total harga</b></td>
-            <td><b>{{order.totalPrices}}</b></td>
+            <td colspan="2" class="summary"><b>Total harga</b></td>
+            <td class="rupiah"><b>{{order.totalPrices}}</b></td>
         </tr>
         <tr>
-            <td colspan="3" class="summary"><b>DP yang harus dibayar</b></td>
-            <td><b>{{order.dp}}</b></td>
+            <td colspan="2" class="summary"><b>DP yang harus dibayar</b></td>
+            <td class="rupiah"><b>{{order.dp}}</b></td>
         </tr>
     </table>
 
     <h2>Pembayaran</h2>
     <p>
-        Kirimkan uang muka (DP) untuk pesanan Anda sejumlah Rp. <b>{{order.dp}}</b> ke rekening Kuliner
+        Kirimkan uang muka (DP) untuk pesanan Anda sejumlah <b class="rupiah">{{order.dp}}</b> ke rekening Kuliner
         Nusantara <br>
         <img src="http://sp.beritasatu.com/media/images/original/20111221144834840.jpg" width="100"> <br>
         BCA 1010101 <br>
@@ -68,10 +66,16 @@
     <p>
         Jika Anda telah membayar, silahkan konfirmasi pembayaran dengan mengklik tombol berikut.
     </p>
-    <form action="/my-customer/order/{{order.id}}/confirm" method="POST">
-        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-        <button class="btn btn-primary" value="submit">Konfirmasi Pembayaran</button>
-    </form>
+    <div class="order-action">
+        <form method="post" action="/my-customer/order/{{order.id}}/delete">
+            <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+            <button class="btn btn-danger" type="submit">Hapus belanjaan ini</button>
+        </form>
+        <form action="/my-customer/order/{{order.id}}/confirm" method="POST">
+            <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+            <button class="btn btn-primary" value="submit">Konfirmasi Pembayaran</button>
+        </form>
+    </div>
 </main>
 
 {{>_partial/footer}}

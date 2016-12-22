@@ -124,10 +124,13 @@ public class CustomerController{
     }
 
     @RequestMapping(value = "my-customer/order")
-    public String orderIndex(Model model) {
+    public String orderIndex(
+            Model model,
+            HttpServletRequest request) {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
         Customer customer = helper.getCurrentCustomer();
         List<Order> orderList = customer.getOrders();
-        orderList.size(); // lazy load the order
         model.addAttribute("orderList", orderList);
         model.addAttribute("customer", customer);
         return "customer/order";
@@ -162,11 +165,12 @@ public class CustomerController{
         order.updateTotalPrices();
         orderRepository.save(order);
 
-        return "redirect:/my-customer/order/cart";
+        return "redirect:/my-customer/order/" + order.getId() + "/cart";
     }
 
-    @RequestMapping(value = "/my-customer/order/cart", method = RequestMethod.GET)
+    @RequestMapping(value = "/my-customer/order/{id}/cart", method = RequestMethod.GET)
     public String orderCart(
+            @PathVariable int id,
             Model model,
             HttpServletRequest request)
     {
@@ -175,9 +179,18 @@ public class CustomerController{
         model.addAttribute("_csrf", _csrf);
 
         model.addAttribute("customer", helper.getCurrentCustomer());
-        model.addAttribute("order", orderRepository.findByCustomerEmailAndStatus(email, Order.ORDER_STATUS_CART).get(0));
+        model.addAttribute("order", orderRepository.findOne((long) id));
 
         return "/customer/cart";
+    }
+
+    @RequestMapping(value = "/my-customer/order/{id}/delete", method = RequestMethod.POST)
+    public String deleteOrder(
+            Model model,
+            @PathVariable int id) {
+        // TODO remove its orderDetail data in database.
+        orderRepository.delete((long) id);
+        return "redirect:/my-customer/order";
     }
 
     @RequestMapping(value = "/my-costumer/order/{id}/confirmation", method = RequestMethod.POST)

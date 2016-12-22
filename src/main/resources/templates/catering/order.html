@@ -1,0 +1,64 @@
+{{>_partial/header}}
+{{>_partial/catering-navbar}}
+
+<main class="container">
+    <h2>Daftar Pesanan Anda</h2>
+    <div class="order-list">
+        {{#orderList}}
+        <div class="order-item">
+            <div class="order-detail">
+                <table class="table">
+                    <tr>
+                        <td>Tanggal Pemesanan</td>
+                        <td>Tanggal Pengiriman</td>
+                        <td>Jumlah pax</td>
+                        <td>Status</td>
+                        {{#notComplete}}
+                        <td>Kekurangan pembayaran</td>
+                        {{/notComplete}}
+                        <td>Nomor order</td>
+                    </tr>
+                    <tr>
+                        <td>{{createDate}}</td>
+                        <td>{{deliveryDate}}</td>
+                        <td>{{quantities}}</td>
+                        <td>{{plainTextStatus}}</td>
+                        {{#notComplete}}
+                        <td>{{remainingPayment}}</td>
+                        {{/notComplete}}
+                        <td>{{id}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="order-product-detail">
+                <p>Detail pesanan</p>
+                <table class="table">
+                    <tr>
+                        <th>Nama produk</th>
+                        <th>Harga satuan</th>
+                        <th>Subtotal</th>
+                    </tr>
+                    {{#orderDetails}}
+                    <tr>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{price}}</td>
+                    </tr>
+                    {{/orderDetails}}
+                </table>
+            </div>
+            <div class="order-action">
+                {{#isPending}}
+                    <a href="/my-catering/order/{{id}}/confirm" class="btn btn-primary">Konfirmasi Pesanan</a>
+                    <a href="/my-catering/order/{{id}}/delete"  class="btn btn-danger">Tolak Pesanan</a>
+                {{/isPending}}
+                {{#isWaiting}}
+                    <a href="/my-catering/order/{{id}}/confirm" class="btn btn-primary">Pesanan Selesai</a>
+                {{/isWaiting}}
+            </div>
+        </div>
+        {{/orderList}}
+    </div>
+</main>
+
+{{>_partial/footer}}
