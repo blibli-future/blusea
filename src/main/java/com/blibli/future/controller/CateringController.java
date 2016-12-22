@@ -108,14 +108,14 @@ public class CateringController {
 
                     // Creating the directory to store file
                     //String rootPath = System.getProperty("catalina.home");
-                    File dir = new File(env.getProperty("blusea.productPhotoDir.path") + formatted);
+                    File dir = new File(env.getProperty("blusea.PhotoDir.path") + "/Product/" + formatted);
                     if (!dir.exists())
                         dir.mkdirs();
 
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    newProduct.setPhoto("http://localhost/gambarProduct"
+                    newProduct.setPhoto("http://localhost/gambar/Product"
                             + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
@@ -180,14 +180,14 @@ public class CateringController {
                     String fileName = UUID.randomUUID().toString().replaceAll("-","");
 
                     // Creating the directory to store file
-                    File dir = new File(env.getProperty("blusea.cateringPhotoDir.path") + formatted);
+                    File dir = new File(env.getProperty("blusea.PhotoDir.path") + "/Catering/" + formatted);
                     if (!dir.exists())
                         dir.mkdirs();
 
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    catering.setPhoto("http://localhost/gambarCatering"
+                    catering.setPhoto("http://localhost/gambar/Catering"
                             + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
