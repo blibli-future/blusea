@@ -1,9 +1,9 @@
 package com.blibli.future.controller;
 
-/**
- * Created by ARDI on 10/6/2016.
- */
 import com.blibli.future.model.User;
+import com.blibli.future.model.UserRole;
+import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.security.SecurityService;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
@@ -42,12 +42,18 @@ public class CateringController {
     ProductRepository productRepository;
 
     @Autowired
+    UserRoleRepository userRoleRepository;
+
+    @Autowired
     Helper helper;
+
+    @Autowired
+    private SecurityService securityService;
 
     private static final Logger logger = LoggerFactory
             .getLogger(CateringController.class);
 
-    @RequestMapping(value="/catering/register",method=RequestMethod.GET)
+    @RequestMapping(value="/my-catering/register",method=RequestMethod.GET)
     public String cateringRegisterForm(
             Model model,
             HttpServletRequest request)
@@ -59,15 +65,20 @@ public class CateringController {
         return "catering/register";
     }
 
-    @RequestMapping(value="/catering/register",method=RequestMethod.POST)
+    @RequestMapping(value="/my-catering/register",method=RequestMethod.POST)
     public String cateringAdd(
             @ModelAttribute Catering newCatering,
             Model model){
-
+        newCatering.setPhoto("https://dummyimage.com/200x200/000/fff");
         cateringRepository.save(newCatering);
+        UserRole r = new UserRole();
+        r.setUsername(newCatering.getUsername());
+        r.setRole("ROLE_CATERING");
+        userRoleRepository.save(r);
+        securityService.autologin(newCatering.getUsername(), newCatering.getPassword());
 
         model.addAttribute("catering", newCatering);
-        return "redirect:/catering/" + newCatering.getUsername();
+        return "redirect:/my-catering/profile";
     }
 
     @RequestMapping(value="/catering/{username}/addproducts",method=RequestMethod.GET)
@@ -217,4 +228,7 @@ public class CateringController {
         cateringRepository.save(catering);
         return "redirect:/my-catering/profile";
     }
+
+    //delete product
+
 }
