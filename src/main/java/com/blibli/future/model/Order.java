@@ -16,9 +16,13 @@ public class Order {
     private long id;
     private Date createDate;
     private Date deliveryDate;
+    private String note;
     private int quantities;
     private int totalPrices;
-    private String note;
+    @Transient
+    private int noDiscountPrice;
+    @Transient
+    private int discountAmount;
 
     /**
      * Order Status Explanation
@@ -29,7 +33,7 @@ public class Order {
      */
     private int status;
     public static int ORDER_STATUS_CART = 0;
-    public static int ORDER_STATUS_CONFIRMATION = 1;
+    public static int ORDER_STATUS_PENDING = 1;
     public static int ORDER_STATUS_WAITING = 2;
     public static int ORDER_STATUS_COMPLETE = 3;
 
@@ -82,9 +86,21 @@ public class Order {
     public void updateTotalPrices() {
         int tmp = 0;
         for (OrderDetail od: this.orderDetails) {
-            tmp += od.getProduct().getPrice() * this.quantities;
+            tmp += od.getDiscountedPrice() * this.quantities;
         }
         totalPrices = tmp;
+    }
+
+    public int getNoDiscountPrice() {
+        int noDiscount = 0;
+        for (OrderDetail od: this.orderDetails) {
+            noDiscount += od.getProduct().getPrice() * this.quantities;
+        }
+        return noDiscount;
+    }
+
+    public int getDiscountAmount() {
+        return getTotalPrices() - getNoDiscountPrice();
     }
 
     public void setTotalPrices(int totalPrices) {
@@ -137,5 +153,9 @@ public class Order {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public int getDp() {
+        return this.catering.getDp() * this.getTotalPrices() / 100;
     }
 }

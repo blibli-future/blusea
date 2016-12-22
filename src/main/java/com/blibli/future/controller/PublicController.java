@@ -38,11 +38,11 @@ public class PublicController {
 		model.addAttribute("caterings", firstSixCatering);
         User user = helper.getCurrentUser();
         if(user instanceof Customer){
-            Customer customer = (Customer) helper.getCurrentUser();
+            Customer customer = (Customer) user;
             model.addAttribute("customer", customer);
             return "/customer/home";
         }else if(user instanceof Catering){
-            Catering catering = (Catering) helper.getCurrentUser();
+            Catering catering = (Catering) user;
             model.addAttribute("catering", catering);
             return "/catering/home";
         }

@@ -66,8 +66,8 @@ public class Catering extends User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getDp() {
-        return dp;
+    public int getDp() {
+        return Integer.parseInt(dp);
     }
 
     public void setDp(String dp) {

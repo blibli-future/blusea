@@ -30,3 +30,7 @@ main.container {
     visibility: visible;
     opacity: 1;
 }
+
+.table .summary {
+    text-align: right;
+}

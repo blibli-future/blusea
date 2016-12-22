@@ -115,7 +115,7 @@ public class DatabaseSeeder {
         p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/b/b3/Various_grains.jpg");
         p.setDescription("Roti dengan gandum utuh dan organik");
         p.setCatering(c);
-        p.setPrice(2500);
+        p.setPrice("1-3000|10-2800|100-2500|1000-2000");
         productRepository.save(p);
 
         p = new Product();

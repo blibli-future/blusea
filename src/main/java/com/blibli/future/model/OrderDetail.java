@@ -10,6 +10,8 @@ public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Transient
+    private int discountedPrice;
 
     @ManyToOne
     private Order order;
@@ -47,6 +49,10 @@ public class OrderDetail {
 
     public int getPrice() {
         return product.getPrice() * order.getQuantities();
+    }
+
+    public int getDiscountedPrice() {
+        return this.product.getPrice(order.getQuantities());
     }
 
     @Override
