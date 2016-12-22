@@ -1,13 +1,8 @@
 package com.blibli.future.controller;
 
-import com.blibli.future.model.Customer;
-import com.blibli.future.model.User;
+import com.blibli.future.model.*;
 import com.blibli.future.model.UserRole;
-import com.blibli.future.model.UserRole;
-import com.blibli.future.repository.CateringRepository;
-import com.blibli.future.repository.CustomerRepository;
-import com.blibli.future.repository.UserRepository;
-import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.repository.*;
 import com.blibli.future.security.SecurityService;
 import com.blibli.future.security.SecurityService;
 import com.blibli.future.repository.UserRoleRepository;
@@ -32,18 +27,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class CustomerController{
     @Autowired
     private CustomerRepository customerRepository;
-
+    @Autowired
+    private CateringRepository cateringRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
     @Autowired
     private Helper helper;
-
     @Autowired
     private UserRoleRepository userRoleRepository;
-
     @Autowired
     private SecurityService securityService;
 
@@ -121,5 +122,78 @@ public class CustomerController{
         customerRepository.save(customer);
         return "redirect:/my-customer/profile";
     }
-}
 
+    @RequestMapping(value = "my-customer/order")
+    public String orderIndex(Model model) {
+        Customer customer = helper.getCurrentCustomer();
+        List<Order> orderList = customer.getOrders();
+        orderList.size(); // lazy load the order
+        model.addAttribute("orderList", orderList);
+        model.addAttribute("customer", customer);
+        return "customer/order";
+    }
+
+    @RequestMapping(value = "/my-customer/order/new", method = RequestMethod.POST)
+    public String createNewOrder(HttpServletRequest request)
+    {
+        Order order = new Order();
+        int orderQuantity = Integer.parseInt(request.getParameter("quantity"));
+        Catering catering = cateringRepository.findOne(Long.parseLong(request.getParameter("catering-id")));
+        order.setCustomer(helper.getCurrentCustomer());
+        order.setCatering(catering);
+        order.setQuantities(orderQuantity);
+        order.setCreateDate(new Date());
+        try {
+            order.setDeliveryDate((new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("deliveryDate"))));
+        }
+        catch (java.text.ParseException e) {
+            // TODO this should be throwing error to user and prompt them to
+            // re-input delivery date correctly.
+            order.setDeliveryDate(new Date());
+        }
+        order.setNote(request.getParameter("note"));
+        orderRepository.save(order);
+
+        for(String productId: request.getParameterValues("choosen-product")) {
+            Product orderedProduct = productRepository.findOne(Long.parseLong(productId));
+            OrderDetail od = new OrderDetail(order, orderedProduct);
+            orderDetailRepository.save(od);
+        }
+        order.updateTotalPrices();
+        orderRepository.save(order);
+
+        return "redirect:/my-customer/order/cart";
+    }
+
+    @RequestMapping(value = "/my-customer/order/cart", method = RequestMethod.GET)
+    public String orderCart(
+            Model model,
+            HttpServletRequest request)
+    {
+        String email = helper.getCurrentCustomer().getEmail();
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        model.addAttribute("customer", helper.getCurrentCustomer());
+        model.addAttribute("order", orderRepository.findByCustomerEmailAndStatus(email, Order.ORDER_STATUS_CART).get(0));
+
+        return "/customer/cart";
+    }
+
+    @RequestMapping(value = "/my-costumer/order/{id}/confirmation", method = RequestMethod.POST)
+    public String checkoutOrder(
+            Model model,
+            HttpServletRequest request,
+            @PathVariable int id)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Order o = orderRepository.findOne((long) id);
+        if(o.getStatus() == Order.ORDER_STATUS_CART) {
+            o.setStatus(Order.ORDER_STATUS_PENDING);
+        }
+        orderRepository.save(o);
+        return "redirect:/my-customer/order";
+    }
+}
