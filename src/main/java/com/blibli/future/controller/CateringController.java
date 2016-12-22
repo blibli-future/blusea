@@ -234,21 +234,6 @@ public class CateringController {
         return "redirect:/my-catering/profile";
     }
 
-    //delete product
-
-    @RequestMapping(value="/my-catering/{id}/delete",method=RequestMethod.GET)
-    public String deleteProductForm(
-            @PathVariable long id,
-            Model model,
-            HttpServletRequest request)
-    {
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-
-        model.addAttribute("product", productRepository.findOne(id));
-        return "redirect:/my-catering/profile";
-    }
-
     @RequestMapping(value="/my-catering/{id}/delete" , method = RequestMethod.POST)
     public String deleteProduct(
             @PathVariable long id,

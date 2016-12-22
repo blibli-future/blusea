@@ -37,9 +37,12 @@
                                     {{description}}
                                 </p>
                             </div>
-                            <a class="btn btn-danger" method="POST" href="/my-catering/{{id}}/delete">
-                                Delete
-                            </a>
+                            <form method="POST" action="/my-catering/{{id}}/delete">
+                                <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                                <button class="btn btn-danger" value="submit">
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                     {{/catering.products}}

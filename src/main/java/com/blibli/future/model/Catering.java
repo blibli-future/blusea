@@ -24,9 +24,9 @@ public class Catering extends User {
     private String photo;
 
     //relationship begins
-    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "catering", fetch = FetchType.EAGER)
     private List<Product> products;
-    @OneToMany(mappedBy = "catering", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "catering", fetch = FetchType.EAGER)
     private List<Order> orders;
     //relationship ends
 
