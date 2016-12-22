@@ -7,9 +7,10 @@
 </head>
 <body>
 <h1>Welcome to Toko BluSea</h1>
-<form method="POST" action="/my-catering/edit">
+<form method="POST" action="/my-catering/edit" enctype="multipart/form-data">
     <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-    <img class="img-fluid card-img-top" src="{{catering.photo}}" alt="Card image cap">
+    <img class="img-fluid card-img-top" src="{{catering.photo}}" alt="Card image cap"/>
+    Change Photo? <input type="file" name="file" value="{{catering.photo}}"/> <br />
     <fieldset>
         Edit Username <input type="text" name="username" value="{{catering.username}}"/> <br />
         Edit Name <input type="text" name="cateringName" value="{{catering.cateringName}}"/> <br />

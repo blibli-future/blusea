@@ -115,7 +115,7 @@ public class CateringController {
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    newProduct.setPhoto("http://localhost/gambar"
+                    newProduct.setPhoto("http://localhost/gambarProduct"
                             + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
@@ -162,9 +162,50 @@ public class CateringController {
 
     @RequestMapping(value="/my-catering/edit", method= RequestMethod.POST)
     public String editCatering(
+            @RequestParam("file") MultipartFile file,
             HttpServletRequest request)
     {
         Catering catering = (Catering) helper.getCurrentUser();
+
+        //photo
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+
+        if(catering != null){
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+
+                    String fileName = UUID.randomUUID().toString().replaceAll("-","");
+
+                    // Creating the directory to store file
+                    File dir = new File(env.getProperty("blusea.cateringPhotoDir.path") + formatted);
+                    if (!dir.exists())
+                        dir.mkdirs();
+
+                    // Create the file on server
+                    File serverFile = new File(dir.getAbsolutePath()
+                            + File.separator + fileName + ".jpg");
+                    catering.setPhoto("http://localhost/gambarCatering"
+                            + File.separator + formatted + File.separator + fileName + ".jpg");
+                    BufferedOutputStream stream = new BufferedOutputStream(
+                            new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
+
+                    logger.info("Server File Location="
+                            + serverFile.getAbsolutePath());
+
+                } catch (Exception e) {
+                    return "You failed to upload " + catering.getCateringName() + " => " + e.getMessage();
+                }
+            } else {
+                return "You failed to upload " + catering.getCateringName()
+                        + " because the file was empty.";
+            }
+        }
+
         catering.setUsername(request.getParameter("username"));
         catering.setPassword(request.getParameter("password"));
         catering.setEmail(request.getParameter("email"));
@@ -173,7 +214,6 @@ public class CateringController {
         catering.setDescription(request.getParameter("description"));
         catering.setPhoneNumber(request.getParameter("phoneNumber"));
         catering.setDp(request.getParameter("dp"));
-        catering.setPhoto(request.getParameter("photo"));
         cateringRepository.save(catering);
         return "redirect:/my-catering/profile";
     }
