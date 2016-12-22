@@ -1,8 +1,5 @@
 package com.blibli.future.model;
 
-/**
- * Created by ARDI on 10/6/2016.
- */
 
 import org.springframework.data.util.Pair;
 

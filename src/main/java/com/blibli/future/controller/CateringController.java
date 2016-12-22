@@ -151,8 +151,13 @@ public class CateringController {
     }
 
     @RequestMapping(value="/my-catering/profile" , method = RequestMethod.GET)
-    public String showMyCateringProfile(ModelMap model)
+    public String showMyCateringProfile(
+            Model model,
+            HttpServletRequest request)
     {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
         Catering catering = (Catering) helper.getCurrentUser();
         model.addAttribute("catering", catering);
         return "catering/profile";
@@ -231,4 +236,31 @@ public class CateringController {
 
     //delete product
 
+    @RequestMapping(value="/my-catering/{id}/delete",method=RequestMethod.GET)
+    public String deleteProductForm(
+            @PathVariable long id,
+            Model model,
+            HttpServletRequest request)
+    {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        model.addAttribute("product", productRepository.findOne(id));
+        return "redirect:/my-catering/profile";
+    }
+
+    @RequestMapping(value="/my-catering/{id}/delete" , method = RequestMethod.POST)
+    public String deleteProduct(
+            @PathVariable long id,
+            Model model)
+    {
+        Catering catering = (Catering) helper.getCurrentUser();
+        //model.addAttribute("catering", catering);
+
+        Product product = productRepository.findOne(id);
+        System.out.println(product.getId());
+        productRepository.delete(product);
+
+        return "redirect:/my-catering/profile";
+    }
 }
