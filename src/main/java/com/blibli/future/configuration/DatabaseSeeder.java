@@ -61,7 +61,7 @@ public class DatabaseSeeder {
         c.setPassword("12345");
         c.setDescription("Hehe");
         c.setAddress("Jalan Kaliurang");
-        c.setDp("70%");
+        c.setDp("70");
         c.setPhoto("https://dummyimage.com/200x200/000/fff");
         c.setPhoneNumber("085642196188");
         cateringRepository.save(c);

@@ -5,16 +5,19 @@
             <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/catering">Catering</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="/my-customer/order">My Order</a>
         </li>
-    </ul>
 
-    <ul class="nav navbar-nav float-md-right">
-        <li class="nav-item">
-            <a class="nav-link" href="/my-customer/profile">Hello {{customer.nickName}}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link btn btn-primary" href="/logout">Logout</a>
+        <li class="nav-item dropdown float-xs-right">
+            <a class="nav-link dropdown-toggle" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hello, {{customer.nickName}}</a>
+            <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
+                <a class="dropdown-item" href="/my-customer/profile">Dashboard</a>
+                <a class="dropdown-item" href="/my-customer/edit">Edit Profile</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
         </li>
     </ul>
 </nav>
