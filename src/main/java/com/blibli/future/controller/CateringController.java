@@ -91,7 +91,7 @@ public class CateringController {
         return "redirect:/my-catering/profile";
     }
 
-    @RequestMapping(value="/catering/{username}/addproducts",method=RequestMethod.GET)
+    @RequestMapping(value="/catering/my-catering/addproducts",method=RequestMethod.GET)
     public String cateringGetAddProduct(
             @PathVariable String username,
             Model model,
@@ -100,18 +100,17 @@ public class CateringController {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        model.addAttribute("catering", cateringRepository.findByUsername(username));
+        model.addAttribute("catering", helper.getCurrentCatering());
 
         return "catering/addproducts";
     }
 
-    @RequestMapping(value="/catering/{username}/addproducts", method=RequestMethod.POST)
+    @RequestMapping(value="/catering/my-catering/addproducts", method=RequestMethod.POST)
     public String cateringPostAddProduct(
-            @PathVariable String username,
             @ModelAttribute Product newProduct,
             @RequestParam("file") MultipartFile file,
             Model model){
-        Catering catering = cateringRepository.findByUsername(username);
+        Catering catering = helper.getCurrentCatering();
 
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -191,7 +190,7 @@ public class CateringController {
             @RequestParam("file") MultipartFile file,
             HttpServletRequest request)
     {
-        Catering catering = (Catering) helper.getCurrentUser();
+        Catering catering = helper.getCurrentCatering();
 
         //photo
         Calendar cal = Calendar.getInstance();
@@ -244,7 +243,7 @@ public class CateringController {
         return "redirect:/my-catering/profile";
     }
 
-    @RequestMapping(value="/my-catering/{id}/delete" , method = RequestMethod.POST)
+    @RequestMapping(value="/my-catering/product/{id}/delete" , method = RequestMethod.POST)
     public String deleteProduct(
             @PathVariable long id,
             Model model)
@@ -253,7 +252,6 @@ public class CateringController {
         //model.addAttribute("catering", catering);
 
         Product product = productRepository.findOne(id);
-        System.out.println(product.getId());
         productRepository.delete(product);
 
         return "redirect:/my-catering/profile";

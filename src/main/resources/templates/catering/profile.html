@@ -3,7 +3,7 @@
 
 <main class="container">
     <h1>{{catering.username}}</h1>
-    <img class="img-fluid" src="{{catering.photo}}" alt="Card image cap"/>
+    <img class="img-fluid" width="400" src="{{catering.photo}}" alt="Card image cap"/>
     <a href="/catering/{{catering.username}}/changePhoto"> Change Photo </a>
     <table class="table">
         <tr>
@@ -21,7 +21,7 @@
     </table>
     <a class="btn btn-primary" href="/my-catering/edit"> Want to edit? </a>
     <p>Daftar menu</p>
-    <a class="btn btn-primary" href="/catering/{{catering.username}}/addproducts" > Want to add products? </a>
+    <a class="btn btn-primary" href="/my-catering/addproducts" > Want to add products? </a>
         <input type="hidden" name="catering-id" value="{{catering.id}}"/>
         <div class="row">
             <div class="col-md-9">
@@ -33,11 +33,11 @@
                             <div class="card-block">
                                 <h4 class="card-title">{{name}}</h4>
                                 <p class="card-text">
-                                    Harga Rp. {{price}} / pax <br>
+                                    Harga Rp. <span class="rupiah">{{price}}</span> / pax <br>
                                     {{description}}
                                 </p>
                             </div>
-                            <form method="POST" action="/my-catering/{{id}}/delete">
+                            <form method="POST" action="/my-catering/product/{{id}}/delete">
                                 <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                                 <button class="btn btn-danger" value="submit">
                                     Delete
@@ -47,7 +47,9 @@
                     </div>
                     {{/catering.products}}
                 </div>
+            </div>
         </div>
+</main>
 
 
     {{>_partial/footer}}

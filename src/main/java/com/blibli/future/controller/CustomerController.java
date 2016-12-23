@@ -66,7 +66,7 @@ public class CustomerController{
         return "customer/profile";
     }
 
-    @RequestMapping(value="/register", method= RequestMethod.GET)
+    @RequestMapping(value="/my-customer/register", method= RequestMethod.GET)
     public String addUserForm(
             HttpServletRequest request,
             Model model)
@@ -76,7 +76,7 @@ public class CustomerController{
         return "customer/register";
     }
 
-    @RequestMapping(value="/register", method= RequestMethod.POST)
+    @RequestMapping(value="/my-customer/register", method= RequestMethod.POST)
     public String addUser(
             @ModelAttribute Customer newCustomer,
             Model model)
@@ -88,22 +88,7 @@ public class CustomerController{
         r.setRole("ROLE_CUSTOMER");
         userRoleRepository.save(r);
         securityService.autologin(newCustomer.getUsername(), newCustomer.getPassword());
-        System.out.println("Success");
         return "redirect:/my-customer/profile";
-    }
-
-    @RequestMapping(value="/customer/{username}/order",method = RequestMethod.GET)
-    public String showOrder(
-            @PathVariable String username,
-            Model model,
-            HttpServletRequest request)
-    {
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-
-        model.addAttribute("customer", customerRepository.findByUsername(username));
-
-        return "customer/order";
     }
 
 
