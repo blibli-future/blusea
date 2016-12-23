@@ -3,6 +3,8 @@ package com.blibli.future.model;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -191,7 +193,21 @@ public class Order {
             plainText = "Menunggu pembayaran DP dari pembeli.";
         } else if (isPending()) {
             plainText = "Menunggu konfirmasi penerimaan pesanan dari pemilik catering.";
+        } else if (isWaiting()) {
+            plainText = "Menunggu pesanan disiapkan oleh catering.";
+        } else if (isComplete()) {
+            plainText = "Pesanan selesai";
         }
         return plainText;
+    }
+
+    public String getPlainTextDeliveryDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(deliveryDate);
+    }
+
+    public String getPlainTextCreateDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(createDate);
     }
 }

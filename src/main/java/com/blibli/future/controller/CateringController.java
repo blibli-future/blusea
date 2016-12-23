@@ -1,7 +1,7 @@
 package com.blibli.future.controller;
 
-import com.blibli.future.model.User;
-import com.blibli.future.model.UserRole;
+import com.blibli.future.model.*;
+import com.blibli.future.repository.OrderRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import com.blibli.future.security.SecurityService;
 import com.blibli.future.utility.Helper;
@@ -16,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import com.blibli.future.model.Product;
-import com.blibli.future.model.Catering;
 import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.ProductRepository;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -34,19 +33,16 @@ public class CateringController {
 
     @Autowired
     public Environment env;
-
     @Autowired
     CateringRepository cateringRepository;
-
     @Autowired
     ProductRepository productRepository;
-
     @Autowired
     UserRoleRepository userRoleRepository;
-
+    @Autowired
+    OrderRepository orderRepository;
     @Autowired
     Helper helper;
-
     @Autowired
     private SecurityService securityService;
 
@@ -255,5 +251,37 @@ public class CateringController {
         productRepository.delete(product);
 
         return "redirect:/my-catering/profile";
+    }
+
+    @RequestMapping(value = "/my-catering/order")
+    public String orderIndex(Model model) {
+        // Get ALL order except the one that still have CART status
+        // Catering should not see CART
+        List<Order> orderList = orderRepository.findByCateringEmailAndStatus(helper.getEmail(), Order.ORDER_STATUS_PENDING);
+        orderList.addAll(orderRepository.findByCateringEmailAndStatus(helper.getEmail(), Order.ORDER_STATUS_WAITING));
+        orderList.addAll(orderRepository.findByCateringEmailAndStatus(helper.getEmail(), Order.ORDER_STATUS_COMPLETE));
+
+        model.addAttribute("orderList", orderList);
+        return "catering/order";
+    }
+
+    @RequestMapping(value = "/my-catering/order/{id}/confirm")
+    public String processOrder(@PathVariable long id) {
+        Order order = orderRepository.findOne(id);
+        if (order.isPending()) {
+            order.setStatus(Order.ORDER_STATUS_WAITING);
+        } else if (order.isWaiting()) {
+            order.setStatus(Order.ORDER_STATUS_COMPLETE);
+        }
+        orderRepository.save(order);
+        return "redirect:/my-catering/order";
+    }
+
+    @RequestMapping(value = "/my-catering/order/{id}/delete", method = RequestMethod.GET)
+    public String deleteOrder(
+            @PathVariable int id) {
+        // TODO remove its orderDetail data in database.
+        orderRepository.delete((long) id);
+        return "redirect:/my-catering/order";
     }
 }

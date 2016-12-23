@@ -188,15 +188,12 @@ public class CustomerController{
         return "redirect:/my-customer/order";
     }
 
-    @RequestMapping(value = "/my-costumer/order/{id}/confirmation", method = RequestMethod.POST)
+    @RequestMapping(value = "/my-costumer/order/{id}/confirm", method = RequestMethod.POST)
     public String checkoutOrder(
             Model model,
             HttpServletRequest request,
             @PathVariable int id)
     {
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-
         Order o = orderRepository.findOne((long) id);
         if(o.getStatus() == Order.ORDER_STATUS_CART) {
             o.setStatus(Order.ORDER_STATUS_PENDING);

@@ -19,12 +19,12 @@
                         <td>Nomor order</td>
                     </tr>
                     <tr>
-                        <td>{{createDate}}</td>
-                        <td>{{deliveryDate}}</td>
+                        <td>{{plainTextCreateDate}}</td>
+                        <td>{{plainTextDeliveryDate}}</td>
                         <td>{{quantities}}</td>
                         <td>{{plainTextStatus}}</td>
                         {{#notComplete}}
-                        <td>{{remainingPayment}}</td>
+                        <td class="rupiah">{{remainingPayment}}</td>
                         {{/notComplete}}
                         <td>{{id}}</td>
                     </tr>
@@ -41,8 +41,8 @@
                     {{#orderDetails}}
                     <tr>
                         <td>{{product.name}}</td>
-                        <td>{{product.price}}</td>
-                        <td>{{price}}</td>
+                        <td class="rupiah">{{product.price}}</td>
+                        <td class="rupiah">{{price}}</td>
                     </tr>
                     {{/orderDetails}}
                 </table>

@@ -54,7 +54,16 @@
                     <label for="note">Keterangan tambahan</label>
                     <textarea type="text" class="form-control" id="note" name="note" placeholder="Keterangan tambahan untuk pesanan Anda"></textarea>
                 </div>
+                {{#helper.loggedInAsCustomer}}
                 <button type="submit" class="btn btn-primary btn-lg">Pesan</button>
+                {{/helper.loggedInAsCustomer}}
+                {{^helper.loggedInAsCustomer}}
+                <button type="submit" class="btn btn-primary btn-lg" disabled>Pesan</button>
+                <div class="alert alert-warning" role="alert">
+                    <p>Silahkan <a href="/login">login</a> sebagai pengguna atau <a href="/my-customer/register">mendaftar</a>
+                    terlebih dahulu untuk dapat memesan makanan.</p>
+                </div>
+                {{/helper.loggedInAsCustomer}}
             </div>
         </div>
     </form>

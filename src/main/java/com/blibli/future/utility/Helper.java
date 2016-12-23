@@ -25,7 +25,7 @@ public class Helper {
     }
 
     public String getEmail() {
-        return getCurrentCustomer().getEmail();
+        return getCurrentUser().getEmail();
     }
 
     public boolean isLoggedInAsCustomer() {
