@@ -35,21 +35,21 @@ public class PublicController {
 	@Autowired
 	Helper helper;
 
+	@ModelAttribute("helper")
+	public Helper getHelper() {
+		return helper;
+	}
+
+	@ModelAttribute("activeUser")
+	public User getActiveUser() {
+		return helper.getCurrentUser();
+	}
+
 	@RequestMapping("/")
 	public String landing(
 			Model model) {
 		List<Catering> firstSixCatering = cateringRepository.findAll().subList(0, 6);
 		model.addAttribute("caterings", firstSixCatering);
-        User user = helper.getCurrentUser();
-        if(user instanceof Customer){
-            Customer customer = (Customer) user;
-            model.addAttribute("customer", customer);
-            return "/customer/home";
-        }else if(user instanceof Catering){
-            Catering catering = (Catering) user;
-            model.addAttribute("catering", catering);
-            return "/catering/home";
-        }
         return "public/landing";
 	}
 

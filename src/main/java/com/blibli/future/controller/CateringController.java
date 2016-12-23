@@ -53,6 +53,16 @@ public class CateringController {
     private static final Logger logger = LoggerFactory
             .getLogger(CateringController.class);
 
+    @ModelAttribute("helper")
+    public Helper getHelper() {
+        return helper;
+    }
+
+    @ModelAttribute("activeUser")
+    public User getActiveUser() {
+        return helper.getCurrentUser();
+    }
+
     @RequestMapping(value="/my-catering/register",method=RequestMethod.GET)
     public String cateringRegisterForm(
             Model model,

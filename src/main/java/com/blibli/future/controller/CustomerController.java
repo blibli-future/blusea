@@ -48,6 +48,16 @@ public class CustomerController{
     @Autowired
     private SecurityService securityService;
 
+    @ModelAttribute("helper")
+    public Helper getHelper() {
+        return helper;
+    }
+
+    @ModelAttribute("activeUser")
+    public User getActiveUser() {
+        return helper.getCurrentUser();
+    }
+
     @RequestMapping(value="/my-customer/profile" , method = RequestMethod.GET)
     public String showMyCustomerProfile(ModelMap model)
     {

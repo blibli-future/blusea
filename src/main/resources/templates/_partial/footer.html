@@ -1,9 +1,12 @@
 <footer class="footer">
     <div class="container">
-        <p">Kuliner Nusantara adalah penyedia layanan B2B untuk kebutuhan catering perusahaan.</p>
+        <p>Kuliner Nusantara adalah penyedia layanan B2B untuk kebutuhan catering perusahaan.</p>
         <ul>
+            {{^helper.loggedIn}}
             <li><a class="text-muted" href="/my-catering/register">Daftar sebagai penyedia catering</a></li>
             <li><a class="text-muted" href="/login">Masuk sebagai catering</a></li>
+            {{/helper.loggedIn}}
+
             <li><a class="text-muted" href="/about">Tentang Kuliner Nusantara</a> </li>
         </ul>
     </div>

@@ -1,0 +1,11 @@
+{{^helper.loggedIn}}
+    {{>_partial/public-navbar}}
+{{/helper.loggedIn}}
+
+{{#helper.loggedInAsCustomer}}
+    {{>_partial/customer-navbar}}
+{{/helper.loggedInAsCustomer}}
+
+{{#helper.loggedInAsCatering}}
+    {{>_partial/catering-navbar}}
+{{/helper.loggedInAsCatering}}
