@@ -50,10 +50,8 @@ public class Helper {
     public User getCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (isLoggedIn()) {
-            System.out.println(auth.getName());
             return userRepository.findByUsername(auth.getName());
         }
-        System.out.println("Not logged in");
         return null;
     }
 

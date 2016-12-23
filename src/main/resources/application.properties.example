@@ -3,4 +3,4 @@ spring.datasource.username=postgres
 spring.datasource.password=
 
 spring.jpa.hibernate.ddl-auto=create-drop
-blusea.productPhotoDir.path=C:\\xampp\\htdocs\\gambar\\
+blusea.PhotoDir.path=C:\\xampp\\htdocs\\gambar\\
