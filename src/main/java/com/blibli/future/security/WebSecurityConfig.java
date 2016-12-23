@@ -27,18 +27,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 // URL that need special access role need to
                 // declared explicitly
+                .antMatchers("/my-customer/register")
+                    .permitAll()
+                .antMatchers("/my-catering/register")
+                    .permitAll()
+                // Catch all rules for private page
                 .antMatchers("/admin/**")
                     .access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/catering")
-                    .permitAll()
-                .antMatchers("/user/profile")
+                .antMatchers("/my-customer/**")
                     .access("hasRole('ROLE_CUSTOMER')")
-                .antMatchers("/catering/{username}")
+                .antMatchers("/my-catering/**")
                     .access("hasRole('ROLE_CATERING')")
-                .antMatchers("/catering/{username}/addproducts")
-                    .access("hasRole('ROLE_CATERING')")
-                .antMatchers("/catering/register")
-                    .permitAll()
                 // Any other url is accessible by everyone
                 .anyRequest()
                     .permitAll()
