@@ -1,32 +1,20 @@
 package com.blibli.future.controller;
 
 import com.blibli.future.model.*;
-import com.blibli.future.model.UserRole;
 import com.blibli.future.repository.*;
 import com.blibli.future.security.SecurityService;
-import com.blibli.future.security.SecurityService;
-import com.blibli.future.repository.UserRoleRepository;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller

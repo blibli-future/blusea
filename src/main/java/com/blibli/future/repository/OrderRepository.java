@@ -3,7 +3,6 @@ package com.blibli.future.repository;
 
 import com.blibli.future.model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

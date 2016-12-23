@@ -6,7 +6,6 @@ package com.blibli.future.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import com.blibli.future.model.Product;
 import org.springframework.stereotype.Repository;

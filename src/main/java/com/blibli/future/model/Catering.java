@@ -3,8 +3,6 @@ package com.blibli.future.model;
 /**
  * Created by ARDI on 10/6/2016.
  */
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
