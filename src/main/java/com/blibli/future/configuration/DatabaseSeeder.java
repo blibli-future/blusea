@@ -142,6 +142,7 @@ public class DatabaseSeeder {
         // automatic data seeder
         Fairy fairy = Fairy.create();
         TextProducer texter = fairy.textProducer();
+        int randomNumber;
         for (int i=0; i<30; i++) {
             Company company = fairy.company();
             Person person = fairy.person(withCompany(company));
@@ -155,14 +156,16 @@ public class DatabaseSeeder {
             c.setDescription(texter.paragraph(5));
             c.setPhoneNumber(person.telephoneNumber());
             c.setDp("50");
-            c.setPhoto("https://dummyimage.com/600x400/000/fff");
+            randomNumber = ThreadLocalRandom.current().nextInt(1, 101);
+            c.setPhoto("/assets/image/dummy/file-" + randomNumber + ".jpg");
             cateringRepository.save(c);
 
             for (int j=0; j<10; j++) {
                 p = new Product();
                 p.setName("Produk " + j);
                 p.setDescription("Deskripsi dari produk " + j);
-                p.setPhoto("https://dummyimage.com/200x200/000/fff");
+                randomNumber = ThreadLocalRandom.current().nextInt(1, 101);
+                p.setPhoto("/assets/image/dummy/file-" + randomNumber + ".jpg");
                 p.setCatering(c);
                 int randomPrice = ThreadLocalRandom.current().nextInt(10, 101) * 100;
                 p.setPrice(randomPrice);
