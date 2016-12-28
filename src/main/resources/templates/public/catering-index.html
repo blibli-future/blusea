@@ -1,0 +1,65 @@
+{{>_partial/header}}
+{{>_partial/navbar}}
+
+<main class="container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item {{#isFirstPage}}disabled{{/isFirstPage}}">
+                        <a class="page-link" href="/catering?page={{prevPage}}&count={{cateringPerPage}}" aria-label="Previous">
+                            <span aria-hidden="true">Previous</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><span href="#" class="page-link">{{start}}-{{end}} dari {{total}} catering</span></li>
+                    <li class="page-item {{#isLastPage}}disabled{{/isLastPage}}">
+                        <a class="page-link" href="/catering?page={{nextPage}}&count={{cateringPerPage}}" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        {{#caterings}}
+        <div class="col-md-4">
+            <div class="card">
+                <img class="img-fluid card-img-top" src="{{photo}}" alt="Card image cap">
+                <h4 class="card-title">{{cateringName}}</h4>
+                <div class="card-block">
+                    <p class="card-text">{{description}}</p>
+                    <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
+                </div>
+            </div>
+        </div>
+        {{/caterings}}
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item {{#isFirstPage}}disabled{{/isFirstPage}}">
+                        <a class="page-link" href="/catering?page={{prevPage}}&count={{cateringPerPage}}" aria-label="Previous">
+                            <span aria-hidden="true">Previous</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><span href="#" class="page-link">{{start}}-{{end}} dari {{total}} catering</span></li>
+                    <li class="page-item {{#isLastPage}}disabled{{/isLastPage}}">
+                        <a class="page-link" href="/catering?page={{nextPage}}&count={{cateringPerPage}}" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</main>
+
+{{>_partial/footer}}

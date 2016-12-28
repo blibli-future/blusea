@@ -78,10 +78,59 @@ public class PublicController {
 
 	//catering
 
-	@RequestMapping(value="/catering",method=RequestMethod.GET)
-	public String showAllCateringList(Model model){
-		model.addAttribute("caterings", cateringRepository.findAll());
-		return "catering/list";
+	@RequestMapping(value="/catering", method=RequestMethod.GET)
+	public String showAllCateringList(Model model, HttpServletRequest request){
+		int currentPage;
+		int cateringPerPage;
+
+		// Try to get current page from URL, if parameter is empty, open first page
+		try {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		catch (NumberFormatException e) {
+			currentPage = 1;
+		}
+		try {
+			cateringPerPage = Integer.parseInt(request.getParameter("count"));
+		}
+		catch (NumberFormatException e) {
+			cateringPerPage = 10;
+		}
+
+		int startIndex = (currentPage-1) * cateringPerPage;
+		int endIndex = startIndex + cateringPerPage;
+		int cateringLastIndex;
+		List<Catering> allCatering = cateringRepository.findAll();
+		cateringLastIndex = allCatering.size() - 1;
+
+		// Please don't try to process negative page :)
+		if (currentPage < 1) {
+			return "redirect:/catering";
+		}
+
+		// Avoid accessing out of bound page
+		if (startIndex > cateringLastIndex) {
+			return "redirect:/catering?page=" + (currentPage-1) + "&count=" + cateringPerPage;
+		}
+
+		// End of list cutting  must match Catering number
+		if (endIndex >= cateringLastIndex) {
+			endIndex = cateringLastIndex;
+			model.addAttribute("isLastPage", true);
+		}
+
+		if (currentPage == 1) {
+			model.addAttribute("isFirstPage", true);
+		}
+		List<Catering> subset = allCatering.subList(startIndex, endIndex);
+		model.addAttribute("caterings", subset);
+		model.addAttribute("cateringPerPage", cateringPerPage);
+		model.addAttribute("prevPage", currentPage-1);
+		model.addAttribute("nextPage", currentPage+1);
+		model.addAttribute("start", startIndex+1);
+		model.addAttribute("end", endIndex+1);
+		model.addAttribute("total", cateringLastIndex+1);
+		return "public/catering-index";
 	}
 
 	@RequestMapping("/catering/{username}")
