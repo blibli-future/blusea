@@ -8,14 +8,16 @@ import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -50,10 +52,29 @@ public class PublicController {
 
 	@RequestMapping(value="/login", method= RequestMethod.GET)
 	public String authenticateUser(
+			@RequestParam(value = "error" , required = false) String error,
+			@RequestParam(value = "logout" , required = false) String logout,
 			@ModelAttribute User newUser,
 			HttpServletRequest request,
 			Model model)
 	{
+		if (error != null) {
+			model.addAttribute("error", "Invalid username and password!");
+
+			//login form for update page
+			//if login error, get the targetUrl from session again.
+			String targetUrl = getRememberMeTargetUrlFromSession(request);
+			System.out.println(targetUrl);
+			if(StringUtils.hasText(targetUrl)){
+				model.addAttribute("targetUrl", targetUrl);
+			}
+
+		}
+
+		if (logout != null) {
+			model.addAttribute("msg", "You've been logged out successfully.");
+		}
+
 		String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
 		model.addAttribute("_csrf", _csrf);
 		return "public/login";
@@ -158,5 +179,41 @@ public class PublicController {
 		return "/customer/dashboard";
 	}
 
+	/**
+	 * Check if user is login by remember me cookie, refer
+	 * org.springframework.security.authentication.AuthenticationTrustResolverImpl
+	 */
+	private boolean isRememberMeAuthenticated() {
 
+		Authentication authentication =
+				SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null) {
+			return false;
+		}
+
+		return RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass());
+	}
+
+	/**
+	 * save targetURL in session
+	 */
+	private void setRememberMeTargetUrlToSession(HttpServletRequest request){
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			session.setAttribute("targetUrl", "/admin/update");
+		}
+	}
+
+	/**
+	 * get targetURL from session
+	 */
+	private String getRememberMeTargetUrlFromSession(HttpServletRequest request){
+		String targetUrl = "";
+		HttpSession session = request.getSession(false);
+		if(session!=null){
+			targetUrl = session.getAttribute("targetUrl")==null?""
+					:session.getAttribute("targetUrl").toString();
+		}
+		return targetUrl;
+	}
 }

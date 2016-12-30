@@ -86,9 +86,8 @@ public class CateringController {
         return "redirect:/my-catering/profile";
     }
 
-    @RequestMapping(value="/catering/my-catering/addproducts",method=RequestMethod.GET)
+    @RequestMapping(value="/my-catering/addproducts",method=RequestMethod.GET)
     public String cateringGetAddProduct(
-            @PathVariable String username,
             Model model,
             HttpServletRequest request)
     {
@@ -100,7 +99,7 @@ public class CateringController {
         return "catering/addproducts";
     }
 
-    @RequestMapping(value="/catering/my-catering/addproducts", method=RequestMethod.POST)
+    @RequestMapping(value="/my-catering/addproducts", method=RequestMethod.POST)
     public String cateringPostAddProduct(
             @ModelAttribute Product newProduct,
             @RequestParam("file") MultipartFile file,

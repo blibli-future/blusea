@@ -6,8 +6,18 @@
     <form method="POST" action="/login">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
         <fieldset>
+            {{#error}}
+            <div class="alert alert-danger" role="alert">
+                <strong>Invalid username or password</strong>
+            </div>
+            {{/error}}
+
             Masukkan Username <input type="text" name="username" />  <br />
             Masukkan Password <input type="password" name="password" />  <br />
+            <div>
+                <label for="remember-me">Remember me</label>
+                <input type="checkbox" name="remember-me" id="remember-me">
+            </div>
             <input type="submit"
                    value="Login!" />
         </fieldset>
