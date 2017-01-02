@@ -1,6 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- enable use-expressions -->
+<http auto-config="true" use-expressions="true">
+    <intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 
-</beans>
+    <form-login login-page="/login"
+                default-target-url="/welcome"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password"
+                login-processing-url="/auth/login_check"
+                authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler" />
+
+    <logout logout-success-url="/login?logout" delete-cookies="JSESSIONID" />
+    <csrf />
+
+    <!-- enable remember me -->
+    <remember-me
+            token-validity-seconds="1209600"
+            remember-me-parameter="remember-me"
+            data-source-ref="dataSource" />
+
+</http>

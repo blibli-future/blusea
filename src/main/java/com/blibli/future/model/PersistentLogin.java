@@ -6,9 +6,16 @@ import java.util.Date;
 @Entity
 @Table(name="persistent_logins")
 public class PersistentLogin {
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
+    private String session;
     private String username;
     private String token;
     private Date lastUsed;
@@ -21,13 +28,7 @@ public class PersistentLogin {
         this.username = username;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getToken() {
         return token;

@@ -59,16 +59,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .deleteCookies("remember-me")
                     .logoutSuccessUrl("/")
                 .and()
-                    .rememberMe().tokenRepository(persistentTokenRepository())
+                    .rememberMe()
+                    .rememberMeParameter("remember-me")
+                    .rememberMeCookieName("my-remember-me")
                     .tokenValiditySeconds(31536000);
 
-    }
-
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
-        db.setDataSource(dataSource);
-        return db;
     }
 
     @Bean

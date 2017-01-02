@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -61,6 +62,7 @@ public class PublicController {
 		if (error != null) {
 			model.addAttribute("error", "Invalid username and password!");
 
+			System.out.print("Haha");
 			//login form for update page
 			//if login error, get the targetUrl from session again.
 			String targetUrl = getRememberMeTargetUrlFromSession(request);
@@ -78,12 +80,6 @@ public class PublicController {
 		String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
 		model.addAttribute("_csrf", _csrf);
 		return "public/login";
-	}
-
-	@RequestMapping(value="/login-error")
-	public String loginError(Model model) {
-		model.addAttribute("loginError", true);
-		return "public/login-error";
 	}
 
 	@RequestMapping(value="/login/process")
@@ -215,5 +211,28 @@ public class PublicController {
 					:session.getAttribute("targetUrl").toString();
 		}
 		return targetUrl;
+	}
+
+	/**
+	 * This update page is for user login with password only.
+	 * If user is login via remember me cookie, send login to ask for password again.
+	 * To avoid stolen remember me cookie to update info
+	 */
+	@RequestMapping(value = "/admin/update**", method = RequestMethod.GET)
+	public String updatePage(
+			HttpServletRequest request,
+			Model model) {
+
+		if (isRememberMeAuthenticated()) {
+			//send login for update
+			System.out.println("Masuk");
+			setRememberMeTargetUrlToSession(request);
+			model.addAttribute("loginUpdate", true);
+			return "redirect::/login";
+
+		} else {
+			return "login";
+		}
+
 	}
 }
