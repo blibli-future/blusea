@@ -23,3 +23,18 @@ body {
     padding-bottom: 10px;
     border-bottom: 1px solid #816263;
 }
+
+
+.banner {
+    background:url("/assets/image/home-slide-2.jpg") no-repeat 0px 0px;
+    background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    -ms-background-size:cover;
+    -webkit-background-size:cover;
+    min-height:705px;
+}
+
+.login-page {
+    padding: 0;
+}

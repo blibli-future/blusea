@@ -93,7 +93,7 @@ a.simpleCart_empty {
   float: left;
 }
 .banner {
-	background:url("../images/banner_img.jpg") no-repeat 0px 0px;
+	background:url("/assets/image/banner_img.jpg") no-repeat 0px 0px;
 	background-size:cover;
 	-moz-background-size:cover;
 	-o-background-size:cover;
@@ -301,7 +301,7 @@ ul.multi-column-dropdown h6 {
     text-decoration: none;
     height: 70px;
     width: 40px;
-    background: transparent url("../images/arrows2.png") no-repeat left top;
+    background: transparent url("/assets/image/arrows2.png") no-repeat left top;
     margin-top: 1%;
 }
  .callbacks_nav:hover{
@@ -479,7 +479,7 @@ ul.multi-column-dropdown h6 {
 a.twitter {
 	width: 25px;
 	height: 25px;
-	background: url(../images/follow.png) no-repeat 0px 0px;
+	background: url(/assets/image/follow.png) no-repeat 0px 0px;
 	display: inline-block;
 	margin:0 1em;
 	  vertical-align: text-bottom;
@@ -490,7 +490,7 @@ a.twitter:hover,a.facebook:hover {
 a.facebook {
 	width: 25px;
 	height: 25px;
-	background: url(../images/follow.png) no-repeat -25px 0px;
+	background: url(/assets/image/follow.png) no-repeat -25px 0px;
 	display: inline-block;
 	  vertical-align: text-bottom;
 }
@@ -585,7 +585,7 @@ a.product_name {
 	color: #999;
 }
 .product p i {
-	background: url(../images/cart.png) no-repeat;
+	background: url(/assets/image/cart.png) no-repeat;
 	width: 20px;
 	height: 14px;
 	display: inline-block;
@@ -593,7 +593,7 @@ a.product_name {
 	vertical-align: middle;
 }
 .product-left:hover .product p i{
-	background: url(../images/cart-2.png) no-repeat;
+	background: url(/assets/image/cart-2.png) no-repeat;
 }
 /*--end-product--*/
 h3.like{
@@ -667,11 +667,11 @@ a.like_name {
 }
 .nbs-flexisel-nav-left {
 	left: 0px;
-	background: url(../images/arrows.png) no-repeat -8px -7px;
+	background: url(/assets/image/arrows.png) no-repeat -8px -7px;
 }
 .nbs-flexisel-nav-right {
 	right: 0px;
-	background: url(../images/arrows.png) no-repeat -61px -7px;
+	background: url(/assets/image/arrows.png) no-repeat -61px -7px;
 }
 .other-products {
     padding: 60px 0;
@@ -870,7 +870,7 @@ ul.tags_links li a:hover{
 	line-height: 18px;
 	color: #333;
 	font-weight: bold;
-	background: url(../images/tag_arrow.png) right 4px no-repeat;
+	background: url(/assets/image/tag_arrow.png) right 4px no-repeat;
 	padding-right: 20px;
 	margin-top:1.5em;
 	display: inline-block;
@@ -942,7 +942,7 @@ ul.ratings li a{
 	font-weight: 600;
 }
 i.rating-ed{
-	background: url(../images/stars.png)no-repeat -9px;
+	background: url(/assets/image/stars.png)no-repeat -9px;
 }
 .price_single {
 	font-size: 1.3em;
@@ -1226,7 +1226,7 @@ ul.tags_links li a:hover{
 	line-height: 18px;
 	color: #333;
 	font-weight: bold;
-	background: url(../images/tag_arrow.png) right 4px no-repeat;
+	background: url(/assets/image/tag_arrow.png) right 4px no-repeat;
 	padding-right: 20px;
 	margin-top:1.5em;
 	display: inline-block;
@@ -1278,7 +1278,7 @@ ul.ratings li a{
 	font-weight: 600;
 }
 i.rating-ed{
-	background: url(../images/stars.png)no-repeat -9px;
+	background: url(/assets/image/stars.png)no-repeat -9px;
 }
 .price_single {
 	font-size: 1.3em;
@@ -1898,7 +1898,7 @@ div#myTabContent {
 	width: 100%;
 }
 .close1, .close2,.close3 {
-	background: url('../images/close_1.png') no-repeat 0px 0px;
+	background: url('/assets/image/close_1.png') no-repeat 0px 0px;
 	cursor: pointer;
 	width: 28px;
 	height: 28px;
@@ -2132,7 +2132,7 @@ p.right {
 .social-icons  ul li a {
 	width:18px;
 	height:18px;
-	background:url('../images/s-icons.png') no-repeat 0px 0px;
+	background:url('/assets/image/s-icons.png') no-repeat 0px 0px;
 	display:inline-block;
 	margin: 0 5px;
 }
@@ -2759,13 +2759,13 @@ p.right {
 		margin: 0 0.3em;
 		width: 20px;
 		height: 20px;
-		background: url(../images/follow.png) no-repeat 0px 3px;
+		background: url(/assets/image/follow.png) no-repeat 0px 3px;
 		background-size: 35px;
 	}
 	a.facebook {
 		width: 20px;
 		height: 20px;
-		background: url(../images/follow.png) no-repeat -18px 2px;
+		background: url(/assets/image/follow.png) no-repeat -18px 2px;
 		background-size: 35px;
 	}
 	.online-strip h3 {
