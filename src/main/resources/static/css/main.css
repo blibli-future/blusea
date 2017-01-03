@@ -1,64 +1,21 @@
 body {
+    margin-top: 100px;
 }
 
-main.container {
-    padding-top: 70px;
-}
-
-.footer {
-    margin-top: 60px;
-    padding: 20px;
+.navbar-blusea {
+    z-index: 9000;
     width: 100%;
-    background-color: #e5e5e5;
+    position: fixed;
+    top: 0;
 }
 
-#homepage .card-title {
-    position: absolute;
-    top: 25%;
-    right : 33%;
-    left : 33%;
-
-    text-align: center;
-    background: rgba(29, 106, 154, 0.72);
-    color: #fff;
-
-    visibility: hidden;
-    opacity: 0;
+.navbar-blusea .banner-top {
+    padding-top: 10px;
+    background-color: #f8f8f8;
 }
 
-#homepage img:hover ~ .card-title{
-    visibility: visible;
-    opacity: 1;
-}
-
-.table .summary {
-    text-align: right;
-}
-
-.order-list .order-item {
-    margin-bottom: 15px;
-    border: 1px solid #bbb;
-    border-top: 2px solid #333;
-}
-
-.order-item .order-detail {
-    background-color: #eee;
-}
-
-.order-item table {
-    margin-bottom: 0;
-}
-
-.order-list .order-product-detail {
-    padding: 15px;
-    border-top: 1px solid #bbb;
-}
-
-.order-action {
-    text-align: right;
-    padding: 15px;
-}
-
-.order-action form {
-    display: inline-block;
+.navbar-blusea .inner-banner {
+    background-color: white;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #816263;
 }
