@@ -1,5 +1,9 @@
 body {
-    margin-top: 100px;
+    margin-top: 140px;
+}
+
+.jumbotron {
+    background-color: #f8f8f8;
 }
 
 .navbar-blusea {
@@ -15,7 +19,7 @@ body {
 }
 
 .navbar-blusea .inner-banner {
-    background-color: white;
+    background-color: #f8f8f8;
     padding-bottom: 10px;
     border-bottom: 1px solid #816263;
 }
