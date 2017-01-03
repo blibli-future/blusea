@@ -1,74 +1,149 @@
 {{>_partial/header}}
 {{>_partial/navbar}}
 
-<main class="container">
-    <h1>{{catering.cateringName}}</h1>
-    <table class="table">
-        <tr>
-            <td>Alamat</td>
-            <td>{{catering.address}}</td>
-        </tr>
-        <tr>
-            <td>Nomor telepon</td>
-            <td>{{catering.phoneNumber}}</td>
-        </tr>
-    </table>
-    <h2>Daftar menu</h2>
+<div class="container">
     <form action="/my-customer/order/new" method="POST">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
         <input type="hidden" name="catering-id" value="{{catering.id}}"/>
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row">
+    <div class="products-page">
+        <div class="products">
+            <div class="latest-bis">
+                <img src="{{catering.photo}}" class="img-responsive" alt="" />
+            </div>
+            <div class="product-listy">
+                <h2>{{catering.cateringName}}</h2>
+                <ul class="product-list">
+                    <li>{{{catering.description}}}</li>
+                    <li><hr></li>
+                    <li><strong>Alamat Perusahaan</strong></li>
+                    <li>{{catering.address}}</li>
+                    <li><hr></li>
+                    <li><strong>Nomor Telepon</strong></li>
+                    <li>{{catering.phoneNumber}}</li>
+                </ul>
+            </div>
+            <!-- Mungkin akan berguna
+            <div class="tags">
+                <h4 class="tag_head">Tags Widget</h4>
+                <ul class="tags_links">
+                    <li><a href="#">Kitesurf</a></li>
+                    <li><a href="#">Super</a></li>
+                    <li><a href="#">Duper</a></li>
+                    <li><a href="#">Theme</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="#">Best</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Apparel</a></li>
+                    <li><a href="#">Super</a></li>
+                    <li><a href="#">Duper</a></li>
+                    <li><a href="#">Theme</a></li>
+                    <li><a href="#">Responsive</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Equipment</a></li>
+                </ul>
+            </div>
+            -->
+
+        </div>
+        <div class="new-product">
+            <div class="new-product-top">
+                <ul class="product-top-list">
+                    <li><a href="index.html">Home</a>&nbsp;<span>&gt;</span></li>
+                    <li><span class="act">Catering Product Catalog</span>&nbsp;</li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="mens-toolbar">
+                <ul class="women_pagenation">
+                    <li>Page:</li>
+                    <li class="active"><a href="#">1</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
+                <div class="clearfix"></div>
+                <ul>
                     {{#products}}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="img-fluid card-img-top" src="{{photo}}" alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">{{name}}</h4>
-                                <p class="card-text">
-                                    Harga <span class="rupiah">{{price}}</span> / pax <br>
-                                    {{description}}
-                                </p>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="choosen-product" value="{{id}}"> Tambahkan ke pesanan
-                                    </label>
+                    <li>
+                            <div class="simpleCart_shelfItem">
+                                <div class="view view-first">
+                                    <div class="inner_content clearfix">
+                                        <div class="product_image">
+                                            <img src="{{photo}}" class="img-responsive" alt=""/>
+                                            <div class="product_container">
+                                                <div class="cart-left">
+                                                    <p class="title">{{name}}</p>
+                                                </div>
+                                                <div class="pricey"><span class="item_price rupiah">{{price}}</span>/pax</div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                        <div class="cbp-vm-details">
+                            {{description}}
+                        </div>
+                                <label class="btn btn-default">
+                                    <input type="checkbox" name="choosen-product" value="{{id}}"> Tambahkan ke paket
+                                </label>
+                        </div>
+                    </li>
+                    {{/products}}
+                </ul>
+                <hr>
+                <div class="order-button-div">
+                    <button type="button" class="btn btn-lg btn-block btn-primary order-button" data-toggle="modal" data-target="#order-form">Pesan makanan</button>
+                </div>
+</div>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- Form pesan -->
+        <div class="modal fade" id="order-form" tabindex="-1" role="dialog" aria-labelledby="Form order">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Pesan catering</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="quantity">Jumlah pesanan</label>
+                            <input type="text" class="form-control" id="quantity" name="quantity" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryDate">Tanggal pengiriman</label>
+                            <input type="text" class="form-control" id="deliveryDate" name="deliveryDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="note">Keterangan tambahan</label>
+                            <textarea type="text" class="form-control" id="note" name="note" placeholder="Keterangan tambahan untuk pesanan Anda"></textarea>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                            {{#helper.loggedInAsCustomer}}
+                            <button type="submit" class="btn btn-primary btn-lg">Pesan</button>
+                            {{/helper.loggedInAsCustomer}}
+                            {{^helper.loggedInAsCustomer}}
+                            <button type="submit" class="btn btn-primary btn-lg" disabled>Pesan</button>
+                            <div class="alert alert-warning" role="alert">
+                                <p>Silahkan <a href="/login">login</a> sebagai pengguna atau <a href="/my-customer/register">mendaftar</a>
+                                    terlebih dahulu untuk dapat memesan makanan.</p>
                             </div>
+                            {{/helper.loggedInAsCustomer}}
                         </div>
                     </div>
-                    {{/products}}
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="quantity">Jumlah pesanan</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="0">
-                </div>
-                <div class="form-group">
-                    <label for="deliveryDate">Tanggal pengiriman</label>
-                    <input type="text" class="form-control" id="deliveryDate" name="deliveryDate">
-                </div>
-                <div class="form-group">
-                    <label for="note">Keterangan tambahan</label>
-                    <textarea type="text" class="form-control" id="note" name="note" placeholder="Keterangan tambahan untuk pesanan Anda"></textarea>
-                </div>
-                {{#helper.loggedInAsCustomer}}
-                <button type="submit" class="btn btn-primary btn-lg">Pesan</button>
-                {{/helper.loggedInAsCustomer}}
-                {{^helper.loggedInAsCustomer}}
-                <button type="submit" class="btn btn-primary btn-lg" disabled>Pesan</button>
-                <div class="alert alert-warning" role="alert">
-                    <p>Silahkan <a href="/login">login</a> sebagai pengguna atau <a href="/my-customer/register">mendaftar</a>
-                    terlebih dahulu untuk dapat memesan makanan.</p>
-                </div>
-                {{/helper.loggedInAsCustomer}}
             </div>
         </div>
-    </form>
-    </main>
-
+</form>
+<!-- content-section-ends-here -->
+</div>
 <!--
 What? A css link INSIDE html body?!
 https://stackoverflow.com/questions/4957446/load-external-css-file-in-body-tag

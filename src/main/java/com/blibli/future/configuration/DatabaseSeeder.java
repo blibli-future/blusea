@@ -103,7 +103,7 @@ public class DatabaseSeeder {
         c.setAddress("Jl. Adi Sucipto");
         c.setDescription("Prima Catering, melalui pengalaman selama 15 tahun telah menjadi “partner of choice” bagi berbagai perusahaan terkemuka di Jakarta. \n" +
                 "\n" +
-                "<br>T: +622145841573 / HP: +628111333800 (Marketing) / E: debby@prima-catering.com");
+                "<br>T: +622145841573 <br> HP: +628111333800 (Marketing) <br> E: debby@prima-catering.com");
         c.setPhoneNumber("+622145841573");
         c.setPhoto("http://static1.squarespace.com/static/52414d6fe4b00ee0badffc5d/t/52fa2817e4b0a0539a45c733/1477546613639/?format=1500w");
         c.setDp("50");
@@ -124,7 +124,7 @@ public class DatabaseSeeder {
 
         p = new Product();
         p.setName("Kacang gurih");
-        p.setPhoto("https://cdn.pixabay.com/photo/2015/02/05/05/58/peanut-624601_960_720.jpg");
+        p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/f/f1/Snack_kacang_kedelai.JPG");
         p.setDescription("Kacang tanah yang digoreng dengan bumbu garam spesial.");
         p.setCatering(c);
         p.setPrice(2000);

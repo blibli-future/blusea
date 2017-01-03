@@ -7,7 +7,7 @@ body {
 }
 
 .navbar-blusea {
-    z-index: 9000;
+    z-index: 100;
     width: 100%;
     position: fixed;
     top: 0;
@@ -24,7 +24,6 @@ body {
     border-bottom: 1px solid #816263;
 }
 
-
 .banner {
     background:url("/assets/image/home-slide-2.jpg") no-repeat 0px 0px;
     background-size:cover;
@@ -37,4 +36,32 @@ body {
 
 .login-page {
     padding: 0;
+}
+
+ul.product-list li {
+    color: #FFF;
+    font-size: 0.85em;
+    text-decoration: none;
+    padding: 5px 2em;
+    font-family: 'Doppio One', sans-serif;
+    font-weight: 400;
+    display: block;
+}
+
+.products-page {
+    padding-top: 0;
+}
+
+.btn.btn-primary {
+    background-color: #816263;
+}
+
+.order-button-div {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.latest-bis {
+    border: 10px solid #816263;
+    margin-bottom: 0;
 }
