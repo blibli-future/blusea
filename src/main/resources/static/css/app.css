@@ -21,7 +21,7 @@ body {
 .navbar-blusea .inner-banner {
     background-color: #f8f8f8;
     padding-bottom: 10px;
-    border-bottom: 1px solid #816263;
+    border-bottom: 1px solid #f5533a;
 }
 
 .banner {
@@ -53,7 +53,7 @@ ul.product-list li {
 }
 
 .btn.btn-primary {
-    background-color: #816263;
+    background-color: #f5533a;
 }
 
 .order-button-div {
@@ -62,7 +62,7 @@ ul.product-list li {
 }
 
 .latest-bis {
-    border: 10px solid #816263;
+    border: 10px solid #f5533a;
     margin-bottom: 0;
 }
 
