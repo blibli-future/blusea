@@ -137,3 +137,7 @@ ul.product-list li {
 .order-action form {
     display: inline-block;
 }
+
+.catering-list .panel-body {
+    height: 260px;
+}

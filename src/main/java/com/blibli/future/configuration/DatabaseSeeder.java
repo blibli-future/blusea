@@ -55,14 +55,15 @@ public class DatabaseSeeder {
 
         Catering c = new Catering();
         r = new UserRole();
-        c.setCateringName("Ahmad Widardi");
+        c.setCateringName("Imperia Catering Jakarta");
         c.setUsername("ArdiCatering");
         c.setEmail("cateringa@gmail.com");
         c.setPassword("12345");
-        c.setDescription("Hehe");
-        c.setAddress("Jalan Kaliurang");
+        c.setDescription("Building trust and relationship with you for every special events you have.</br>" +
+                "Our mission is to provide you with fresh food from good sourced ingredients and quality service you need with the best value.");
+        c.setAddress("Jl. Pasar Inpres No. 1, Radio Dalam, Kebayoran Baru, RT.2/RW.14, Gandaria Utara, Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12510");
         c.setDp("70");
-        c.setPhoto("https://dummyimage.com/200x200/000/fff");
+        c.setPhoto("/assets/image/dummy/file-4.jpg");
         c.setPhoneNumber("085642196188");
         cateringRepository.save(c);
         r.setUsername("ArdiCatering");

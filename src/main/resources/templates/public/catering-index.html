@@ -24,14 +24,16 @@
             </nav>
         </div>
     </div>
-    <div class="row">
+    <div class="row catering-list">
         {{#caterings}}
-        <div class="col-md-4">
-            <div class="card">
-                <img class="img-fluid card-img-top" src="{{photo}}" alt="Card image cap">
-                <h4 class="card-title">{{cateringName}}</h4>
-                <div class="card-block">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <img class="img-responsive card-img-top" src="{{photo}}" alt="Card image cap">
+                <div class="panel-body">
+                    <h4 class="panel-title">{{cateringName}}</h4>
                     <p class="card-text">{{description}}</p>
+                </div>
+                <div class="panel-footer">
                     <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
                 </div>
             </div>
