@@ -138,6 +138,46 @@ ul.product-list li {
     display: inline-block;
 }
 
+
 .catering-list .panel-body {
     height: 260px;
 }
+
+/*
+   Reason to subscribe
+*/
+.row.reason-to-subscribe {
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 60px 0;
+    margin-bottom: 30px;
+}
+.row.reason-to-subscribe h1{
+    margin-bottom: 50px;
+}
+.row {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.row:after, .row:before {
+    content: " ";
+    display: table;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.row:after {
+    clear: both;
+}
+.row:after, .row:before {
+    content: " ";
+    display: table;
+}
+

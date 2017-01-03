@@ -220,6 +220,7 @@ ul.multi-column-dropdown h6 {
 	width: 50%;
 }
 .banner-bottom-left h2 {
+    visibility: hidden;
     font-size: 90px;
     font-weight: 600;
     line-height: 120px;
