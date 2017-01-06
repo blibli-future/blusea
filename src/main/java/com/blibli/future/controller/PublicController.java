@@ -2,9 +2,11 @@ package com.blibli.future.controller;
 
 import com.blibli.future.model.Catering;
 import com.blibli.future.model.Customer;
+import com.blibli.future.model.Product;
 import com.blibli.future.model.User;
 import com.blibli.future.repository.CateringRepository;
 import com.blibli.future.repository.CustomerRepository;
+import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class PublicController {
 	CustomerRepository customerRepository;
 
 	@Autowired
+	ProductRepository productRepository;
+
+	@Autowired
 	Helper helper;
 
 	@ModelAttribute("helper")
@@ -46,8 +51,10 @@ public class PublicController {
 	@RequestMapping("/")
 	public String landing(
 			Model model) {
+		List<Product> productList = productRepository.findAll().subList(0,12);
 		List<Catering> firstSixCatering = cateringRepository.findAll().subList(0, 6);
 		model.addAttribute("caterings", firstSixCatering);
+		model.addAttribute(productList);
         return "public/landing";
 	}
 
