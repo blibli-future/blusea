@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name="blusea_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements UserDetails{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,6 +21,7 @@ public class User implements UserDetails{
     private String username;
     private String email;
     private String password;
+    private String photo;
 
     @OneToOne
     @PrimaryKeyJoinColumn
@@ -96,11 +97,20 @@ public class User implements UserDetails{
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
     public UserRole getUserRoles() {
         return roles;
     }
 
     public void setRoles(UserRole roles) {
         this.roles = roles;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

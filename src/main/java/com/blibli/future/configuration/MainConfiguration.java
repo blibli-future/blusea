@@ -16,7 +16,6 @@ public class MainConfiguration extends RouterConfigurationSupport {
 
     @Override
     public List<String> listRouteFiles() {
-
         List<String> routeFiles = new ArrayList<>();
         routeFiles.add("classpath:routes.conf");
         return routeFiles;

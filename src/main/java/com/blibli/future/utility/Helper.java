@@ -28,27 +28,24 @@ public class Helper {
     }
 
     public boolean isLoggedInAsCustomer() {
-        User u = getCurrentUser();
-        try {
+        if (isLoggedIn()) {
+            User u = getCurrentUser();
             return u instanceof Customer;
-        } catch (NullPointerException e) {
-            return false;
         }
-
+        return false;
     }
 
     public boolean isLoggedInAsCatering() {
-        User u = getCurrentUser();
-        try {
+        if (isLoggedIn()) {
+            User u = getCurrentUser();
             return u instanceof Catering;
-        } catch (NullPointerException e) {
-            return false;
         }
+        return false;
     }
 
     public User getCurrentUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (isLoggedIn()) {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             return userRepository.findByUsername(auth.getName());
         }
         return null;

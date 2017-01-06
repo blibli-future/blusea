@@ -31,17 +31,17 @@ import java.util.UUID;
 public class CateringController {
 
     @Autowired
-    public Environment env;
+    private Environment env;
     @Autowired
-    CateringRepository cateringRepository;
+    private CateringRepository cateringRepository;
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     @Autowired
-    UserRoleRepository userRoleRepository;
+    private UserRoleRepository userRoleRepository;
     @Autowired
-    OrderRepository orderRepository;
+    private OrderRepository orderRepository;
     @Autowired
-    Helper helper;
+    private Helper helper;
     @Autowired
     private SecurityService securityService;
 
@@ -174,6 +174,7 @@ public class CateringController {
     {
         Catering catering = (Catering) helper.getCurrentUser();
         model.addAttribute("catering", catering);
+
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
         return "catering/edit";

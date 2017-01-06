@@ -28,8 +28,6 @@ public class PersistentLogin {
         this.username = username;
     }
 
-
-
     public String getToken() {
         return token;
     }

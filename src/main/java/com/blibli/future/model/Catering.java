@@ -11,7 +11,6 @@ import javax.persistence.*;
 
 @Entity
 public class Catering extends User {
-//    private String username;
     private String cateringName;
     private String address;
 
@@ -19,7 +18,6 @@ public class Catering extends User {
     private String description;
     private String phoneNumber;
     private String dp;
-    private String photo;
 
     //relationship begins
     @OneToMany(mappedBy = "catering", fetch = FetchType.EAGER)
@@ -103,15 +101,5 @@ public class Catering extends User {
 
         }
         return categories;
-    }
-
-    // HACKKK MOVE THIS TO USER MODEL
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 }

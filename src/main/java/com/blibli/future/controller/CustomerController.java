@@ -157,7 +157,6 @@ public class CustomerController{
             Model model,
             HttpServletRequest request)
     {
-        String email = helper.getCurrentCustomer().getEmail();
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
