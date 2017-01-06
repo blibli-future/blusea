@@ -8,5 +8,5 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 @Profile("production")
-public class DevConfiguration {
+public class ProductionConfiguration {
 }
