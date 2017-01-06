@@ -8,10 +8,6 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 
-
-
-
-
 <div class="banner">
     <div class="container">
         <div class="banner-bottom">
@@ -100,11 +96,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </header>
             {{#productList}}
             <div class="col-md-4 product simpleCart_shelfItem text-center">
-                <a href="single.html"><img src="{{photo}}" alt="" /></a>
+                <a href="/catering/{{catering.username}}"><img src="{{photo}}" alt="" /></a>
                 <div class="mask">
-                    <a href="/catering/{{catering.id}}">Quick View</a>
+                    <a href="/catering/{{catering.username}}">Quick View</a>
                 </div>
-                <a class="product_name" href="/catering/{{catering.id}}">{{name}}</a>
+                <a class="product_name" href="/catering/{{catering.username}}">{{name}}</a>
                 <p><a class="item_add" href="#"><span class="item_price rupiah">{{price}}</span></a></p>
             </div>
             {{/productList}}
