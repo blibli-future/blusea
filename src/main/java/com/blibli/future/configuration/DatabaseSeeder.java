@@ -128,7 +128,7 @@ public class DatabaseSeeder {
         p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/f/f1/Snack_kacang_kedelai.JPG");
         p.setDescription("Kacang tanah yang digoreng dengan bumbu garam spesial.");
         p.setCatering(c);
-        p.setPrice(2000);
+        p.setPrice("1-2000|15-1900|50-1800|100-1500|1000-1000");
         productRepository.save(p);
 
         p = new Product();
@@ -136,7 +136,7 @@ public class DatabaseSeeder {
         p.setPhoto("https://upload.wikimedia.org/wikipedia/commons/4/46/Preety_much_sums_up_Osaka_food_culture_(4127987298).jpg");
         p.setDescription("Tempura yang digoreng deepfried dengan topping telur dadar dari ayam kampung.");
         p.setCatering(c);
-        p.setPrice(5000);
+        p.setPrice("1-5000|10-4900|100-4500");
         productRepository.save(p);
 
 
@@ -169,7 +169,16 @@ public class DatabaseSeeder {
                 p.setPhoto("/assets/image/dummy/file-" + randomNumber + ".jpg");
                 p.setCatering(c);
                 int randomPrice = ThreadLocalRandom.current().nextInt(10, 101) * 100;
-                p.setPrice(randomPrice);
+                String price = "1-" + randomPrice;
+                for (int k = 2; k <= 10; k++) {
+                    if (randomPrice < 1000) {
+                        randomPrice -= 50;
+                    } else {
+                        randomPrice -= 100;
+                    }
+                    price += "|" + (k*10) + "-" + randomPrice;
+                }
+                p.setPrice(price);
                 productRepository.save(p);
             }
         }
