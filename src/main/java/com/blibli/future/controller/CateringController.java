@@ -295,12 +295,12 @@ public class CateringController {
                     // Create the file on server
                     File serverFile = new File(dir.getAbsolutePath()
                             + File.separator + fileName + ".jpg");
-                    product.setPhoto("http://localhost/gambar/Product"
-                            + File.separator + formatted + File.separator + fileName + ".jpg");
                     BufferedOutputStream stream = new BufferedOutputStream(
                             new FileOutputStream(serverFile));
                     stream.write(bytes);
                     stream.close();
+                    product.setPhoto("http://localhost/gambar/Product"
+                        + File.separator + formatted + File.separator + fileName + ".jpg");
 
                     logger.info("Server File Location="
                             + serverFile.getAbsolutePath());
@@ -308,13 +308,10 @@ public class CateringController {
                 } catch (Exception e) {
                     return "You failed to upload " + product.getName() + " => " + e.getMessage();
                 }
-                product.setDescription(request.getParameter("description"));
-                product.setName(request.getParameter("name"));
-                product.setPrice(request.getParameter("price"));
-            } else {
-                return "You failed to upload " + product.getName()
-                        + " because the file was empty.";
             }
+            product.setDescription(request.getParameter("description"));
+            product.setName(request.getParameter("name"));
+            product.setPrice(Integer.parseInt(request.getParameter("price")));
             productRepository.save(product);
             cateringRepository.save(catering);
             return "redirect:/my-catering/profile";
