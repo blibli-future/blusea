@@ -37,6 +37,7 @@
                                     {{description}}
                                 </p>
                             </div>
+                            <a href="/my-catering/product/{{id}}/edit"> Edit Product? </a>
                             <form method="POST" action="/my-catering/product/{{id}}/delete">
                                 <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                                 <button class="btn btn-danger" value="submit">

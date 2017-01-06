@@ -252,6 +252,77 @@ public class CateringController {
         return "redirect:/my-catering/profile";
     }
 
+    @RequestMapping(value="/my-catering/product/{id}/edit", method= RequestMethod.GET)
+    public String editProductForm(
+            @PathVariable long id,
+            HttpServletRequest request,
+            Model model)
+    {
+        Product product = productRepository.findOne(id);
+        model.addAttribute("product", product);
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+        return "catering/editProduct";
+    }
+
+    @RequestMapping(value = "/my-catering/product/{id}/edit" , method = RequestMethod.POST)
+    public String editProduct(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable long id,
+            HttpServletRequest request)
+    {
+        Catering catering = (Catering) helper.getCurrentUser();
+
+        Product product = productRepository.findOne(id);
+
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+        String formatted = format1.format(cal.getTime());
+
+        if(catering != null){
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+
+                    String fileName = UUID.randomUUID().toString().replaceAll("-","");
+
+                    // Creating the directory to store file
+                    //String rootPath = System.getProperty("catalina.home");
+                    File dir = new File(env.getProperty("blusea.PhotoDir.path") + "/Product/" + formatted);
+                    if (!dir.exists())
+                        dir.mkdirs();
+
+                    // Create the file on server
+                    File serverFile = new File(dir.getAbsolutePath()
+                            + File.separator + fileName + ".jpg");
+                    product.setPhoto("http://localhost/gambar/Product"
+                            + File.separator + formatted + File.separator + fileName + ".jpg");
+                    BufferedOutputStream stream = new BufferedOutputStream(
+                            new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
+
+                    logger.info("Server File Location="
+                            + serverFile.getAbsolutePath());
+
+                } catch (Exception e) {
+                    return "You failed to upload " + product.getName() + " => " + e.getMessage();
+                }
+                product.setDescription(request.getParameter("description"));
+                product.setName(request.getParameter("name"));
+                product.setPrice(request.getParameter("price"));
+            } else {
+                return "You failed to upload " + product.getName()
+                        + " because the file was empty.";
+            }
+            productRepository.save(product);
+            cateringRepository.save(catering);
+            return "redirect:/my-catering/profile";
+        }
+        return "redirect:/my-catering/profile";
+
+    }
+
     @RequestMapping(value = "/my-catering/order")
     public String orderIndex(Model model) {
         // Get ALL order except the one that still have CART status

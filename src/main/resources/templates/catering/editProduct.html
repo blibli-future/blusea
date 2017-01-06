@@ -1,0 +1,21 @@
+{{>_partial/header}}
+{{>_partial/navbar}}
+
+<main class="container">
+    <h1>Welcome to Toko BluSea</h1>
+    <form method="POST" action="/my-catering/product/{{product.id}}/edit" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+        <fieldset>
+            Edit Nama Product <input type="text" name="name" value="{{product.name}}"/> <br />
+            Edit Description <input type="text" name="description" value="{{product.description}}"/> <br />
+            Edit Price <input type="number" name="price" value="{{product.price}}"> <br>
+            <img class="img-fluid card-img-top" src="{{product.photo}}" alt="Card image cap"/>
+            File to upload: <input type="file" name="file" value="{{product.photo}}"/> <br />
+            <input type="submit"
+                   value="Add Product" />
+        </fieldset>
+    </form>
+    </body>
+</main>
+
+{{>_partial/footer}}
