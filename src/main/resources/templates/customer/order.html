@@ -31,20 +31,23 @@
                 </table>
             </div>
             <div class="order-product-detail">
-                <p>Detail pesanan</p>
-                <table class="table">
-                    <tr>
-                        <th>Nama produk</th>
-                        <th>Harga satuan</th>
-                        <th>Subtotal</th>
-                    </tr>
-                    {{#orderDetails}}
-                    <tr>
-                        <td>{{product.name}}</td>
-                        <td class="rupiah">{{product.price}}</td>
-                        <td class="rupiah">{{price}}</td>
-                    </tr>
-                    {{/orderDetails}}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nama produk</th>
+                            <th>Harga satuan</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#orderDetails}}
+                        <tr>
+                            <td>{{product.name}}</td>
+                            <td class="rupiah">{{product.price}}</td>
+                            <td class="rupiah">{{price}}</td>
+                        </tr>
+                        {{/orderDetails}}
+                    </tbody>
                 </table>
             </div>
             <div class="order-action">

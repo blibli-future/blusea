@@ -24,35 +24,39 @@
         </div>
     </form>
     <h4>Detail Pesanan</h4>
-    <table class="table">
-        <tr>
-            <th>Nama produk</th>
-            <th>Harga satuan</th>
-            <th>Subtotal</th>
-        </tr>
-        {{#order.orderDetails}}
-        <tr>
-            <td>{{product.name}}</td>
-            <td class="rupiah">{{product.price}}</td>
-            <td class="rupiah">{{price}}</td>
-        </tr>
-        {{/order.orderDetails}}
-        <tr>
-            <td colspan="2" class="summary">Harga sebelum diskon</td>
-            <td class="rupiah">{{order.noDiscountPrice}}</td>
-        </tr>
-        <tr>
-            <td colspan="2" class="summary">Potongan diskon</td>
-            <td class="rupiah">{{order.discountAmount}}</td>
-        </tr>
-        <tr>
-            <td colspan="2" class="summary"><b>Total harga</b></td>
-            <td class="rupiah"><b>{{order.totalPrices}}</b></td>
-        </tr>
-        <tr>
-            <td colspan="2" class="summary"><b>DP yang harus dibayar</b></td>
-            <td class="rupiah"><b>{{order.dp}}</b></td>
-        </tr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nama produk</th>
+                <th>Harga satuan</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#order.orderDetails}}
+            <tr>
+                <td>{{product.name}}</td>
+                <td class="rupiah">{{product.price}}</td>
+                <td class="rupiah">{{price}}</td>
+            </tr>
+            {{/order.orderDetails}}
+            <tr>
+                <td colspan="2" class="summary">Harga sebelum diskon</td>
+                <td class="rupiah">{{order.noDiscountPrice}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="summary">Potongan diskon</td>
+                <td class="rupiah">{{order.discountAmount}}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="summary"><b>Total harga</b></td>
+                <td class="rupiah"><b>{{order.totalPrices}}</b></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="summary"><b>DP yang harus dibayar</b></td>
+                <td class="rupiah"><b>{{order.dp}}</b></td>
+            </tr>
+        </tbody>
     </table>
 
     <h2>Pembayaran</h2>

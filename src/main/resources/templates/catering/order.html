@@ -49,8 +49,8 @@
             </div>
             <div class="order-action">
                 {{#isPending}}
-                    <a href="/my-catering/order/{{id}}/confirm" class="btn btn-primary">Konfirmasi Pesanan</a>
-                    <a href="/my-catering/order/{{id}}/delete"  class="btn btn-danger">Tolak Pesanan</a>
+                    <a href="/my-catering/order/{{id}}/delete"  class="btn btn-default">Tolak</a>
+                    <a href="/my-catering/order/{{id}}/confirm" class="btn btn-primary">Terima</a>
                 {{/isPending}}
                 {{#isWaiting}}
                     <a href="/my-catering/order/{{id}}/confirm" class="btn btn-primary">Pesanan Selesai</a>
