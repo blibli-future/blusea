@@ -23,6 +23,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -103,7 +104,7 @@ public class CateringController {
     public String cateringPostAddProduct(
             @ModelAttribute Product newProduct,
             @RequestParam("file") MultipartFile file,
-            Model model){
+            HttpServletRequest request){
         Catering catering = helper.getCurrentCatering();
 
         Calendar cal = Calendar.getInstance();
@@ -146,6 +147,12 @@ public class CateringController {
                 return "You failed to upload " + newProduct.getName()
                         + " because the file was empty.";
             }
+
+            String[] quantity = request.getParameterValues("quantity");
+            String[] price = request.getParameterValues("price");
+            String newProductPrice = helper.setProductPrice(quantity,price);
+            newProduct.setPrice(newProductPrice);
+
             productRepository.save(newProduct);
             cateringRepository.save(catering);
             return "redirect:/my-catering/profile";

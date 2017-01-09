@@ -2,6 +2,7 @@
 {{>_partial/navbar}}
 
 <main class="container">
+    <script src="/assets/js/addProductPrice.js" type="text/javascript"></script>
     <head>
         <title>Welcome to BluSea, {{catering.username}}!</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,9 +12,20 @@
     <form method="POST" action="/my-catering/addproducts" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
         <fieldset>
-            Insert Nama Product <input type="text" name="name" /> <br />
+            Insert Nama Product <input type="text" name="name" > <br />
             Insert Description <input type="text" name="description" /> <br />
-            Insert Price <input type="number" name="price"> <br>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Min. Quantity</th>
+                  <th>Price per pax</th>
+                </tr>
+              </thead>
+              <tbody id="dynamicTablePrice">
+
+              </tbody>
+              <input type="button" value="Add Price" onClick="expandTablePrice('dynamicTablePrice');">
+            </table>
             File to upload: <input type="file" name="file" /> <br />
             <input type="submit"
                    value="Add Product" />

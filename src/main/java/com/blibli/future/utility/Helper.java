@@ -10,9 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by dhika on 16/12/2016.
- */
+import java.util.ArrayList;
+
+
 @Component
 public class Helper {
     @Autowired
@@ -49,6 +49,18 @@ public class Helper {
             return userRepository.findByUsername(auth.getName());
         }
         return null;
+    }
+
+    public String setProductPrice(String[] quantity, String[] price) {
+        String productPrice = "";
+        int priceSize = quantity.length;
+        for(int i=0;i<priceSize;i++){
+            String productPriceTmp;
+            if(i!=priceSize-1) productPriceTmp = quantity[i] + "-" + price[i] + "|";
+            else productPriceTmp = quantity[i] + "-" + price[i];
+            productPrice = productPrice + productPriceTmp;
+        }
+        return productPrice;
     }
 
     public Customer getCurrentCustomer() {
