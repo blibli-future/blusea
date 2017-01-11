@@ -1,24 +1,40 @@
 {{>_partial/header}}
 {{>_partial/navbar}}
 
-<head>
-    <title>Welcome to BluSea!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Welcome to Toko BluSea</h1>
-<form method="POST" action="/my-customer/edit">
-    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-    <fieldset>
-        Edit Username <input type="text" name="username" value="{{customer.username}}"/> <br />
-        Edit Email <input type="text" name="email" value="{{customer.email}}"/> <br />
-        Edit Password <input type="password" name="password" value="{{customer.password}}"/> <br />
-        Edit Full Name <input type="text" name="fullName" value="{{customer.fullName}}"/> <br />
-        Edit Nick Name <input type="text" name="nickName" value="{{customer.nickName}}"/> <br />
-        <input type="submit"
-               value="Edit" />
-    </fieldset>
-</form>
-</body>
+<main class="container">
+  <form class="form-horizontal" method="POST" action="/my-customer/edit">
+      <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+      <fieldset>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" name="email" placeholder="Email" value="{{customer.email}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" name="password" value="{{customer.password}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Full Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="fullName" value="{{customer.fullName}}">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Nick Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nickName" value="{{customer.nickName}}">
+          </div>
+        </div>
+        <div class="pull-right">
+          <a href="/my-customer/profile" class="btn btn-default">Back</a>
+          <input class="btn btn-primary" type="submit" value="Edit" />
+        </div>
+      </fieldset>
+  </form>
+</main>
 
 {{>_partial/footer}}

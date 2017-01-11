@@ -2,55 +2,78 @@
 {{>_partial/navbar}}
 
 <main class="container">
-    <h1>{{catering.username}}</h1>
-    <img class="img-fluid" width="400" src="{{catering.photo}}" alt="Card image cap"/>
-    <a href="/catering/{{catering.username}}/changePhoto"> Change Photo </a>
-    <table class="table">
-        <tr>
-            <td>Nama perusahaan</td>
-            <td>{{catering.cateringName}}</td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>{{catering.address}}</td>
-        </tr>
-        <tr>
-            <td>Nomor telepon</td>
-            <td>{{catering.phoneNumber}}</td>
-        </tr>
-    </table>
-    <a class="btn btn-primary" href="/my-catering/edit"> Want to edit? </a>
-    <p>Daftar menu</p>
-    <a class="btn btn-primary" href="/my-catering/addproducts" > Want to add products? </a>
-        <input type="hidden" name="catering-id" value="{{catering.id}}"/>
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row">
-                    {{#catering.products}}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img class="img-responsive card-img-top" src="{{photo}}" alt="Card image cap">
-                            <div class="card-block">
-                                <h4 class="card-title">{{name}}</h4>
-                                <p class="card-text">
-                                    Harga Rp. <span class="rupiah">{{price}}</span> / pax <br>
-                                    {{description}}
-                                </p>
-                            </div>
-                            <a href="/my-catering/product/{{id}}/edit"> Edit Product? </a>
-                            <form method="POST" action="/my-catering/product/{{id}}/delete">
-                                <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-                                <button class="btn btn-danger" value="submit">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    {{/catering.products}}
-                </div>
-            </div>
+  <h3>Catering Dashboard</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <img class="img-responsive img-thumbnail" src="{{catering.photo}}" alt="Card image cap"/>
+      <a href="/catering/{{catering.username}}/changePhoto"> Change Photo </a>
+    </div>
+    <div class="col-md-9">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Nama perusahaan</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">: {{catering.cateringName}}</p>
+          </div>
         </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Nama perusahaan</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">: {{catering.cateringName}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Alamat perusahaan</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">: {{catering.address}}</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Nomor telepon</label>
+          <div class="col-sm-10">
+            <p class="form-control-static">: {{catering.phoneNumber}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="btn btn-default" href="/my-catering/edit">Edit profile</a>
+
+  <hr>
+
+  <h3>Daftar menu</h3>
+
+  <a class="btn btn-primary" href="/my-catering/addproducts" > Add new product </a>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="row">
+        {{#catering.products}}
+        <div class="col-md-4">
+          <div class="card">
+            <img class="img-responsive card-img-top" src="{{photo}}" alt="Card image cap">
+            <div class="card-block">
+              <h4 class="card-title">{{name}}</h4>
+              <p class="card-text">
+                Harga Rp. <span class="rupiah">{{price}}</span> / pax <br>
+                {{description}}
+              </p>
+            </div>
+            <a href="/my-catering/product/{{id}}/edit"> Edit Product? </a>
+            <form method="POST" action="/my-catering/product/{{id}}/delete">
+              <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+              <button class="btn btn-danger" value="submit">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+        {{/catering.products}}
+      </div>
+    </div>
+  </div>
 </main>
 
 
-    {{>_partial/footer}}
+{{>_partial/footer}}

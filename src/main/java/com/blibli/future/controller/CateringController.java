@@ -228,9 +228,6 @@ public class CateringController {
                 } catch (Exception e) {
                     return "You failed to upload " + catering.getCateringName() + " => " + e.getMessage();
                 }
-            } else {
-                return "You failed to upload " + catering.getCateringName()
-                        + " because the file was empty.";
             }
         }
 

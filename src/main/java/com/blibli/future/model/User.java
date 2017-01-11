@@ -18,10 +18,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String username;
-    private String email;
-    private String password;
-    private String photo;
+    private String username = "";
+    private String email = "";
+    private String password = "";
+    private String photo = "/assets/image/anon-avatar.png";
 
     @OneToOne
     @PrimaryKeyJoinColumn

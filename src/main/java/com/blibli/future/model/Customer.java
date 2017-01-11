@@ -6,8 +6,8 @@ import java.util.List;
 @Entity
 public class Customer extends User {
 
-    private String fullName;
-    private String nickName;
+    private String fullName = "";
+    private String nickName = "";
 
     //relationship begins
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
