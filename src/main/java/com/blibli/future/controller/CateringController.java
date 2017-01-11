@@ -6,6 +6,7 @@ import com.blibli.future.repository.UserRoleRepository;
 import com.blibli.future.security.SecurityService;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.data.util.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -267,6 +268,8 @@ public class CateringController {
     {
         Product product = productRepository.findOne(id);
         model.addAttribute("product", product);
+        ArrayList<Pair<Integer , Integer >> productPriceList = product.getPricePair();
+        model.addAttribute("productPriceList",productPriceList);
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
         return "catering/editProduct";

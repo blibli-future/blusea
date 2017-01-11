@@ -5,12 +5,14 @@ import com.blibli.future.model.Customer;
 import com.blibli.future.model.User;
 import com.blibli.future.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Component
@@ -49,6 +51,16 @@ public class Helper {
             return userRepository.findByUsername(auth.getName());
         }
         return null;
+    }
+
+    public ArrayList<Pair<Integer, Integer>> getPricePair(String priceData) {
+        ArrayList<Pair<Integer, Integer>> pricePair = new ArrayList<>();
+        for (String stringPair: priceData.split("\\|")) {
+            int minQuantity = Integer.parseInt(stringPair.split("\\-")[0]);
+            int price = Integer.parseInt(stringPair.split("\\-")[1]);
+            pricePair.add(Pair.of(minQuantity, price));
+        }
+        return pricePair;
     }
 
     public String setProductPrice(String[] quantity, String[] price) {

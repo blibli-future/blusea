@@ -96,12 +96,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </header>
             {{#productList}}
             <div class="col-md-4 product simpleCart_shelfItem text-center">
-                <a href="/catering/{{catering.username}}"><img src="{{photo}}" alt="" /></a>
+                <a href="/catering/{{catering.username}}"><img src="{{photo}}" alt="" height="300px" width="300px" /></a>
                 <div class="mask">
                     <a href="/catering/{{catering.username}}">Quick View</a>
                 </div>
                 <a class="product_name" href="/catering/{{catering.username}}">{{name}}</a>
-                <p><a class="item_add" href="#"><span class="item_price rupiah">{{price}}</span></a></p>
+                <p><a class="item_add" href="#">Starts from <br/> <span class="item_price rupiah"> &nbsp; {{price}}</span> per pax</a></p>
             </div>
             {{/productList}}
             <div class="clearfix"></div>
@@ -196,38 +196,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     </div>
 </div>
 
-<!--
-<main class="container" id="homepage">
-    <div class="jumbotron">
-        <h1>Selamat datang di Kuliner Nusantara</h1>
-        <p class="lead">Temukan kebutuhan catering perusahaanmu disini!</p>
-        <form>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <input type="email" class="form-control form-control-xl" id="lgFormGroupInput" placeholder="Kombinasi makanan, contoh &#34;ayam, nasi goreng, bakso&#34;">
-                </div>
-                <button type="submit" class="col-sm-2 col-form-label col-form-label-xl btn btn-primary">Cari</button>
-            </div>
-        </form>
-    </div>
-
-
-    <div class="row">
-        {{#caterings}}
-        <div class="col-md-4">
-            <div class="card">
-                <img class="img-fluid card-img-top" src="{{photo}}" alt="Card image cap">
-                <h4 class="card-title">{{cateringName}}</h4>
-                <div class="card-block">
-                    <p class="card-text">{{{description}}}</p>
-                    <a href="/catering/{{username}}/" class="btn btn-primary">Lihat makanan</a>
-                </div>
-            </div>
-        </div>
-
-        {{/caterings}}
-    </div>
-</main>
--->
 
 {{>_partial/footer}}
