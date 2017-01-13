@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +25,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class CateringController {
@@ -151,6 +149,22 @@ public class CateringController {
 
             String[] quantity = request.getParameterValues("quantity");
             String[] price = request.getParameterValues("price");
+            ArrayList<Pair<Integer, Integer>> pricePair = new ArrayList<>();
+            for(int i=0;i<quantity.length;i++){
+                pricePair.add(Pair.of(Integer.parseInt(quantity[i]) , Integer.parseInt(price[i])));
+            }
+
+            Collections.sort(pricePair, new Comparator<Pair<Integer,Integer>>() {
+                @Override public int compare(Pair<Integer,Integer> x, Pair<Integer,Integer> y) {
+                    return x.getFirst() - y.getFirst();
+                }
+            });
+
+            for(int i=0;i<pricePair.size();i++){
+                quantity[i] = String.valueOf(pricePair.get(i).getFirst());
+                price[i] = String.valueOf(pricePair.get(i).getSecond());
+            }
+
             String newProductPrice = helper.setProductPrice(quantity,price);
             newProduct.setPrice(newProductPrice);
 
@@ -318,7 +332,26 @@ public class CateringController {
             }
             product.setDescription(request.getParameter("description"));
             product.setName(request.getParameter("name"));
-            product.setPrice(Integer.parseInt(request.getParameter("price")));
+            String[] quantity = request.getParameterValues("quantity");
+            String[] price = request.getParameterValues("price");
+            ArrayList<Pair<Integer, Integer>> pricePair = new ArrayList<>();
+            for(int i=0;i<quantity.length;i++){
+                pricePair.add(Pair.of(Integer.parseInt(quantity[i]) , Integer.parseInt(price[i])));
+            }
+
+            Collections.sort(pricePair, new Comparator<Pair<Integer,Integer>>() {
+                @Override public int compare(Pair<Integer,Integer> x, Pair<Integer,Integer> y) {
+                    return x.getFirst() - y.getFirst();
+                }
+            });
+
+            for(int i=0;i<pricePair.size();i++){
+                quantity[i] = String.valueOf(pricePair.get(i).getFirst());
+                price[i] = String.valueOf(pricePair.get(i).getSecond());
+            }
+
+            String newProductPrice = helper.setProductPrice(quantity,price);
+            product.setPrice(newProductPrice);
             productRepository.save(product);
             cateringRepository.save(catering);
             return "redirect:/my-catering/profile";
