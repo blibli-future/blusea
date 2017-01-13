@@ -118,7 +118,7 @@ public class PublicController {
 			cateringPerPage = Integer.parseInt(request.getParameter("count"));
 		}
 		catch (NumberFormatException e) {
-			cateringPerPage = 10;
+			cateringPerPage = 8;
 		}
 
 		int startIndex = (currentPage-1) * cateringPerPage;
@@ -139,7 +139,7 @@ public class PublicController {
 
 		// End of list cutting  must match Catering number
 		if (endIndex >= cateringLastIndex) {
-			endIndex = cateringLastIndex;
+			endIndex = cateringLastIndex+1;
 			model.addAttribute("isLastPage", true);
 		}
 
