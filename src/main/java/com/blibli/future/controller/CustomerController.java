@@ -6,7 +6,13 @@ import com.blibli.future.security.SecurityService;
 import com.blibli.future.utility.Helper;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -33,8 +39,7 @@ public class CustomerController{
     private Helper helper;
     @Autowired
     private UserRoleRepository userRoleRepository;
-    @Autowired
-    private SecurityService securityService;
+
 
     @ModelAttribute("helper")
     public Helper getHelper() {
@@ -67,7 +72,8 @@ public class CustomerController{
     @RequestMapping(value="/my-customer/register", method= RequestMethod.POST)
     public String addUser(
             @ModelAttribute Customer newCustomer,
-            Model model)
+            Model model,
+            HttpServletRequest request)
     {
         customerRepository.save(newCustomer);
         model.addAttribute("customer", newCustomer);
@@ -75,10 +81,11 @@ public class CustomerController{
         r.setUsername(newCustomer.getUsername());
         r.setRole("ROLE_CUSTOMER");
         userRoleRepository.save(r);
-        securityService.autologin(newCustomer.getUsername(), newCustomer.getPassword());
+        //securityService.autologin(newCustomer.getUsername(), newCustomer.getPassword());
+        helper.authenticateUserAndSetSession(newCustomer, request);
+
         return "redirect:/my-customer/profile";
     }
-
 
     @RequestMapping(value="/my-customer/edit", method= RequestMethod.GET)
     public String editCustomerForm(

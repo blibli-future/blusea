@@ -66,21 +66,21 @@ public class CateringController {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        model.addAttribute("catering", cateringRepository.findAll());
         return "catering/register";
     }
 
     @RequestMapping(value="/my-catering/register",method=RequestMethod.POST)
     public String cateringAdd(
             @ModelAttribute Catering newCatering,
-            Model model){
+            Model model,
+            HttpServletRequest request){
         newCatering.setPhoto("https://dummyimage.com/200x200/000/fff");
         cateringRepository.save(newCatering);
         UserRole r = new UserRole();
         r.setUsername(newCatering.getUsername());
         r.setRole("ROLE_CATERING");
         userRoleRepository.save(r);
-        securityService.autologin(newCatering.getUsername(), newCatering.getPassword());
+        helper.authenticateUserAndSetSession(newCatering , request);
 
         model.addAttribute("catering", newCatering);
         return "redirect:/my-catering/profile";
