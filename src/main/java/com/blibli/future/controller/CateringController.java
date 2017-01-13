@@ -242,8 +242,6 @@ public class CateringController {
                 }
             }
         }
-
-        catering.setUsername(request.getParameter("username"));
         catering.setPassword(request.getParameter("password"));
         catering.setEmail(request.getParameter("email"));
         catering.setCateringName(request.getParameter("cateringName"));
@@ -251,6 +249,7 @@ public class CateringController {
         catering.setDescription(request.getParameter("description"));
         catering.setPhoneNumber(request.getParameter("phoneNumber"));
         catering.setDp(request.getParameter("dp"));
+
         cateringRepository.save(catering);
         return "redirect:/my-catering/profile";
     }
