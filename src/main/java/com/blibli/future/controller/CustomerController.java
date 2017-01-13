@@ -104,7 +104,6 @@ public class CustomerController{
             HttpServletRequest request)
     {
         Customer customer = (Customer) helper.getCurrentUser();
-        customer.setUsername(request.getParameter("username"));
         customer.setPassword(request.getParameter("password"));
         customer.setEmail(request.getParameter("email"));
         customer.setFullName(request.getParameter("fullName"));
