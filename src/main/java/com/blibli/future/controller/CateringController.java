@@ -74,7 +74,6 @@ public class CateringController {
             @ModelAttribute Catering newCatering,
             Model model,
             HttpServletRequest request){
-        newCatering.setPhoto("https://dummyimage.com/200x200/000/fff");
         cateringRepository.save(newCatering);
         UserRole r = new UserRole();
         r.setUsername(newCatering.getUsername());
@@ -82,7 +81,6 @@ public class CateringController {
         userRoleRepository.save(r);
         helper.authenticateUserAndSetSession(newCatering , request);
 
-        model.addAttribute("catering", newCatering);
         return "redirect:/my-catering/profile";
     }
 
