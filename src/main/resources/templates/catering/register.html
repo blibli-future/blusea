@@ -1,27 +1,56 @@
 {{>_partial/header}}
 {{>_partial/navbar}}
-
-<head>
-    <title>Welcome to BluSea!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
-<h1>Welcome to Toko BluSea</h1>
-<form method="POST" action="/catering/register">
-    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-    <fieldset>
-        Insert Username <input type="text" name="username" /> <br />
-        Insert Name <input type="text" name="cateringName" /> <br />
-        Insert Email <input type="text" name="email" /> <br />
-        Insert Password <input type="password" name="password" /> <br />
-        Insert Address <input type="text" name="address" /> <br />
-        Insert Description <input type="text" name="description" /> <br />
-        Insert Phone Number <input type="text" name="phoneNumber" /> <br />
-        Insert DP (Down Payment) <input type="text" name="dp" /> <br />
-        <input type="submit"
-               value="Register" />
-    </fieldset>
+<h1>Register to Kuliner Nusantara as Catering Owner</h1>
+<form method="POST" action="/my-catering/register">
+  <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+  <fieldset>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Catering Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="cateringName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" name="email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" name="password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Address</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="address">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <textarea type="text" class="form-control" name="description" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Phone Numer</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="phoneNumber">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Down Payment (DP)</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="dp">
+      </div>
+    </div>
+    <div class="pull-right">
+      <a href="/my-catering/profile" class="btn btn-default">Cancel</a>
+      <input class="btn btn-primary" type="submit" value="Edit" />
+    </div>
+  </fieldset>
 </form>
-</body>
 
 {{>_partial/footer}}
