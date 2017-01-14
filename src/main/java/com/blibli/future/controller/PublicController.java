@@ -124,7 +124,7 @@ public class PublicController {
 		int startIndex = (currentPage-1) * cateringPerPage;
 		int endIndex = startIndex + cateringPerPage;
         int cateringLastIndex;
-        List<Catering> allCatering = cateringRepository.findAll();
+        List<Catering> allCatering = cateringRepository.findAllByOrderByCateringName();
         cateringLastIndex = allCatering.size() - 1;
 
 		// Please don't try to process negative page :)

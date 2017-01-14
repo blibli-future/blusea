@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 
 @Entity
+
 public class Catering extends User {
     private String cateringName;
     private String address;

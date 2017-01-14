@@ -21,10 +21,7 @@ public class Order {
     private String note;
     private int quantities;
     private int totalPrices;
-    @Transient
-    private int noDiscountPrice;
-    @Transient
-    private int discountAmount;
+
 
     /**
      * Order Status Explanation
