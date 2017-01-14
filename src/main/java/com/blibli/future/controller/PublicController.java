@@ -104,27 +104,43 @@ public class PublicController {
 
 	@RequestMapping(value="/catering", method=RequestMethod.GET)
 	public String showAllCateringList(Model model, HttpServletRequest request){
+	    final String PAGE_PARAMETER = "page";
+	    final String SIZE_PARAMETER = "count";
+	    final String ORDER_BY_PARAMETER = "sort";
 		int currentPage;
 		int cateringPerPage;
+		String sortBy = "id";
 
 		// Try to get current page from URL, if parameter is empty, open first page
 		try {
-			currentPage = Integer.parseInt(request.getParameter("page"));
+			currentPage = Integer.parseInt(request.getParameter(PAGE_PARAMETER));
 		}
 		catch (NumberFormatException e) {
 			currentPage = 1;
 		}
 		try {
-			cateringPerPage = Integer.parseInt(request.getParameter("count"));
+			cateringPerPage = Integer.parseInt(request.getParameter(SIZE_PARAMETER));
 		}
 		catch (NumberFormatException e) {
 			cateringPerPage = 8;
 		}
+		if (request.getParameter(ORDER_BY_PARAMETER) != null) {
+            sortBy = request.getParameter(ORDER_BY_PARAMETER);
+        }
 
+        // variables related to pagination calculation
 		int startIndex = (currentPage-1) * cateringPerPage;
 		int endIndex = startIndex + cateringPerPage;
         int cateringLastIndex;
-        List<Catering> allCatering = cateringRepository.findAllByOrderByCateringName();
+        List<Catering> allCatering;
+
+        // get catering in order of what our request ask.
+        System.out.println(sortBy);
+        if (sortBy.equals("name")) {
+            allCatering = cateringRepository.findAllByOrderByCateringName();
+        } else {
+            allCatering = cateringRepository.findAll();
+        }
         cateringLastIndex = allCatering.size() - 1;
 
 		// Please don't try to process negative page :)
@@ -134,7 +150,7 @@ public class PublicController {
 
 		// Avoid accessing out of bound page
 		if (startIndex > cateringLastIndex) {
-			return "redirect:/catering?page=" + (currentPage-1) + "&count=" + cateringPerPage;
+			return "redirect:/catering?" + PAGE_PARAMETER + "=" + (currentPage-1) + "&"+ SIZE_PARAMETER + "=" + cateringPerPage;
 		}
 
 		// End of list cutting  must match Catering number
@@ -150,6 +166,7 @@ public class PublicController {
 
 		model.addAttribute("caterings", subset);
 		model.addAttribute("cateringPerPage", cateringPerPage);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("prevPage", currentPage-1);
 		model.addAttribute("nextPage", currentPage+1);
 		model.addAttribute("start", startIndex+1);
