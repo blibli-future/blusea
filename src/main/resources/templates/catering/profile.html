@@ -43,7 +43,7 @@
 
   <h3>Daftar menu</h3>
 
-  <a class="btn btn-primary" href="/my-catering/addproducts" > Add new product </a>
+  <a class="btn btn-primary" href="/my-catering/addproducts">Add new product</a>
   <hr>
 
   <div class="row">
@@ -60,10 +60,10 @@
                 {{description}}
               </p>
             </div>
-            <a href="/my-catering/product/{{id}}/edit"> Edit Product? </a>
-            <form method="POST" action="/my-catering/product/{{id}}/delete">
+            <a class="btn btn-default" href="/my-catering/product/{{id}}/edit">Edit Product</a>
+            <form method="POST" action="/my-catering/product/{{id}}/delete" style="display: inline-block">
               <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-              <button class="btn btn-danger" value="submit">
+              <button class="btn btn-default" value="submit">
                 Delete
               </button>
             </form>

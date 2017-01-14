@@ -123,9 +123,9 @@ public class PublicController {
 
 		int startIndex = (currentPage-1) * cateringPerPage;
 		int endIndex = startIndex + cateringPerPage;
-		int cateringLastIndex;
-		List<Catering> allCatering = cateringRepository.findAll();
-		cateringLastIndex = allCatering.size() - 1;
+        int cateringLastIndex;
+        List<Catering> allCatering = cateringRepository.findAll();
+        cateringLastIndex = allCatering.size() - 1;
 
 		// Please don't try to process negative page :)
 		if (currentPage < 1) {
@@ -138,7 +138,7 @@ public class PublicController {
 		}
 
 		// End of list cutting  must match Catering number
-		if (endIndex >= cateringLastIndex) {
+		if (endIndex > cateringLastIndex) {
 			endIndex = cateringLastIndex+1;
 			model.addAttribute("isLastPage", true);
 		}
@@ -147,13 +147,15 @@ public class PublicController {
 			model.addAttribute("isFirstPage", true);
 		}
 		List<Catering> subset = allCatering.subList(startIndex, endIndex);
+
 		model.addAttribute("caterings", subset);
 		model.addAttribute("cateringPerPage", cateringPerPage);
 		model.addAttribute("prevPage", currentPage-1);
 		model.addAttribute("nextPage", currentPage+1);
 		model.addAttribute("start", startIndex+1);
-		model.addAttribute("end", endIndex+1);
+		model.addAttribute("end", endIndex);
 		model.addAttribute("total", cateringLastIndex+1);
+
 		return "public/catering-index";
 	}
 

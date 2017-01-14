@@ -4,40 +4,54 @@
 <main class="container">
     <script src="/assets/js/addProductPrice.js" type="text/javascript"></script>
     <h1>Welcome to Toko BluSea</h1>
-    <form method="POST" action="/my-catering/product/{{product.id}}/edit" enctype="multipart/form-data">
+    <form class="form-horizontal" method="POST" action="/my-catering/product/{{product.id}}/edit" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="{{_csrf}}"/>
         <fieldset>
-            Edit Nama Product <input type="text" name="name" value="{{product.name}}"/> <br />
-            Edit Description <input type="text" name="description" value="{{product.description}}"/> <br />
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Product Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" value="{{product.name}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="description" value="{{product.description}}">
+              </div>
+            </div>
             <table class="table">
               <thead>
-              <tr>
-                <th>Min. Quantity</th>
-                <th>Price per pax</th>
-              </tr>
+                <tr>
+                  <th>Min. Quantity</th>
+                  <th>Price per pax</th>
+                </tr>
               </thead>
-
               <tbody>
-
               {{#productPriceList}}
               <tr>
-                <td> <input type='text' name='quantity' value="{{first}}"></td>
-                <td> <input type='text' name='price' value="{{second}}"></td>
-                <td><input type='button' value='Delete' onClick='deleteTablePriceRow(this);'></td>
+                <td><input type='text' name='quantity' value="{{first}}"></td>
+                <td><input type='text' name='price' value="{{second}}"></td>
+                <td><input class="btn btn-default" type='button' value='Delete' onClick='deleteTablePriceRow(this);'></td>
               </tr>
               {{/productPriceList}}
-
               </tbody>
-
               <tbody id="dynamicTablePrice">
 
               </tbody>
-              <input type="button" value="Add Price" onClick="expandTablePrice('dynamicTablePrice');">
+              <tr>
+                <td colspan="2">
+                  <input class="btn btn-default" type="button" value="Add Price" onClick="expandTablePrice('dynamicTablePrice');">
+                </td>
+              </tr>
             </table>
-            <img class="img-fluid card-img-top" src="{{product.photo}}" alt="Card image cap"/>
-            File to upload: <input type="file" name="file" value="{{product.photo}}"/> <br />
-            <input type="submit"
-                   value="Add Product" />
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Upload product photo</label>
+              <div class="col-sm-10">
+                <img class="img-fluid card-img-top" width="200" src="{{product.photo}}" alt="Card image cap"/>
+                <input type="file" name="file" class="form-control" />
+              </div>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Edit Product" />
         </fieldset>
     </form>
     </body>
