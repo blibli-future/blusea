@@ -2,6 +2,8 @@
 
 A B2B E-commerence site for ordering food catering in large scale. 
 
+[Demo website](http://kulinernusantara.cf:8080)
+
 # Technology Stack
 
 - Java
